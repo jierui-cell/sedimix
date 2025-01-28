@@ -1,0 +1,19 @@
+ref_genome: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa"
+threads: 32
+min_length: 35
+min_quality: 25
+
+use_snp_panel: False 
+# alt_ref_genome: "/global/scratch/users/jieruixu/sediment_dna/sedimix/reference_data/human_third_allele/modified_hg19.fa"
+# snp_panel_bed: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.bed" 
+mask_on_target_snps: False  
+
+classification_software: "centrifuge" # either kraken2 or centrifuge 
+classification_software_path: "/global/home/users/jieruixu/jieruixu/sediment_dna/peerj_replication/centrifuge" # the path should not end with / 
+classification_index: "nt"
+memory_mb: 200000
+taxID: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/temp/primates_taxids.csv" # primate 
+
+calculate_from_mapdamage: True
+lineage_sites: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.transformed.txt"
+types: "hominin_informative"

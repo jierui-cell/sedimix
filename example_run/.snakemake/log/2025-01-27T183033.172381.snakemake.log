@@ -1,0 +1,50 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 32
+Rules claiming more threads will be scaled down.
+Provided resources: mem_mb=200000
+Job stats:
+job                          count
+-------------------------  -------
+all                              1
+classification                   1
+combine_reports                  1
+filter_deaminated_reads          1
+filter_reads_by_length           1
+final_report                     1
+generate_classified_reads        1
+map_sort_index                   1
+mapping_quality_filter           1
+mark_duplicates                  1
+on_target_read_filter            1
+run_mapdamage                    1
+total                           12
+
+Select jobs to execute...
+
+[Mon Jan 27 18:30:34 2025]
+rule filter_reads_by_length:
+    input: 0_data/example_reads.fq
+    output: temp/example_reads_length_filtered.fq
+    jobid: 8
+    benchmark: benchmarks/filter_reads_by_length/example_reads.txt
+    reason: Missing output files: temp/example_reads_length_filtered.fq
+    wildcards: sample=example_reads
+    resources: tmpdir=/tmp
+
+[Mon Jan 27 18:30:54 2025]
+Finished job 8.
+1 of 12 steps (8%) done
+Select jobs to execute...
+
+[Mon Jan 27 18:30:54 2025]
+rule classification:
+    input: temp/example_reads_length_filtered.fq
+    output: 1_classification/example_reads.centrifuge, 1_classification/example_reads.centrifugeLog, 1_classification/example_reads.k2report
+    jobid: 7
+    benchmark: benchmarks/classification/example_reads.txt
+    reason: Missing output files: 1_classification/example_reads.centrifuge; Input files updated by another job: temp/example_reads_length_filtered.fq
+    wildcards: sample=example_reads
+    threads: 32
+    resources: tmpdir=/tmp, mem_mb=200000, mem_mib=190735
+

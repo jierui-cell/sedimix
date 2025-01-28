@@ -1,0 +1,551 @@
+name	taxID	taxRank	genomeSize	numReads	numUniqueReads	abundance
+Neisseria gonorrhoeae	485	species	1111904	1	1	0.0
+Aeromonas hydrophila	644	species	3595669	1	0	0.0
+Aeromonas salmonicida	645	species	1848081	1	0	0.0
+Aeromonas caviae	648	species	10429117	1	0	0.0
+Bacillus cereus	1396	species	3739448	1	1	0.0
+Paenibacillus polymyxa	1406	species	3728640	1	0	0.0
+Bacillus thuringiensis serovar tolworthi	1442	leaf	6900731	1	1	0.0
+Clostridium baratii	1561	species	3338630	1	1	0.0
+Kitasatospora aureofaciens	1894	species	7608358	1	1	0.0
+Citrus sinensis	2711	species	73816632	1	0	0.0
+Cryptomeria japonica	3369	species	12191338	2	0	0.0
+Gossypium	3633	genus	125427	1	0	0.0
+Gossypium hirsutum	3635	species	71048	4	1	1.66246e-05
+Theobroma cacao	3641	species	384373267	3	0	0.0
+Carica papaya	3649	species	77723030	1	1	0.0
+Cucumis melo	3656	species	1774444	12	5	0.0
+Cucurbita maxima	3661	species	227979	3	0	0.0
+Cucurbita moschata	3662	species	92484825	1	0	0.0
+Cucurbita pepo subsp. pepo	3664	subspecies	89672372	3	0	0.0
+Populus trichocarpa	3694	species	156271188	2	2	0.0
+Brassica napus	3708	species	2016	1	0	0.0
+Malus domestica	3750	species	1748	2	0	0.0
+Lupinus angustifolius	3871	species	8394	2	1	0.0
+Medicago truncatula	3880	species	343743562	3	3	0.0
+Vigna radiata var. radiata	3916	varietas	93137019	1	1	0.0
+Hevea brasiliensis	3981	species	28179	1	1	0.0
+Ricinus communis	3988	species	57411946	1	1	0.0
+Linum usitatissimum	4006	species	6816543	1	1	0.0
+Solanum lycopersicum	4081	species	2022455988	10	1	0.0
+Nicotiana tomentosiformis	4098	species	108768907	1	1	0.0
+Erythranthe guttata	4155	species	61586880	1	0	0.0
+Helianthus annuus	4232	species	156674	4	0	0.0
+Poaceae	4479	family	4932269	1	0	0.0
+Oryza sativa	4530	species	229882122	1	0	0.0
+Oryza brachyantha	4533	species	57097967	1	1	0.0
+Setaria italica	4555	species	82790460	1	0	0.0
+Triticum aestivum	4565	species	110956	4	2	8.16783e-19
+Zea mays	4577	species	3895378	5	1	0.0
+Ananas comosus	4615	species	82888375	1	0	0.0
+Ascomycota	4890	phylum	7650823	1	0	0.0
+Saccharomyces cerevisiae	4932	species	12402719	2	1	0.0
+Candida albicans	5476	species	23294789	1	0	0.0
+Leishmania peruviana	5681	species	66831189	4	0	0.0
+Dictyostelium purpureum	5786	species	18737861	1	1	0.0
+Plasmodium vivax	5855	species	12491555	3	0	0.0
+Trematoda	6178	class	13644	1	0	0.0
+Schistosoma japonicum	6182	species	30117121	1	0	0.0
+Schistosoma mansoni	6183	species	280991889	3	1	0.0
+Schistosoma curassoni	6186	species	344229937	4	1	0.0
+Schistosoma rodhaini	6188	species	343312182	7	4	0.0
+Cestoda	6199	class	796	1	0	0.0
+Hydatigera taeniaeformis	6205	species	792	1	0	0.0
+Hymenolepis diminuta	6216	species	165979450	1	1	0.0
+Caenorhabditis briggsae	6238	species	39017387	1	1	0.0
+Caenorhabditis elegans	6239	species	253898728	1	1	0.0
+Strongyloides stercoralis	6248	species	43713584	2	2	0.0
+Ascaris lumbricoides	6252	species	317405864	1	0	0.0
+Parascaris equorum	6256	species	185438286	1	1	0.0
+Toxocara canis	6265	species	299968489	2	0	0.0
+Anisakis simplex	6269	species	127946490	1	0	0.0
+Brugia pahangi	6280	species	90679018	1	1	0.0
+Haemonchus placei	6290	species	7177	1	0	0.0
+Angiostrongylus cantonensis	6313	species	253740563	1	0	0.0
+Heligmosomoides polygyrus	6339	species	40575	2	1	0.0
+Helobdella robusta	6412	species	30409490	1	0	0.0
+Aplysia californica	6500	species	85873705	2	0	0.0
+Crassostrea virginica	6565	species	179622887	1	1	0.0
+Mizuhopecten yessoensis	6573	species	157887145	1	1	0.0
+Spisula solidissima	6584	species	14271	1	0	8.27535e-05
+Arthropoda	6656	phylum	30258	1	0	0.0
+Tachypleus tridentatus	6853	species	210128	1	1	0.0
+Bombyx	7090	genus	0	1	0	0.0
+Bombyx mori	7091	species	103615509	3	3	0.0
+Culex quinquefasciatus	7176	species	28278823	1	1	0.0
+Drosophilidae	7214	family	2144986	1	0	0.0
+Drosophila melanogaster	7227	species	821265483	6	0	0.0
+Drosophila navojoa	7232	species	37548718	1	1	0.0
+Drosophila yakuba	7245	species	66787843	1	0	0.0
+Drosophila willistoni	7260	species	44645073	3	0	0.0
+Drosophila obscura	7282	species	72302517	2	0	0.0
+Lucilia cuprina	7375	species	41547103	2	0	0.0
+Chordata	7711	phylum	1096945	2	0	0.0
+Eptatretus burgeri	7764	species	9822181	2	1	0.0
+Callorhinchus milii	7868	species	110112348	3	0	0.0
+Coelacanthidae	7895	family	0	1	0	0.0
+Danio rerio	7955	species	1789158798	23	13	0.0
+Cyprinus carpio	7962	species	34026	20	11	0.0
+Astyanax mexicanus	7994	species	148362139	3	0	0.0
+Esox lucius	8010	species	190192512	5	0	0.0
+Oncorhynchus kisutch	8019	species	165203973	2	0	0.0
+Oncorhynchus mykiss	8022	species	16407	2	0	0.0
+Salmo salar	8030	species	383967421	2	0	0.0
+Poecilia reticulata	8081	species	166338919	1	1	0.0
+Oryzias latipes	8090	species	2906808803	23	4	0.0
+Perciformes	8111	order	15502	1	0	0.0
+Oreochromis niloticus	8128	species	6008	3	1	0.0
+Haplochromis burtoni	8153	species	168875388	2	1	0.0
+Lates calcarifer	8187	species	171571790	1	0	0.0
+Anura	8342	order	82301	1	0	0.0
+Xenopus tropicalis	8364	species	196763717	2	2	0.0
+Testudines	8459	order	88463	5	0	0.0
+Chelonia mydas	8469	species	2517	1	1	0.0
+Alligator mississippiensis	8496	species	174303905	2	1	0.0
+Sphenodontia	8505	order	0	2	0	0.0
+Agkistrodon contortrix	8720	species	3656	1	0	0.0
+Aves	8782	class	689900	5	0	0.0
+Tinamiformes	8802	order	720	1	0	0.0
+Apterygiformes	8819	order	828438957	4	0	0.0
+Apterygidae	8820	family	828438957	4	0	0.0
+Apteryx	8821	genus	828438957	1	0	0.0
+Apteryx australis	8822	species	828438957	3	0	3.53502e-73
+Anseriformes	8826	order	2855209	1	0	0.0
+Anatidae	8830	family	2855209	1	0	0.0
+Anas platyrhynchos	8839	species	9565	4	0	0.0
+Chaetura pelagica	8897	species	31310525	2	0	0.0
+Caprimulgiformes	8902	order	2112	1	0	0.0
+Columbidae	8930	family	7294	1	0	0.0
+Galliformes	8976	order	8443	3	0	0.0
+Numididae	8990	family	801	1	0	0.0
+Phasianidae	9005	family	11215	1	0	3.0332e-28
+Gallus gallus	9031	species	102696	7	1	0.0
+Meleagris gallopavo	9103	species	9906	1	0	0.0
+Passeriformes	9126	order	144245	4	0	0.0
+Parus major	9157	species	8463	3	0	0.0
+Pelecaniformes	9205	order	4311	1	0	0.0
+Phalacrocorax carbo	9209	species	4306	1	0	0.0
+Piciformes	9219	order	4316	1	0	0.0
+Pygoscelis adeliae	9238	species	47027914	1	0	0.0
+Choloepus hoffmanni	9358	species	2758142	1	0	0.0
+Dasypodidae	9359	family	0	6	0	0.0
+Dasypus	9360	genus	0	1	0	0.0
+Erinaceidae	9363	family	3586	2	0	0.0
+Erinaceus	9364	genus	766	1	0	0.0
+Erinaceus europaeus	9365	species	63155401	1	0	0.0
+Tenrecidae	9369	family	0	1	0	0.0
+Talpidae	9373	family	10171	3	0	0.0
+Chrysochloridae	9389	family	18345	3	0	0.0
+Tupaiidae	9393	family	0	5	0	0.0
+Tupaia	9394	genus	0	2	0	0.0
+Chiroptera	9397	order	10509	1	0	0.0
+Pteropodidae	9398	family	8506	11	0	0.0
+Pteropus	9401	genus	6413	1	0	0.0
+Pteropus alecto	9402	species	102803241	1	0	0.0
+Rousettus aegyptiacus	9407	species	2915	2	0	8.97404e-16
+Vespertilionidae	9431	family	8943	6	0	0.0
+Primates	9443	order	2883089	140	6	0.0
+Callithrix	9481	genus	31447	109	0	0.0
+Callithrix jacchus	9483	species	216124282	117	7	5.52646e-08
+Saguinus	9486	genus	8638	1	0	0.0
+Saguinus imperator	9491	species	1595	1	0	0.0
+Cebidae	9498	family	11769589	39	0	0.0
+Alouatta seniculus	9503	species	5018	2	0	0.0
+Aotus	9504	genus	63380	84	0	0.0
+Ateles	9506	genus	15585	9	0	0.0
+Ateles belzebuth	9507	species	35747	2	0	3.39867e-05
+Ateles geoffroyi	9509	species	10573	9	1	0
+Cebus	9513	genus	106464660	53	0	0.0
+Sapajus apella	9515	species	40100	1	1	0.0
+Cebus capucinus	9516	species	212920289	14	0	1.6644e-08
+Lagothrix	9518	genus	0	1	0	0.0
+Lagothrix lagotricha	9519	species	582312	1	0	1.05602e-31
+Saimiri	9520	genus	12926346	48	0	4.12052e-34
+Plecturocebus moloch	9523	species	2569668	2	0	1.04076e-37
+Cercopithecidae	9527	family	1180357	352	1	0.0
+Cercocebus	9529	genus	8885	30	0	0.0
+Cercocebus atys	9531	species	9871	58	2	0.00175022
+Chlorocebus aethiops	9534	species	5812	140	7	0.0356804
+Cercopithecus cephus	9535	species	30351	1	0	4.34567e-05
+Macaca	9539	genus	134185	546	0	0.0
+Macaca fascicularis	9541	species	88755	4602	353	0.0457599
+Macaca fuscata	9542	species	514133	1	0	2.30922e-23
+Macaca fuscata fuscata	9543	subspecies	1026658	4	0	9.66454e-26
+Macaca mulatta	9544	species	16561	1094	44	0.0660994
+Macaca nemestrina	9545	species	20029	80	3	0.000739668
+Papio	9554	genus	44495	120	0	7.48888e-14
+Papio anubis	9555	species	166218	262	6	0
+Papio hamadryas	9557	species	49577	1	0	2.7339e-17
+Theropithecus	9564	genus	0	1	0	0.0
+Mandrillus	9567	genus	0	22	0	0.0
+Mandrillus leucophaeus	9568	species	109931841	28	0	2.16808e-08
+Colobus	9570	genus	18592763	48	0	0.0
+Hylobatidae	9577	family	3233	3	0	0.0
+Hylobates	9578	genus	3563	4	0	0.0
+Hylobates klossii	9587	species	227982	1	0	1.5955e-22
+Symphalangus syndactylus	9590	species	1080	4	1	0
+Gorilla	9592	genus	31448342	66	0	1.53061e-31
+Gorilla gorilla	9593	species	52381092	955	3	0
+Gorilla gorilla gorilla	9595	subspecies	157124060	542	3	9.91745e-07
+Pan	9596	genus	3066782	223	0	2.70609e-05
+Pan paniscus	9597	species	169420362	768	2	0
+Pan troglodytes	9598	species	3066782	7771	94	0.00153686
+Pongo	9599	genus	158861	227	0	0.0
+Pongo pygmaeus	9600	species	158861	457	15	0.00137275
+Pongo abelii	9601	species	273952845	1469	35	0
+Hominidae	9604	family	13322049	698	0	0.0
+Homo	9605	genus	226076	140	0	0.0
+Homo sapiens	9606	species	226076	95577	31304	0
+Canidae	9608	family	11291726	2	0	0.0
+Canis	9611	genus	22561109	1	0	0.0
+Canis lupus familiaris	9615	subspecies	360717376	11	2	0
+Ailuropoda	9645	genus	453	1	0	0.0
+Mustelidae	9655	family	19060823	1	0	0.0
+Mustela putorius	9668	species	200522898	1	0	7.28791e-55
+Mustela putorius furo	9669	subspecies	200522898	3	1	5.8895e-09
+Viverridae	9673	family	16689	1	0	0.0
+Felidae	9681	family	2782457	5	0	0.0
+Felis	9682	genus	49634	1	0	0.0
+Felis catus	9685	species	250610812	4	0	0.0
+Panthera pardus	9691	species	22460	1	1	0.0
+Herpestidae	9697	family	6162	1	0	0.0
+Odobenidae	9705	family	24369310	1	0	0.0
+Phocidae	9709	family	14366	3	0	0.0
+Cetacea	9721	order	6915634	3	0	0.0
+Delphinidae	9726	family	11312	3	0	0.0
+Orcinus orca	9733	species	69979089	1	0	0.0
+Tursiops	9738	genus	1381	1	0	0.0
+Tursiops truncatus	9739	species	1381	2	0	0.00163425
+Monodontidae	9747	family	0	1	0	0.0
+Delphinapterus	9748	genus	0	1	0	0.0
+Delphinapterus leucas	9749	species	205007935	4	0	5.76065e-09
+Balaenoptera	9766	genus	54185970	1	0	0.0
+Trichechidae	9775	family	60190185	5	0	0.0
+Trichechus	9776	genus	60190185	1	0	0.0
+Elephantidae	9780	family	6931	3	0	0.0
+Loxodonta	9784	genus	1324	1	0	0.0
+Loxodonta africana	9785	species	1324	8	1	2.99469e-14
+Perissodactyla	9787	order	2210714	1	0	0.0
+Equidae	9788	family	40388	8	0	3.89725e-26
+Equus	9789	genus	40388	1	0	0.0
+Equus asinus	9793	species	52605	2	0	0.0
+Equus caballus	9796	species	326913942	14	2	3.42337e-67
+Equus przewalskii	9798	species	128876883	1	0	0.0
+Rhinocerotidae	9803	family	4195218	6	0	0.0
+Ceratotherium	9806	genus	48148900	1	0	0.0
+Orycteropodidae	9816	family	50717503	2	0	0.0
+Suidae	9821	family	78950	7	0	0.0
+Sus	9822	genus	84990	2	0	0.0
+Sus scrofa	9823	species	95450	34	4	0
+Camelidae	9835	family	9397	6	0	0.0
+Camelus	9836	genus	0	1	0	0.0
+Cervidae	9850	family	1845052	1	0	0.0
+Odocoileus virginianus texanus	9880	subspecies	165530829	1	0	0.0
+Bovidae	9895	family	17846062	7	0	0.0
+Bison	9900	genus	39562238	1	0	0.0
+Bos	9903	genus	7326	2	0	0.0
+Bos taurus	9913	species	394961186	3	0	0.0
+Bos indicus	9915	species	996	2	1	0.0
+Ovis	9935	genus	83591296	7	0	0.0
+Ovis aries musimon	9938	subspecies	251161496	2	0	9.92652e-21
+Ovis aries	9940	species	251161496	3	0	9.85139e-21
+Manidae	9972	family	7360	4	0	0.0
+Manis javanica	9974	species	142484297	1	1	0.0
+Ochotonidae	9976	family	2612	2	0	0.0
+Leporidae	9979	family	23039	4	0	0.0
+Oryctolagus	9984	genus	238434	1	0	0.0
+Oryctolagus cuniculus	9986	species	238434	6	0	3.99573e-27
+Rodentia	9989	order	396321	8	0	0.0
+Marmota	9992	genus	10782251	1	0	0.0
+Heteromyidae	10015	family	5117	1	0	0.0
+Dipodomys ordii	10020	species	636	3	0	0
+Cricetulus griseus	10029	species	193126084	6	1	4.78471e-65
+Mesocricetus auratus	10036	species	125033043	2	1	0.0
+Muridae	10066	family	233397	5	0	0.0
+Mus	10088	genus	1012125	6	0	0.0
+Mus musculus	10090	species	1294439	166	32	7.20719e-06
+Mus pahari	10093	species	91745972	1	0	0.0
+Rattus	10114	genus	8192	1	0	0.0
+Rattus norvegicus	10116	species	88	7	1	0.840579
+Caviidae	10139	family	6115	3	0	0.0
+Cavia	10140	genus	3338	1	0	1.58847e-17
+Cavia porcellus	10141	species	125218127	1	0	0.0
+Chinchillidae	10150	family	1007	1	0	0.0
+Octodontidae	10158	family	0	2	0	0.0
+Octodon	10159	genus	0	2	0	0.0
+Octodon degus	10160	species	127932844	1	0	0.0
+Bathyergidae	10167	family	12157	6	0	0.0
+Heterocephalus glaber	10181	species	255818186	6	0	0
+Saccoglossus kowalevskii	10224	species	46945302	1	1	0.0
+Human gammaherpesvirus 4	10376	species	2964	1	0	0.000371033
+Retroviridae	11632	family	5548	1	0	0.000212865
+Human endogenous retrovirus	11827	species	10851	2	0	4.44951e-16
+Microcebus	13149	genus	0	11	0	0.0
+Eulemur	13513	genus	342436	1	0	0.0
+Parastagonospora nodorum	13684	species	18921380	2	0	0.0
+Saimiri boliviensis	27679	species	58016916	5	0	2.03577e-08
+Limnochromis auritus	27749	species	694469	1	1	0.0
+Nippostrongylus brasiliensis	27835	species	294457905	1	1	0.0
+Echinostoma caproni	27848	species	834586601	6	4	0.0
+Anolis carolinensis	28377	species	128618658	3	0	0.0
+Solanum pennellii	28526	species	1002699199	7	6	0.0
+Tarenaya hassleriana	28532	species	83376844	1	0	0.0
+Corvidae	28725	family	1576575	1	0	0.0
+Macroscelididae	28735	family	25137	5	0	0.0
+Cyprinodon variegatus	28743	species	18728	1	0	0.0
+Drosophila takahashii	29030	species	67539358	1	0	0.0
+Ursus maritimus	29073	species	83121724	1	1	0.0
+Castoridae	29132	family	2113	4	0	0.0
+Spirodela polyrhiza	29656	species	138083998	2	2	0.0
+Vitis vinifera	29760	species	285341	6	3	0.0
+Drosophila busckii	30019	species	185940756	2	1	0.0
+Drosophila kikkawai	30033	species	58382995	1	0	0.0
+Carcharhiniformes	30483	order	982	1	0	0.0
+Lamniformes	30496	order	0	1	0	0.0
+Aotus azarai	30591	species	63380	1	0	0.0
+Cacajao	30595	genus	3325	4	0	0.0
+Cacajao calvus	30596	species	3325	3	0	5.42267e-13
+Propithecus	30600	genus	14600	4	0	0.0
+Microcebus murinus	30608	species	255938764	7	1	1.14205e-08
+Otolemur	30610	genus	3546	2	0	0.0
+Otolemur garnettii	30611	species	8148	3	0	0.000172487
+Dipodidae	30648	family	14365	1	0	0.0
+Cynocephalidae	30657	family	12421	7	0	0.0
+Cynoglossidae	30947	family	0	1	0	0.0
+Schistosoma mattheei	31246	species	340837091	8	2	0.0
+Acinonyx jubatus	32536	species	74932865	1	0	0.0
+synthetic construct	32630	species	214681095	302	0	3.4612e-07
+Metazoa	33208	kingdom	0	1	0	0.0
+Colobus guereza	33548	species	13612	4	0	0.00038616
+Carnivora	33554	order	6355551	10	0	0.0
+Chinchilla lanigera	34839	species	163802158	4	1	7.20977e-09
+Eumetopias jubatus	34886	species	457709	1	0	7.19695e-32
+Streptophyta	35493	phylum	451130	2	0	0.0
+Dioscorea bulbifera	35874	species	208574	1	1	0.0
+Cercopithecus nictitans	36228	species	33137	1	0	4.32043e-16
+Plasmodium ovale	36330	species	115369	1	0	0.0
+Stealth virus 1	36452	leaf	470645	1	0	1.11456e-34
+Crocidura	36801	genus	12426	2	0	0.0
+Pan troglodytes troglodytes	37011	subspecies	5138091	1	0	9.46563e-18
+Pan troglodytes verus	37012	subspecies	4744407	2	0	6.94042e-18
+Ovis canadensis	37174	species	431770222	6	0	6.5495e-66
+Aotus nancymaae	37293	species	176425845	30	1	5.35555e-08
+Phyllostachys edulis	38705	species	14646499	2	1	0.0
+Poales	38820	order	3817153	1	0	0.0
+Quercus robur	38942	species	13040	15	11	0.0
+Saimiri boliviensis boliviensis	39432	subspecies	116013822	17	2	0
+Oryza sativa Indica Group	39946	leaf	776060630	10	3	0.0
+Oryza sativa Japonica Group	39947	leaf	1062609533	6	0	0.0
+Strongylus vulgaris	40348	species	291136591	2	1	0.0
+Botrytis cinerea	40559	species	49374598	1	0	0.0
+Mammalia	40674	class	3032176	71	20	0.0
+Bathycoccus prasinos	41875	species	27489993	1	0	0.0
+Brugia timori	42155	species	64957355	8	4	0.0
+Phoenix dactylifera	42345	species	83358662	2	1	0.0
+Aotus lemurinus	43147	species	680913	2	0	0.0
+Hirundo rustica	43150	species	39527	5	1	0.0
+Ictidomys tridecemlineatus	43179	species	1140	5	0	0
+Nasalis	43779	genus	0	1	0	0.0
+Human endogenous retrovirus K	45617	species	3945	11	0	0.00125105
+Gossypioides kirkii	47615	species	2845713	1	1	0.0
+Lactobacillus rhamnosus	47715	species	2637953	2	0	0.0
+Schistosoma margrebowiei	48269	species	367421722	10	2	0.0
+Poecilia latipinna	48699	species	164742946	3	0	0.0
+Geospiza fortis	48883	species	37702128	1	0	0.0
+Arabis alpina	50452	species	312303512	2	2	0.0
+Insecta	50557	class	31717	1	0	0.0
+Enterobius vermicularis	51028	species	150132834	3	3	0.0
+Jaculus jaculus	51337	species	5509	1	0	0.0
+Castor canadensis	51338	species	108202888	4	1	1.10474e-08
+Brassica rapa subsp. pekinensis	51351	subspecies	48952210	2	2	0.0
+Leiopelma hochstetteri	51644	species	185030	1	0	6.38266e-06
+Elaeis guineensis	51953	species	97959585	1	0	0.0
+Paphiopedilum rothschildianum	53110	species	48657	1	1	0
+Mesocestoides corti	53468	species	117219480	1	1	0.0
+Colobus angolensis	54131	species	111493952	10	0	9.46213e-21
+Sciuridae	55153	family	708687	7	0	0.0
+Dicrocoelium dendriticum	57078	species	547997351	3	0	0.0
+Coliiformes	57384	order	0	1	0	0.0
+Rhinolophidae	58055	family	19145	2	0	0.0
+Myotis lucifugus	59463	species	20005	2	1	7.78665e-18
+Pantholops hodgsonii	59538	species	70064556	1	1	0.0
+Paenibacillus peoriae	59893	species	14316	1	0	0.0
+Ficedula albicollis	59894	species	84070061	2	1	0.0
+Diphyllobothrium latum	60516	species	531553945	2	2	0.0
+Taenia asiatica	60517	species	136516340	1	0	0.0
+Chlorocebus sabaeus	60711	species	249030895	73	1	8.15762e-08
+Rhinopithecus bieti	61621	species	163508539	41	3	0
+Rhinopithecus roxellana	61622	species	115171951	17	1	3.61479e-08
+Hoolock hoolock	61851	species	466808	5	0	2.53737e-06
+Nomascus leucogenys	61853	species	135597566	384	12	0
+Chenopodium quinoa	63459	species	148219361	4	0	0.0
+Lacerta viridis	65476	species	178683	1	0	0.0
+Streptomyces pactum	68249	species	17063261	1	1	0.0
+Niviventer	69082	genus	13272	1	0	0.0
+Schistocephalus solidus	70667	species	540297029	1	0	0.0
+Cylicostephanus goldi	71465	species	173398844	1	1	0.0
+Ceratotherium simum simum	73337	subspecies	96291502	3	1	1.22646e-08
+uncultured bacterium	77133	species	2727715008	1	1	0.0
+Acanthochromis polyacanthus	80966	species	123387733	2	0	0.0
+Amphiprion ocellaris	80972	species	136807862	3	0	0.0
+Corvus brachyrhynchos	85066	species	1929	1	0	0.0
+Plasmodium relictum	85471	species	18888070	1	1	0.0
+Citrus clementina	85681	species	58010542	1	0	0.0
+uncultured beta proteobacterium	86027	species	17911676	12	9	0.0
+Human endogenous retrovirus W	87786	species	6932	1	0	1.85095e-30
+Eurytemora affinis	88015	species	70311388	1	1	0.0
+Rhinolophus sinicus	89399	species	33766	2	0	0
+Bubalus bubalis	89462	species	105870	5	1	0.0
+Camelina sativa	90675	species	198947762	1	1	0.0
+Pectinodesmus pectinatus	91197	species	268334	1	1	0.0
+Corchorus	93758	genus	0	1	0	0.0
+Coturnix japonica	93934	species	182615022	5	0	0.0
+Gavialis	94834	genus	0	1	0	0.0
+Gavialis gangeticus	94835	species	101522451	4	0	0.0
+Spirometra erinaceieuropaei	99802	species	1259652904	3	2	0.0
+Fragaria vesca subsp. vesca	101020	subspecies	70636896	1	0	0.0
+Prunus mume	102107	species	57506162	1	1	0.0
+Hymenolepis nana	102285	species	163021228	3	2	0.0
+Nostoc sp. PCC 7120	103690	species	7677361	1	0	0.0
+Pogona vitticeps	103695	species	127493429	3	1	0.0
+Thelazia callipaeda	103827	species	75604652	1	0	0.0
+Protobothrops mucrosquamatus	103944	species	45257789	2	1	0.0
+Nothobranchius furzeri	105023	species	135934632	5	0	0.0
+Maylandia zebra	106582	species	164809351	1	0	0.0
+Brassica oleracea var. oleracea	109376	varietas	100758275	1	1	0.0
+Myotis brandtii	109478	species	126509341	2	0	9.3351e-09
+Ovis canadensis canadensis	112262	subspecies	2590566603	157	57	0
+Scleropages formosus	113540	species	131436429	2	2	0.0
+Pipridae	114313	family	2673	1	0	0.0
+Protopolystoma xenopodis	117903	species	617352165	3	0	0.0
+Ateles belzebuth chamek	118643	subspecies	68610	1	0	0.0
+Lipotidae	119500	family	0	1	0	0.0
+Alouatta sara	121123	species	120687	1	0	0.0
+Diaphorina citri	121845	species	29336274	1	1	0.0
+Chionanthus retusus	126362	species	525859	1	0	0.0
+Trichechus manatus latirostris	127582	subspecies	120377676	1	0	0.0
+HERV-H/env59	129527	leaf	7721	1	0	7.29389e-16
+Bombus impatiens	132113	species	66214811	1	1	0.0
+Pteropus vampyrus	132908	species	153176115	2	1	7.70993e-09
+Zootermopsis nevadensis	136037	species	10912	2	2	0.0
+Dendrobium officinale	142615	species	67791486	1	0	0.0
+Unio crassus	143297	species	6297	1	0	0.0
+Condylura cristata	143302	species	86848214	2	0	1.35982e-08
+Sordariomycetes	147550	class	4986063	1	0	0.0
+uncultured organism	155900	species	302709580	2	0	9.45778e-63
+Trichobilharzia regenti	157069	species	701846735	6	2	0.0
+Vigna angularis var. angularis	157739	varietas	522781930	5	3	0.0
+Folsomia candida	158441	species	55179203	1	1	0.0
+Human endogenous retrovirus K113	166122	leaf	10440	3	0	2.2156e-15
+Culicoides sonorensis	179676	species	209569004	2	2	0.0
+Jatropha curcas	180498	species	72858209	1	0	0.0
+Pseudopodoces humilis	181119	species	94805115	1	0	0.0
+Chrysochloris	185452	genus	0	2	0	0.0
+Actinopteri	186623	class	221440	1	0	0.0
+Hipposideros armiger	186990	species	166773250	3	1	0
+Hipposideridae	186994	family	1982	1	0	0.0
+Expression vector GM-C79	188720	species	7057	1	0	0.000167348
+Calidris pugnax	198806	species	114481418	1	1	0.0
+Apteryx australis mantelli	202946	subspecies	1656855686	30	12	7.12781e-10
+Streptomyces sp. FR-008	206662	species	7407321	1	1	0.0
+Myriophyllum spicatum	208873	species	204482	5	0	0.0
+Papio anubis anubis	211508	subspecies	166218	4	0	1.44913e-05
+Phalaenopsis gigantea	212072	species	49172	1	0	2.38383e-22
+Musa acuminata subsp. malaccensis	214687	subspecies	101807837	2	0	0.0
+Larimichthys crocea	215358	species	650433141	5	3	0.0
+Centruroides sculpturatus	218467	species	77772560	3	1	0.0
+Dermestes lardarius	219542	species	6167	1	0	5.53902e-17
+Pyrus x bretschneideri	225117	species	92814685	33	32	0.0
+Leptosphaeria biglobosa 'brassicae' group	225338	leaf	76039743	1	0	0.0
+Coprinopsis cinerea okayama7#130	240176	leaf	19115951	1	1	0.0
+Soboliphyme baturini	241478	species	218349703	2	1	0.0
+Bursera spinescens	245815	species	7012	1	1	0.0
+Tupaia chinensis	246437	species	94302776	1	0	0.0
+Rhincodon typus	259920	species	60882676	2	0	0.0
+Debaryomyces hansenii CBS767	284592	leaf	21183970	1	1	0.0
+Candidatus Blochmannia pennsylvanicus str. BPEN	291272	leaf	795352	1	0	0.0
+Pundamilia nyererei	303518	species	126421961	1	0	0.0
+Balaenoptera acutorostrata scammoni	310752	subspecies	108371506	1	0	0.0
+Dracunculus medinensis	318479	species	103805631	1	1	0.0
+Nomascus	325165	genus	3028	411	0	0.0
+Symphalangus	325166	genus	1080	4	0	0.0
+Hoolock	325167	genus	0	2	0	0.0
+Ziziphus jujuba	326968	species	68551762	1	1	0.0
+Manacus vitellinus	328815	species	88417115	1	1	0.0
+Botrytis cinerea B05.10	332648	leaf	59237771	2	1	0.0
+Colobus angolensis palliatus	336983	subspecies	111493952	16	1	1.17714e-08
+Spalacidae	337664	family	52669	2	0	0.0
+Cricetidae	337677	family	847047	2	0	0.0
+Leishmania major strain Friedlin	347515	leaf	48602933	1	1	0.0
+Dictyostelium discoideum AX4	352472	leaf	20655147	1	1	0.0
+uncultured microorganism	358574	species	35359168	1	0	3.33994e-08
+Phrynosoma cerroense	372475	species	376241	1	0	0.0
+Phrynosoma blainvillii	372482	species	489006	1	0	0.0
+Halothermothrix orenii H 168	373903	leaf	2578623	1	1	0.0
+Aotidae	376918	family	63380	2	0	0.0
+Propithecus coquereli	379532	species	68667671	4	0	2.64242e-08
+Anser cygnoides domesticus	381198	subspecies	146928582	1	1	0.0
+Onchocerca flexuosa	387005	species	86215453	1	1	0.0
+Chlorocebus	392815	genus	2908	138	0	0.0
+Robinsonia masafuerae	409889	species	14032	1	0	0.0
+Aricia icarioides	412856	species	11128	1	1	0.0
+Shuttle vector pANFluc	419244	species	7043	1	0	0.000167681
+Leishmania braziliensis MHOM/BR/75/M2904	420245	leaf	46520687	2	0	0.0
+Fukomys	423606	genus	3362	1	0	0.0
+Struthio camelus australis	441894	subspecies	102447354	1	0	0.0
+Syphacia muris	451379	species	99117145	2	1	0.0
+Galeopterus	482536	genus	12421	5	0	0.0
+Paracoccidioides brasiliensis Pb18	502780	leaf	11669572	1	1	0.0
+Eufriesea mexicana	516756	species	39007263	1	1	0.0
+Lactobacillus paracasei subsp. paracasei 8700:2	537973	leaf	3025352	1	0	0.0
+Rhinopithecus	542827	genus	0	40	0	0.0
+Millerozyma farinosa CBS 7064	559304	leaf	18102490	1	1	0.0
+Micromonas pusilla CCMP1545	564608	leaf	14663185	1	0	0.0
+Lactobacillus rhamnosus Lc 705	568704	leaf	3033431	1	0	0.0
+Piliocolobus	591932	genus	13200	30	0	0.0
+Piliocolobus tephrosceles	591936	species	177155323	54	0	1.03125e-07
+Gongylonema pulchrum	637853	species	322686467	1	1	0.0
+Acidovorax avenae subsp. avenae ATCC 19860	643561	leaf	5486659	1	1	0.0
+Sclerotinia sclerotiorum 1980 UF-70	665079	leaf	54772197	2	1	0.0
+Human artificial chromosome vector 21HAC4	751903	species	81109	2	0	1.45635e-05
+Pan troglodytes ellioti	756884	subspecies	1677671	2	0	7.25425e-07
+Sordaria macrospora k-hell	771870	leaf	15436779	1	1	0.0
+Fukomys damarensis	885580	species	138377006	2	1	0.0
+Corvus cornix cornix	932674	subspecies	154816723	1	0	0.0
+Botrytis cinerea T4	999810	leaf	39511426	1	0	0.0
+Naumovozyma dairenensis CBS 421	1071378	leaf	22155175	1	1	0.0
+Marssonina brunnea f. sp. 'multigermtubi' MB_m1	1072389	leaf	14950719	1	0	0.0
+Moumouvirus Monve	1128131	leaf	1030046	1	0	0.0
+Ictidomys	1141640	genus	1140	1	0	0.0
+Elaeophora elaphi	1147741	species	82568297	2	2	0.0
+Candidatus Blochmannia chromaiodes str. 640	1240471	leaf	791334	1	0	0.0
+Acanthamoeba polyphaga moumouvirus	1269028	leaf	1021348	1	0	0.0
+Metarhizium brunneum ARSEF 3297	1276141	leaf	15876513	1	0	0.0
+Fusarium fujikuroi IMI 58289	1279085	leaf	65424472	1	1	0.0
+Saccharomyces cerevisiae YJM270	1294308	leaf	12365305	1	0	0.0
+Saccharomyces cerevisiae YJM1383	1294356	leaf	12586117	1	0	0.0
+Saccharomyces cerevisiae YJM1478	1294380	leaf	12703465	1	0	0.0
+Crocodylia	1294634	order	11313	4	0	0.0
+Tannerella forsythia 3313	1307832	leaf	3350939	1	1	0.0
+Glaesserella parasuis ZJ0906	1322346	leaf	2324740	1	1	0.0
+Lactobacillus rhamnosus DSM 14870	1380361	leaf	3013149	1	0	0.0
+Methanosarcina barkeri MS	1434108	leaf	4574907	1	1	0.0
+Urtica platyphylla	1435593	species	4628	2	0	0.0
+Megatoma graeseri	1531410	species	1633	1	0	1.22483e-14
+Sapajus	1532884	genus	46110	1	0	0.0
+Attagenus gobicola	1546015	species	347	1	0	0.00186653
+Paenibacillus sp. EOA1	1547902	species	9948	1	1	0.0
+Geobacillus sp. 12AMOR1	1629723	species	3442724	1	0	0.0
+Aeromonas sp. ASNIH3	1636608	species	5033911	1	0	0.0
+Cebus capucinus imitator	1737458	subspecies	212920289	31	4	0
+Plecturocebus	1812035	genus	13149	3	0	0.0
+Carlito	1868481	genus	0	3	0	0.0
+Carlito syrichta	1868482	species	81007224	1	0	1.10881e-49
+Aeromonas sp. ASNIH7	1920107	species	4868657	1	0	0.0
+Seonamhaeicola sp. S2-3	1936081	species	3752836	1	1	0.0
+Saudi moumouvirus	1956188	leaf	1030056	1	0	0.0
+Human ORFeome Gateway entry vector	1958742	species	49605339	96	0	5.49664e-07
+Trichormus variabilis NIES-23	1973479	leaf	7472825	1	0	0.0
+Caenorhabditis sp. 34 TK-2017	1978547	species	122994328	2	0	0.0
+Calothrix sp. NIES-4101	2005461	species	10561507	1	1	0.0
+Ooceraea biroi	2015173	species	83281569	2	0	0.0

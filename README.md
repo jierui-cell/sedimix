@@ -83,17 +83,39 @@ If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the 
 
 ### Python Packages
 
-1. [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html)
+1. [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (version 7.32.4)
 2. `pysam` (version >= 0.6): Python package, an interface for reading/writing SAM/BAM files
 3. `Cython`: Only necessary if `pysam` needs to be built
 4. `numpy` (version >= 1.24.4)
-5. `tqdm`
-6. `pandas` (version 2.1.2)
-7. `pyfaidx` (version 0.8.1.1)
-8. `biopython` (version 1.84)
-9. `scipy` (version 1.11.3)
+5. `tqdm` (version 4.66.1)
+6. `pandas` (version >=2.1.2)
+7. `pyfaidx` (version >=0.8.1.1)
+8. `biopython` (version >=1.84)
+9. `scipy` (version >=1.11.3)
 
-**Index Files**  
+To ensure all necessary dependencies are installed, you can create a conda environment using the provided `environment.yaml` file.
+
+#### Conda Environment
+
+Create a conda environment with the following command:
+
+```bash
+conda env create -f environment.yaml
+```
+
+Alternatively, you can use mamba for faster environment creation:
+
+```bash
+mamba env create -f environment.yaml
+```
+
+Activate the environment with:
+
+```bash
+conda activate sedimix
+```
+
+### Index Files
 Download index files for Centrifuge and Kraken2 from the following:
 - [AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
   We recommend Refseq: bacteria, archaea, viral, human (7.9GB) for Centrifuge.  
@@ -113,39 +135,8 @@ Download index files for Centrifuge and Kraken2 from the following:
 
 Alternatively, you can build Centrifuge and Kraken2 indexes yourself by following the instructions provided on their respective GitHub repositories.
 
-**Human Reference Genome**  
-Download the human reference genome hg19.fq.gz and build the BWA index:  
-```bash
-mkdir hg19
-cd hg19
-wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/latest/hg19.fa.gz
-gunzip hg19.fa.gz
-../bwa/bwa index hg19.fa
-cd ..
-```
-
-## Python and Other Dependencies
-To ensure all necessary dependencies are installed, create a conda environment using the provided `environment.yaml` file.
-
-### Conda Environment
-
-Create a conda environment with the following command:
-
-```bash
-conda env create -f environment.yaml
-```
-
-Alternatively, you can use mamba for faster environment creation:
-
-```bash
-mamba env create -f environment.yaml
-```
-
-Activate the environment with:
-
-```bash
-conda activate sedimix
-```
+### Human Reference Genome 
+Download the human reference genome hg19.fq.gz and build the BWA index. 
 
 ## Pipeline Functionality
 1. Takes raw FASTQ files as input.

@@ -1,0 +1,15 @@
+name: sedimix
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.9
+  - snakemake
+  - pysam>=0.6
+  - cython
+  - numpy>=1.24.4
+  - tqdm>=4.66.1
+  - pandas>=2.1.2
+  - pyfaidx>=0.8.1.1
+  - biopython>=1.84
+  - scipy>=1.11.3

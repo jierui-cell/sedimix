@@ -72,7 +72,7 @@ The following requirements are for **mapDamage2** to successfully run:
 3. R (version >= 3.1) must be present in your `$PATH`.
 4. GNU Scientific Library (GSL)
 
-##### R Libraries:
+#### R Libraries:
 - `inline`
 - `gam`
 - `Rcpp`
@@ -95,7 +95,7 @@ If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the 
 
 To ensure all necessary dependencies are installed, you can create a conda environment using the provided `environment.yaml` file.
 
-##### Conda Environment
+#### Conda Environment
 
 Create a conda environment with the following command:
 

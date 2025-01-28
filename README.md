@@ -86,7 +86,7 @@ If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the 
 1. [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (version 7.32.4)
 2. `pysam` (version >= 0.6): Python package, an interface for reading/writing SAM/BAM files
 3. `Cython`: Only necessary if `pysam` needs to be built
-4. `numpy` (version >= 1.24.4)
+4. `numpy` (version >=1.24.4)
 5. `tqdm` (version 4.66.1)
 6. `pandas` (version >=2.1.2)
 7. `pyfaidx` (version >=0.8.1.1)
@@ -114,6 +114,17 @@ Activate the environment with:
 ```bash
 conda activate sedimix
 ```
+
+### Dependency Check Script
+
+To ensure all required tools, Python packages, and R libraries are installed and correctly configured, we provide a script named `check_dependencies.py`.
+
+#### Usage
+
+1. Save the script `check_dependencies.py` in the root directory of your project.
+2. Run the script using Python:
+   ```bash
+   python3 check_dependencies.py
 
 #### Index Files
 Download index files for Centrifuge and Kraken2 from the following:

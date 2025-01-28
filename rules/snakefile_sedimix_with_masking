@@ -1,0 +1,436 @@
+import glob
+import os
+import yaml
+
+# Load the configuration file
+configfile: "config.yaml"
+
+# Extract and preprocess `types` from the configuration
+types = config["types"].split(",")  # This creates a list of types
+types_str = " ".join(types)  # This creates a space-separated string
+
+# List all .fq and .fq.gz files in the data folder
+fq_files = glob.glob("0_data/*.fq")
+gz_files = glob.glob("0_data/*.fq.gz")
+
+# If there are .fq.gz files, include them in the list of input files
+input_files = fq_files + [f.replace(".fq.gz", ".fq") for f in gz_files]
+
+# Define the final output files
+rule all:
+    input:
+        expand([
+            "4_mapdamage_results/{sample}",
+            "3_final_reads/{sample}_classified_hum.bam", 
+            "3_final_reads/{sample}_classified_hum_deaminated.bam", 
+            "3_final_reads/{sample}_classified_hum_non_deaminated.bam", 
+            "4_final_report/{sample}.tsv"
+        ], sample=[os.path.basename(f).split('.fq')[0] for f in input_files]),
+        "4_final_report/combined_final_report.tsv"
+
+# Unzip fastq.gz files if necessary
+if gz_files:
+    rule unzip_fq_files:
+        input:
+            "0_data/{sample}.fq.gz"
+        output:
+            "0_data/{sample}.fq"
+        benchmark:
+            "benchmarks/unzip_fq_files/{sample}.txt"
+        shell:
+            "gunzip -c {input} > {output}"
+
+# Filter reads based on length before mapping
+rule filter_reads_by_length:
+    input:
+        "0_data/{sample}.fq"
+    output:
+        "temp/{sample}_length_filtered.fq"  # Mark the output as temporary
+    params:
+        min_length=config["min_length"] 
+    benchmark:
+        "benchmarks/filter_reads_by_length/{sample}.txt"
+    shell:
+        """
+        awk '(NR%4==1){{h=$0}} (NR%4==2){{s=$0}} (NR%4==3){{p=$0}} (NR%4==0 && length(s)>={params.min_length}){{print h; print s; print p; print $0}}' {input} > {output}
+        """
+
+if not config["use_snp_panel"]: # if no SNP panel is specified
+    # Map reads using bwa to the reference genome, convert to BAM, sort, and index
+    rule map_sort_index:
+        input:
+            "temp/{sample}_length_filtered.fq" 
+        output:
+            bam="1_mapping/{sample}_length_filtered.bam",
+            bam_bai="1_mapping/{sample}_length_filtered.bam.bai",
+            sai="temp/{sample}_length_filtered.sai",
+            sam="temp/{sample}_length_filtered.sam"
+        threads: config["threads"]
+        params:
+            ref_genome=config["ref_genome"]
+        benchmark:
+            "benchmarks/map_sort_index/{sample}.txt"
+        shell:
+            """
+            bwa aln {params.ref_genome} -t {threads} -n 0.01 -o 2 -l 16500 {input} > {output.sai}
+            bwa samse {params.ref_genome} {output.sai} {input} > {output.sam}
+            samtools view -@ {threads} -h -b {output.sam} | samtools sort -@ {threads} -T temp/{wildcards.sample} -o {output.bam}
+            samtools index {output.bam}
+            """
+    rule on_target_read_filter:
+        input:
+            "1_mapping/{sample}_length_filtered.bam"
+        output:
+            "1_mapping/{sample}_on_target.bam"
+        shell:
+            "cp {input} {output}"
+
+else:
+    # map to alternative reference genome: each SNP position changes to a random third base that is neither ancestral nor derived
+    rule map_sort_index:
+        input:
+            "temp/{sample}_length_filtered.fq" 
+        output:
+            bam="1_mapping/{sample}_length_filtered.bam",
+            bam_bai="1_mapping/{sample}_length_filtered.bam.bai",
+            sai="temp/{sample}_length_filtered.sai",
+            sam="temp/{sample}_length_filtered.sam"
+        threads: config["threads"]
+        params:
+            ref_genome=config["alt_ref_genome"]
+        benchmark:
+            "benchmarks/map_sort_index/{sample}.txt"
+        shell:
+            """
+            bwa aln {params.ref_genome} -t {threads} -n 0.01 -o 2 -l 16500 {input} > {output.sai}
+            bwa samse {params.ref_genome} {output.sai} {input} > {output.sam}
+            samtools view -@ {threads} -h -b {output.sam} | samtools sort -@ {threads} -T temp/{wildcards.sample} -o {output.bam}
+            samtools index {output.bam}
+            """
+
+    # Filter reads that overlap with SNP panel using bedtools
+    rule on_target_read_filter:
+        input:
+            bam="1_mapping/{sample}_length_filtered.bam",
+            bed=config["snp_panel_bed"]
+        output:
+            bam="1_mapping/{sample}_on_target.bam"
+        benchmark:
+            "benchmarks/on_target_read_filter/{sample}.txt"
+        shell:
+            "bedtools intersect -abam {input.bam} -b {input.bed} -u > {output.bam}"
+
+# Filter mapped reads with minimum mapping quality 
+rule mapping_quality_filter:
+    input:
+        "1_mapping/{sample}_on_target.bam"
+    output:
+        "1_mapping/{sample}_LandMQ_filtered.bam"
+    params: 
+        quality=config["min_quality"]
+    benchmark:
+        "benchmarks/mapping_quality_filter/{sample}.txt"
+    shell:
+        """
+        samtools view -h -q {params.quality} {input} |
+        samtools view -bS - > {output}
+        """
+
+# Mark duplicates
+rule mark_duplicates:
+    input:
+        "1_mapping/{sample}_LandMQ_filtered.bam"
+    output:
+        dedup="1_mapping/{sample}_LandMQ_filtered_dedup.bam", 
+        sorted_bam=temp("1_mapping/{sample}_LandMQ_filtered_sorted.bam"),
+        fixmate_bam=temp("1_mapping/{sample}_LandMQ_filtered_fixmate.bam"),
+        fixmate_intermediate=temp("1_mapping/{sample}_LandMQ_filtered_fixmate_intermediate.bam")
+    benchmark:
+        "benchmarks/mark_duplicates/{sample}.txt"
+    shell:
+        """
+        # Step 1: Sort by query name for fixmate
+        samtools sort -n -o {output.fixmate_bam} {input}
+
+        # Step 2: Apply fixmate and save to an intermediate file
+        samtools fixmate -m {output.fixmate_bam} {output.fixmate_intermediate}
+
+        # Step 3: Sort by coordinate
+        samtools sort -o {output.sorted_bam} {output.fixmate_intermediate}
+
+        # Step 4: Mark duplicates
+        samtools markdup -r -s {output.sorted_bam} {output.dedup}
+        """
+        
+if config["mask_on_target_snps"]:
+    # Mask on-target SNPs with 'N'
+    rule mask_on_target_snps:
+        input:
+            "1_mapping/{sample}_LandMQ_filtered_dedup.bam",
+            config["snp_panel_bed"]
+        output:
+            "1_mapping/{sample}_LandMQ_filtered_dedup_masked.bam"
+        benchmark:
+            "benchmarks/mask_on_target_snps/{sample}.txt"
+        shell:
+            "python ../scripts/mask_on_target_snps_vernot_replicate.py {input[0]} {input[1]} {output}"
+else:
+    rule mask_on_target_snps:
+        input:
+            "1_mapping/{sample}_LandMQ_filtered_dedup.bam"
+        output:
+            "1_mapping/{sample}_LandMQ_filtered_dedup_masked.bam"
+        shell:
+            "cp {input} {output}"
+
+# Convert BAM to fastq
+rule bam_to_fastq:
+    input:
+        "1_mapping/{sample}_LandMQ_filtered_dedup_masked.bam"
+    output:
+        "1_mapping/{sample}_LandMQ_filtered_dedup_masked.fq"
+    benchmark:
+        "benchmarks/bam_to_fastq/{sample}.txt"
+    shell:
+        "samtools fastq {input} > {output}"
+
+# Classification using Kraken2 or Centrifuge 
+if (config['classification_software'] == "kraken2"): 
+    rule classification:
+        input:
+            "1_mapping/{sample}_LandMQ_filtered_dedup_masked.fq"
+        output:
+            kraken2_results="2_classification/{sample}.kraken2",
+            kraken2_report="2_classification/{sample}.k2report"
+        params:
+            kraken2_path=config["classification_software_path"],
+            kraken2_db=config["classification_index"]
+        resources:
+            mem_mb=config['memory_mb']  # in MB
+        benchmark:
+            "benchmarks/classification/{sample}.txt"
+        shell:
+            """
+            {params.kraken2_path}/kraken2 --db {params.kraken2_path}/{params.kraken2_db} --output {output.kraken2_results} --report {output.kraken2_report} {input}
+            """
+
+    # Generate classified reads
+    rule generate_classified_reads:
+        input:
+            kraken2_result="2_classification/{sample}.kraken2",
+            bam="1_mapping/{sample}_LandMQ_filtered_dedup.bam"
+        output:
+            bam="3_final_reads/{sample}_classified_hum.bam",
+            bam_bai="3_final_reads/{sample}_classified_hum.bam.bai",
+            lst=temp("3_final_reads/{sample}_reads.lst")
+        params:
+            taxID=config['taxID']  
+        benchmark:
+            "benchmarks/generate_classified_reads/{sample}.txt"
+        shell:
+            """
+            python ../scripts/select_reads_from_kraken2.py {params.taxID} {input.kraken2_result} {wildcards.sample}
+            mv {wildcards.sample}_reads.lst 3_final_reads/
+            # Use samtools to filter the BAM file based on the read IDs from the list
+            samtools view -h -N 3_final_reads/{wildcards.sample}_reads.lst {input.bam} | \
+            samtools sort -o {output.bam}
+            samtools index {output.bam}
+            """
+            
+elif (config['classification_software'] == "centrifuge"): 
+    # Classification
+    rule classification:
+        input:
+            "1_mapping/{sample}_LandMQ_filtered_dedup_masked.fq"
+        output:
+            "2_classification/{sample}.centrifuge",
+            "2_classification/{sample}.centrifugeLog",
+            "2_classification/{sample}.k2report"
+        params:
+            centrifuge_path=config["classification_software_path"],
+            centrifuge_db=config["classification_index"]
+        threads: config['threads']
+        resources:
+            mem_mb=config['memory_mb']  # in MB
+        benchmark:
+            "benchmarks/classification/{sample}.txt"
+        shell:
+            """
+            # Run Centrifuge classification
+            {params.centrifuge_path}/centrifuge -x {params.centrifuge_path}/{params.centrifuge_db} -S {output[0]} --report-file {output[1]} -U {input} -p {threads}
+            # Generate Centrifuge report
+            {params.centrifuge_path}/centrifuge-kreport -x {params.centrifuge_path}/{params.centrifuge_db} {output[0]} > {output[2]}
+            """
+
+    # Generate classified reads
+    rule generate_classified_reads:
+        input:
+            centrifuge_result="2_classification/{sample}.centrifuge",
+            bam="1_mapping/{sample}_LandMQ_filtered_dedup.bam"
+        output:
+            bam="3_final_reads/{sample}_classified_hum.bam",
+            bam_bai="3_final_reads/{sample}_classified_hum.bam.bai",
+            lst=temp("3_final_reads/{sample}_reads.lst")
+        params:
+            taxID=config['taxID']  
+        benchmark:
+            "benchmarks/generate_classified_reads/{sample}.txt"
+        shell:
+            """
+            python ../scripts/select_reads_from_centrifuge.py {params.taxID} {input.centrifuge_result} {wildcards.sample}
+            mv {wildcards.sample}_reads.lst 3_final_reads/
+            # Use samtools to filter the BAM file based on the read IDs from the list
+            samtools view -h -N 3_final_reads/{wildcards.sample}_reads.lst {input.bam} | \
+            samtools sort -o {output.bam}
+            samtools index {output.bam}
+            """
+
+# Run mapDamage after classification
+rule run_mapdamage:
+    input:
+        sam_file="3_final_reads/{sample}_classified_hum.bam", 
+        ref_file=config["ref_genome"]
+    output:
+        dir=directory("4_mapdamage_results/{sample}"),
+        dnacomp="4_mapdamage_results/{sample}/dnacomp.txt", 
+        mis_plot="4_mapdamage_results/{sample}/Fragmisincorporation_plot.pdf", 
+        length_plot="4_mapdamage_results/{sample}/Length_plot.pdf", 
+        distribution="4_mapdamage_results/{sample}/lgdistribution.txt", 
+        mis="4_mapdamage_results/{sample}/misincorporation.txt", 
+        log="4_mapdamage_results/{sample}/Runtime_log.txt"
+    benchmark:
+        "benchmarks/run_mapdamage/{sample}.txt"
+    shell:
+        """
+        mapDamage --merge-libraries -i {input.sam_file} -r {input.ref_file} -d {output.dir} --no-stats
+        """
+
+# Rule to filter deaminated reads
+rule filter_deaminated_reads:
+    input:
+        bam_file="3_final_reads/{sample}_classified_hum.bam",
+        ref_file=config["ref_genome"], 
+        mapdamage_misincorporation="4_mapdamage_results/{sample}/misincorporation.txt" 
+    output:
+        deaminated_bam="3_final_reads/{sample}_classified_hum_deaminated.bam",
+        non_deaminated_bam="3_final_reads/{sample}_classified_hum_non_deaminated.bam",
+        deaminated_bai="3_final_reads/{sample}_classified_hum_deaminated.bam.bai",
+        non_deaminated_bai="3_final_reads/{sample}_classified_hum_non_deaminated.bam.bai",
+        report_file="temp/{sample}_ct_report.csv"
+    params:
+        use_mapdamage=config["calculate_from_mapdamage"]
+    benchmark:
+        "benchmarks/filter_deaminated_reads/{sample}.txt"
+    shell:
+        """
+        python ../scripts/filter_deaminated_reads.py {input.bam_file} {output.deaminated_bam} {output.non_deaminated_bam} {input.ref_file} {output.report_file} --use_mapdamage={params.use_mapdamage}
+        samtools index {output.deaminated_bam}
+        samtools index {output.non_deaminated_bam}
+        """ 
+
+# Final report generation
+rule final_report:
+    input:
+        pre_map="0_data/{sample}.fq",
+        post_length="temp/{sample}_length_filtered.fq",
+        post_map="1_mapping/{sample}_length_filtered.bam",
+        post_map_on_target="1_mapping/{sample}_on_target.bam",
+        post_map_qc="1_mapping/{sample}_LandMQ_filtered.bam",
+        post_map_qc_rmdup="1_mapping/{sample}_LandMQ_filtered_dedup.bam",
+        post_map_qc_classi="3_final_reads/{sample}_classified_hum.bam",
+        deaminated_bam="3_final_reads/{sample}_classified_hum_deaminated.bam",
+        report_file="temp/{sample}_ct_report.csv"
+    output:
+        "4_final_report/{sample}.tsv"
+    params:
+        check_alternate_allele="../scripts/check_alternate_allele_expected_only.py",
+        lineage_sites=config["lineage_sites"],
+        types=types_str,  # Pass the preprocessed space-separated string here
+        use_snp_panel=config["use_snp_panel"], 
+        snp_panel_bed=config.get("snp_panel_bed", "")
+    shell:
+        """
+        id={wildcards.sample}
+        types=({params.types})
+        
+        # Total reads 
+        total_reads=$(echo $(( $(wc -l < {input.pre_map}) / 4 )))
+
+        # Average read length for post-mapping BAM
+        avg_read_length_pre_map=$(samtools view {input.post_map} | cut -f 10 | perl -ne 'chomp;print length($_) . "\n"' | awk '{{ sum += $1; n++ }} END {{ if (n > 0) print sum / n; else print "0" }}')
+
+        # Filtered reads after length check 
+        length_filtered_reads=$(echo $(( $(wc -l < {input.post_length}) / 4 )))
+        
+        # Mapped reads after bwa 
+        mapped_reads=$(samtools view -c -F 4 {input.post_map})
+
+        # On-target reads with SNP panel 
+        on_target_reads=$(samtools view -c -F 4 {input.post_map_on_target})
+
+        # Filtered reads after quality check 
+        total_reads_post_map_qc=$(samtools view -c {input.post_map_qc})
+        
+        # Unique reads
+        unique_reads=$(samtools view -c -F 4 {input.post_map_qc_rmdup})
+        
+        # Average duplication rate 
+        dup_rate=$(echo "scale=2; $total_reads_post_map_qc / $unique_reads" | bc)
+        
+        # Average read length for unique reads
+        avg_read_length_post_map_qc=$(samtools view {input.post_map_qc_rmdup} | cut -f 10 | perl -ne 'chomp;print length($_) . "\n"' | awk '{{ sum += $1; n++ }} END {{ if (n > 0) print sum / n; else print "0" }}')
+
+        # Classified Homo Sapiens 
+        total_reads_classified=$(samtools view -c -F 4 {input.post_map_qc_classi})
+
+        # Number of SNPs covered 
+        if [ "{params.use_snp_panel}" = "True" ]; then
+            snps_recovered=$(bedtools intersect -a {params.snp_panel_bed} -b {input.post_map_qc_classi} -u | wc -l)
+        else
+            snps_recovered="NA"
+        fi
+        
+        # Deaminated reads
+        total_reads_deaminated=$(samtools view -c {input.deaminated_bam})
+    
+        # Proportion deaminated (among classified homo sapiens)
+        proportion_deaminated=$(echo "scale=3; $total_reads_deaminated / $total_reads_classified" | bc) 
+        
+        # Initialize variables to store results for each type
+        proportions=""
+        proportions_deaminated=""
+        proportions_headers=""
+
+        for type in $types; do
+            # Proportion hominin derived for the current type
+            proportion=$(python {params.check_alternate_allele} -b {input.post_map_qc_classi} -v {params.lineage_sites} -t $type)
+            proportions="$proportions\t$proportion"
+            proportions_headers="$proportions_headers\tproportion_${{type}}_derived"
+        done
+
+        for type in $types; do
+            # Proportion hominin derived (deaminated fragments) for the current type
+            p_deaminated=$(python {params.check_alternate_allele} -b {input.deaminated_bam} -v {params.lineage_sites} -t $type)
+            proportions_deaminated="$proportions_deaminated\t$p_deaminated"
+            proportions_headers="$proportions_headers\tproportion_${{type}}_derived_deaminated"
+        done
+
+        # Format C to T percentages at 5' and 3' ends as percentages with two decimal points
+        ct_5=$(awk -F, 'NR==2 {{printf "%.2f%%", $1}}' {input.report_file})
+        ct_3=$(awk -F, 'NR==2 {{printf "%.2f%%", $2}}' {input.report_file})
+        
+        # Output the final report
+        echo -e "ID\tSequenced reads\tAverage Read Length\tLength Filtered\tMapped reads\tOn-target reads\tQuality Filtered\tUnique reads\tAverage duplication rate\tAfter Classification\tNumber of SNPs Recovered\tproportion_deaminated$proportions_headers\tC to T percentage at 5' end\tC to T percentage at 3' end" > {output}
+        echo -e "$id\t$total_reads\t$avg_read_length_pre_map\t$length_filtered_reads\t$mapped_reads\t$on_target_reads\t$total_reads_post_map_qc\t$unique_reads\t$dup_rate\t$total_reads_classified\t$snps_recovered\t$proportion_deaminated$proportions$proportions_deaminated\t$ct_5\t$ct_3" >> {output}
+        """
+
+# Combine all TSV files into one and delete the individual files
+rule combine_reports:
+    input:
+        expand("4_final_report/{sample}.tsv", sample=[os.path.basename(f).split('.fq')[0] for f in input_files])
+    output:
+        "4_final_report/combined_final_report.tsv"
+    shell:
+        """
+        (head -n 1 {input[0]} && tail -n +2 -q 4_final_report/*.tsv) > {output}
+        """

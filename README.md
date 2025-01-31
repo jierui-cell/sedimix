@@ -64,7 +64,7 @@ cd bedtools2
 make
 ```
 
-#### MapDamage2
+#### [MapDamage2](https://ginolhac.github.io/mapDamage/)
 The following requirements are for **mapDamage2** to successfully run:
 
 1. Python (version >= 3.5)
@@ -101,12 +101,6 @@ Create a conda environment with the following command:
 
 ```bash
 conda env create -f environment.yaml
-```
-
-Alternatively, you can use mamba for faster environment creation:
-
-```bash
-mamba env create -f environment.yaml
 ```
 
 Activate the environment with:
@@ -150,21 +144,69 @@ Alternatively, you can build Centrifuge and Kraken2 indexes yourself by followin
 Download the human reference genome hg19.fq.gz and build the BWA index. 
 
 ## Pipeline Functionality
-1. Takes raw FASTQ files as input.
-2. Classifies Homo sapiens or Primate reads using Centrifuge.
+1. Takes raw FASTQ file(s) as input.
+2. Classifies Homo sapiens or Primate reads using Centrifuge or Kraken2.
 2. Processes through BWA to further identify reads of interest.
 4. Outputs a comprehensive taxonomic report and a folder containing classified hominin reads.
 
 ## Usage Instructions
 1. Create a new folder for your current run (same level as `scripts` and `rules`)
-2. Place your input FASTQ files in the `0_data` folder.
-3. Update the `config.yaml` file to select parameters (TODO explain here) 
+2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. 
+3. Update the `config.yaml` file to select parameters (see details below) 
 2. Run the pipeline with the following command:
 
    ```bash
-   snakemake -s ../rules/centrifuge.smk --cores {n_cores}
+   snakemake -s ../rules/snakefile_sedimix --cores {n_cores} --resources mem_mb={max_memory} --jobs 1 --rerun-incomplete 
    ```
 An example folder can be found in `example_run/`.
+
+# Path to the reference genome FASTA file.
+ref_genome: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa"
+
+# Number of threads to use for parallel processing.
+threads: 32
+
+# Minimum read length to retain after filtering.
+min_length: 35
+
+# Minimum base quality score for reads. Reads below this threshold will be filtered out.
+min_quality: 25
+
+# Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
+use_snp_panel: False 
+
+# (Optional) Path to an alternative reference genome with additional or modified alleles.
+# alt_ref_genome: "/global/scratch/users/jieruixu/sediment_dna/sedimix/reference_data/human_third_allele/modified_hg19.fa"
+
+# (Optional) Path to a BED file defining regions of interest based on the SNP panel.
+# snp_panel_bed: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.bed"
+
+# Boolean (True or False) to indicate whether to mask SNPs from the targeted panel regions during processing.
+mask_on_target_snps: False  
+
+# Classification tool to use for taxonomic assignment. Options: "centrifuge" or "kraken2".
+classification_software: "centrifuge" 
+
+# Path to the directory containing the classification software. The path should not end with a '/'.
+classification_software_path: "/global/home/users/jieruixu/jieruixu/sediment_dna/peerj_replication/centrifuge"
+
+# Name of the classification index to use.
+classification_index: "nt"
+
+# Maximum memory (in megabytes) allocated to the pipeline.
+memory_mb: 200000
+
+# Path to a CSV file containing taxonomic IDs of interest for classification.
+taxID: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/temp/primates_taxids.csv"
+
+# Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
+calculate_from_mapdamage: True
+
+# Path to a file containing sites of interest for lineage-specific analysis.
+lineage_sites: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.transformed.txt"
+
+# Analysis type or category for output classification.
+types: "hominin_informative"
 
 ## Retrieve Your Results
 - **Classified Reads**: Located in the `3_final_reads` folder

@@ -13,7 +13,7 @@ Here we present an open-source snakemake workflow that identifies human sequence
 ## Requirements
 Ensure the following tools are installed and configured before running the pipeline:
 
-#### Centrifuge (default)
+#### [Centrifuge (default)](https://ccb.jhu.edu/software/centrifuge/manual.shtml)
 ```bash
 git clone https://github.com/DaehwanKimLab/centrifuge
 make -C centrifuge
@@ -21,7 +21,7 @@ echo 'export PATH=$PATH:$(pwd)/centrifuge' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Kraken2 (optional)
+#### [Kraken2 (optional)](https://github.com/DerrickWood/kraken2/wiki/Manual)
 ```bash
 git clone https://github.com/DerrickWood/kraken2.git
 ./kraken2/install_kraken2.sh kraken2
@@ -29,7 +29,7 @@ echo 'export PATH=$PATH:$(pwd)/kraken2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Seqtk
+#### Seqtk 
 ```bash
 git clone https://github.com/lh3/seqtk.git
 make -C seqtk
@@ -124,12 +124,12 @@ To ensure all required tools, Python packages, and R libraries are installed and
 1. Save the script `check_dependencies.py` in the root directory of your project.
 2. Run the script using Python:
    ```bash
-   python3 check_dependencies.py
+   python check_dependencies.py
 
 #### Index Files
 Download index files for Centrifuge and Kraken2 from the following:
 - [AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
-  We recommend Refseq: bacteria, archaea, viral, human (7.9GB) for Centrifuge.  
+  We recommend NCBI: nucleotide non-redundant sequences (64GB) for Centrifuge.  
   ```bash
   wget https://genome-idx.s3.amazonaws.com/centrifuge/p%2Bh%2Bv.tar.gz
   tar -xvzf p%2Bh%2Bv.tar.gz -C centrifuge
@@ -137,9 +137,9 @@ Download index files for Centrifuge and Kraken2 from the following:
   ```
 
 - [AWS Indexes for Kraken2](https://benlangmead.github.io/aws-indexes/k2)  
-  We recommend Refseq: archaea, bacteria, viral, plasmid, human1, UniVec_Core (60GB) for Kraken2.  
+  The paper was tested out using nt Database version 11/29/2023 (710GB) for Kraken2. A later version should work as well though not tested. Change the code accordingly for the latest version.
   ```bash
-  wget https://genome-idx.s3.amazonaws.com/kraken/k2_standard_20240605.tar.gz
+  wget https://genome-idx.s3.amazonaws.com/kraken/k2_nt_20231129.tar.gz
   tar -xvzf k2_standard_20240605.tar.gz -C kraken2
   rm k2_standard_20240605.tar.gz
   ```
@@ -156,7 +156,9 @@ Download the human reference genome hg19.fq.gz and build the BWA index.
 4. Outputs a comprehensive taxonomic report and a folder containing classified hominin reads.
 
 ## Usage Instructions
-1. Place your input FASTQ files in the `0_data` folder.
+1. Create a new folder for your current run (same level as `scripts` and `rules`)
+2. Place your input FASTQ files in the `0_data` folder.
+3. Update the `config.yaml` file to select parameters (TODO explain here) 
 2. Run the pipeline with the following command:
 
    ```bash
@@ -166,6 +168,6 @@ An example folder can be found in `example_run/`.
 
 ## Retrieve Your Results
 - **Classified Reads**: Located in the `3_final_reads` folder
-- **Nonclassified Reads**: Located in the `3_non_classified_reads` folder
+- **Nonclassified Reads (if specified in congig.yaml)**: Located in the `3_non_classified_reads` folder
 - **Data Summary Report**: Located in the `4_final_report` folder, `combined_final_report.tsv` 
 - **Deamination Profile**: Located in the `4_mapdamage_results` folder 

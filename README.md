@@ -151,7 +151,7 @@ Download the human reference genome hg19.fq.gz and build the BWA index.
 
 ## Usage Instructions
 1. Create a new folder for your current run (same level as `scripts` and `rules`)
-2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. 
+2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. Input files must be in format that is either .fq or .fq.gz. 
 3. Update the `config.yaml` file to select parameters (see details below) 
 2. Run the pipeline with the following command:
 
@@ -160,53 +160,69 @@ Download the human reference genome hg19.fq.gz and build the BWA index.
    ```
 An example folder can be found in `example_run/`.
 
-# Path to the reference genome FASTA file.
-ref_genome: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa"
+Explanation of config.yaml Parameters:
 
-# Number of threads to use for parallel processing.
-threads: 32
+1. ref_genome:
+   - Path to the reference genome FASTA file.
+   - Example: "/path/to/reference.fa"
 
-# Minimum read length to retain after filtering.
-min_length: 35
+2. threads:
+   - Number of threads to use for parallel processing.
+   - Example: 32
 
-# Minimum base quality score for reads. Reads below this threshold will be filtered out.
-min_quality: 25
+3. min_length:
+   - Minimum read length to retain after filtering.
+   - Default: 35
 
-# Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
-use_snp_panel: False 
+4. min_quality:
+   - Minimum base quality score for reads. Reads below this threshold will be filtered out.
+   - Default: 25
 
-# (Optional) Path to an alternative reference genome with additional or modified alleles.
-# alt_ref_genome: "/global/scratch/users/jieruixu/sediment_dna/sedimix/reference_data/human_third_allele/modified_hg19.fa"
+5. use_snp_panel:
+   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
+   - Default: False
 
-# (Optional) Path to a BED file defining regions of interest based on the SNP panel.
-# snp_panel_bed: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.bed"
+6. alt_ref_genome (Optional):
+   - Path to an alternative reference genome with additional or modified alleles.
+   - Commented out by default.
 
-# Boolean (True or False) to indicate whether to mask SNPs from the targeted panel regions during processing.
-mask_on_target_snps: False  
+7. snp_panel_bed (Optional):
+   - Path to a BED file defining regions of interest based on the SNP panel.
+   - Commented out by default.
 
-# Classification tool to use for taxonomic assignment. Options: "centrifuge" or "kraken2".
-classification_software: "centrifuge" 
+8. classification_software:
+   - Classification tool to use for taxonomic assignment. 
+   - Options: "centrifuge" or "kraken2".
+   - Default: "centrifuge"
 
-# Path to the directory containing the classification software. The path should not end with a '/'.
-classification_software_path: "/global/home/users/jieruixu/jieruixu/sediment_dna/peerj_replication/centrifuge"
+9. classification_software_path:
+   - Path to the directory containing the classification software.
+   - The path should not end with a slash (/).
 
-# Name of the classification index to use.
-classification_index: "nt"
+10. classification_index:
+   - Name of the classification index to use.
+   - Default: "nt"
 
-# Maximum memory (in megabytes) allocated to the pipeline.
-memory_mb: 200000
+11. memory_mb:
+   - Maximum memory (in megabytes) allocated to the pipeline.
+   - Default: 200000 (equals 200 GB)
 
-# Path to a CSV file containing taxonomic IDs of interest for classification.
-taxID: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/temp/primates_taxids.csv"
+12. taxID:
+   - A int value that corresponds to the target specie (homo sapiens 9606), or a path to a CSV file containing taxonomic IDs of interest for classification.
+   - Example: "/path/to/primates_taxids.csv"
 
-# Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
-calculate_from_mapdamage: True
+13. calculate_from_mapdamage:
+   - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
+   - Default: True
 
-# Path to a file containing sites of interest for lineage-specific analysis.
-lineage_sites: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.transformed.txt"
+15. lineage_sites:
+   - Path to a file containing sites of interest for lineage-specific analysis.
+   - Example: "/path/to/lineage_sites.txt"
 
-# Analysis type or category for output classification.
-types: "hominin_informative"
+16. types:
+   - Analysis type or category for output classification. This
+   - Example: "hominin_informative"
+
 
 ## Retrieve Your Results
 - **Classified Reads**: Located in the `3_final_reads` folder

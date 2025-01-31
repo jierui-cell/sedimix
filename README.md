@@ -160,67 +160,67 @@ Download the human reference genome hg19.fq.gz and build the BWA index.
    ```
 An example folder can be found in `example_run/`.
 
-Explanation of config.yaml Parameters:
+Explanation of `config.yaml` Parameters:
 
-1. ref_genome:
+1. **ref_genome**:
    - Path to the reference genome FASTA file.
    - Example: "/path/to/reference.fa"
 
-2. threads:
+2. **threads**:
    - Number of threads to use for parallel processing.
    - Example: 32
 
-3. min_length:
+3. **min_length**:
    - Minimum read length to retain after filtering.
-   - Default: 35
+   - Example: 35
 
-4. min_quality:
+4. **min_quality**:
    - Minimum base quality score for reads. Reads below this threshold will be filtered out.
-   - Default: 25
+   - Example: 25
 
-5. use_snp_panel:
+5. **use_snp_panel**:
    - Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
-   - Default: False
+   - Example: False
 
-6. alt_ref_genome (Optional):
+6. **alt_ref_genome** (Optional):
    - Path to an alternative reference genome with additional or modified alleles.
    - Commented out by default.
 
-7. snp_panel_bed (Optional):
+7. **snp_panel_bed** (Optional):
    - Path to a BED file defining regions of interest based on the SNP panel.
    - Commented out by default.
 
-8. classification_software:
+8. **classification_software**:
    - Classification tool to use for taxonomic assignment. 
    - Options: "centrifuge" or "kraken2".
-   - Default: "centrifuge"
+   - Example: "centrifuge"
 
-9. classification_software_path:
+9. **classification_software_path**:
    - Path to the directory containing the classification software.
    - The path should not end with a slash (/).
 
-10. classification_index:
+10. **classification_index**:
    - Name of the classification index to use.
-   - Default: "nt"
+   - Example: "nt"
 
-11. memory_mb:
+11. **memory_mb**:
    - Maximum memory (in megabytes) allocated to the pipeline.
-   - Default: 200000 (equals 200 GB)
+   - Example: 200000 (equals 200 GB)
 
-12. taxID:
-   - A int value that corresponds to the target specie (homo sapiens 9606), or a path to a CSV file containing taxonomic IDs of interest for classification.
+12. **taxID**:
+   - Path to a CSV file containing taxonomic IDs of interest for classification.
    - Example: "/path/to/primates_taxids.csv"
 
-13. calculate_from_mapdamage:
+13. **calculate_from_mapdamage**:
    - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
-   - Default: True
+   - Example: True
 
-15. lineage_sites:
+14. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
    - Example: "/path/to/lineage_sites.txt"
 
-16. types:
-   - Analysis type or category for output classification. This
+15. **types**:
+   - Analysis type or category for output classification.
    - Example: "hominin_informative"
 
 

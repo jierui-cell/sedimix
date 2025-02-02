@@ -143,6 +143,41 @@ Alternatively, you can build Centrifuge and Kraken2 indexes yourself by followin
 #### Human Reference Genome 
 Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index. 
 
+If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias.  
+Use the script `scripts/generate_alternative_ref.py` with three arguments:  
+
+1. The SNP panel/probe file (e.g. containing positions and alleles to modify)  
+2. Your original reference genome (FASTA format)  
+3. A name for your output modified reference genome file  
+
+**SNP Panel/Probe File Format:**  
+- Tab-delimited text file with **no header**.  
+- Must contain **five columns** in the order: `chrom`, `pos`, `ref`, `a1`, `a2`, for example:  
+   ```
+   1 10000 A G C
+   1 20000 T C G
+   2 30000 C T A
+   ```
+- `chrom`: Chromosome number or letter (e.g., `1`, `2`, ..., `X`, `Y`). The script automatically adds `chr` to this value.  
+- `pos`: 1-based genomic position.  
+- `ref`: The reference allele at this position.  
+- `a1` and `a2`: Observed alternate alleles at this position.  
+
+The script replaces bases in the reference genome at specified SNP positions with a "third allele," ensuring it differs from both the original reference and provided SNP alleles. This helps reduce reference bias when mapping ancient or metagenomic reads.
+
+**Example usage:**
+```bash
+python scripts/generate_alternative_ref.py \
+    <snp_panel_file> \
+    <hg19.fasta> \
+    <modified_hg19.fasta>
+
+# Build a BWA index on the newly created reference
+bwa index <modified_hg19.fasta>
+```
+
+Then, in your config.yaml file, update ref_genome (or alt_ref_genome if using the alternate reference) to point to <modified_hg19.fasta>, the newly created FASTA file.
+
 ## Pipeline Functionality
 1. Takes raw FASTQ file(s) as input.
 2. Classifies Homo sapiens or Primate reads using Centrifuge or Kraken2.
@@ -228,7 +263,7 @@ An example folder can be found in `example_run/`.
    - Default: True
 
 ## Retrieve Your Results
-- **Classified Reads**: Located in the `3_final_reads` folder
-- **Nonclassified Reads (if specified in config.yaml)**: Located in the `3_non_classified_reads` folder
-- **Data Summary Report**: Located in the `4_final_report` folder, `combined_final_report.tsv` 
-- **Deamination Profile**: Located in the `4_mapdamage_results` folder 
+- **Classified Hominin Reads**: Located in the `3_final_reads` folder, ending with `{sample_name}_final.bam`. 
+- **Classified Non-hominin Reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
+- **Data Summary Report**: Located in the `4_final_report` folder, `combined_final_report.tsv`.
+- **Deamination Profile**: Located in the `4_mapdamage_results` folder. 

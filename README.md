@@ -206,7 +206,7 @@ An example folder can be found in `example_run/`.
 
 3. **min_length**:
    - Minimum read length to retain after filtering.
-   - Default: 35
+   - Default: 30
 
 4. **min_quality**:
    - Minimum base quality score after mapping for reads. Reads below this threshold will be filtered out.
@@ -235,7 +235,7 @@ An example folder can be found in `example_run/`.
 
 10. **snp_panel_bed** (Optional):
    - Path to a BED file defining regions of interest based on the SNP panel.
-   - Only required if use_snp_panel is set to True. Commented out by default.
+   - Only required if use_snp_panel is set to True. Commented out by default. 
 
 11. **calculate_from_mapdamage**:
    - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.

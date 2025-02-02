@@ -151,7 +151,7 @@ Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index.
 
 ## Usage Instructions
 1. Create a new folder for your current run (same level as `scripts` and `rules`)
-2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. Input files must be in format that is either .fq or .fq.gz. 
+2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. **Input files must be in format that is either .fq or .fq.gz.** 
 3. Update the `config.yaml` file to select parameters (see details below) 
 2. Run the pipeline with the following command:
 
@@ -160,7 +160,7 @@ Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index.
    ```
 An example folder can be found in `example_run/`.
 
-Explanation of `config.yaml` Parameters:
+#### Explanation of `config.yaml` Parameters:
  
 1. **ref_genome**:
    - Path to the reference genome FASTA file.

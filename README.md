@@ -197,15 +197,15 @@ Explanation of `config.yaml` Parameters:
 
 9. **classification_index**:
    - Folder path and name of the classification index to use.
-   - Example: "/path/to/index/nt" (nt is index filename prefix (minus trailing .X.cf). after untaring for Centrifuge; for Kraken2, there is no need for this extra reference, and the path to the untar index folder is suffix)
+   - Example: "/path/to/index/nt" (after untaring for Centrifuge, nt is the index filename prefix (minus trailing .X.cf); for Kraken2, there is no need for this extra reference, and the path to the untar index folder is suffix)
 
 10. **memory_mb**:
    - Maximum memory (in megabytes) allocated to the pipeline. This should align with the max_memory parameter in the snakemake command. 
-   - Default: 200000 (around 200 GB)
+   - Example: 200000 (around 200 GB)
 
 11. **taxID**:
    - Path to a CSV file containing taxonomic IDs of interest for classification.
-   - Default: "/path/to/primates_taxids.csv"
+   - Example: "/path/to/primates_taxids.csv"
 
 12. **calculate_from_mapdamage**:
    - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
@@ -213,11 +213,11 @@ Explanation of `config.yaml` Parameters:
 
 13. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
-   - Default: "/path/to/lineage_sites.txt"
+   - Example: "/path/to/lineage_sites.txt"
 
 14. **types**:
    - Analysis type or category for output classification.
-   - Default: "hominin_informative"
+   - Example: "hominin_informative"
 
 15. **to_clean**:
    - Boolean (True or False) indicating whether to remove all intermediate files once the final output is generated.

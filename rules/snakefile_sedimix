@@ -26,6 +26,8 @@ rule all:
             "3_final_reads/{sample}_final_non_deaminated.bam", 
             "4_final_report/{sample}.tsv"
         ], sample=[os.path.basename(f).split('.fq')[0] for f in input_files]),
+        expand("3_final_reads/{sample}_non_hominin.fq", 
+        sample=[os.path.basename(f).split('.fq')[0] for f in input_files]) if config.get("keep_non_hominin_reads", False) else [],
         "4_final_report/combined_final_report.tsv"
 
 # Unzip fastq.gz files if necessary
@@ -110,7 +112,7 @@ elif (config['classification_software'] == "centrifuge"):
             "benchmarks/classification/{sample}.txt"
         shell:
             """
-            centrifuge -x {params.centrifuge_path}/{params.centrifuge_db} -S {output.centrifuge_results} --report-file {output.centrifuge_report} -U {input} -p {threads}
+            centrifuge -x {params.centrifuge_db} -S {output.centrifuge_results} --report-file {output.centrifuge_report} -U {input} -p {threads}
             centrifuge-kreport -x {params.centrifuge_db} {output.centrifuge_results} > {output.kreport}
             """
 
@@ -248,6 +250,27 @@ rule filter_deaminated_reads:
         samtools index {output.non_deaminated_bam}
         """
 
+if config.get("keep_non_hominin_reads", False):
+    rule save_non_hominin_reads:
+        input:
+            classified_bam="3_final_reads/{sample}_final.bam",
+            all_reads="temp/{sample}_length_filtered.fq"
+        output:
+            non_hominin_reads="3_final_reads/{sample}_non_hominin.fq"
+        benchmark:
+            "benchmarks/save_non_hominin_reads/{sample}.txt"
+        shell:
+            """
+            # Extract read IDs from the classified (hominin) BAM file
+            samtools view {input.classified_bam} | cut -f1 > temp/{wildcards.sample}_hominin_ids.lst
+
+            # Extract all read headers, removing the leading '>' character, then filter out hominin reads
+            seqtk seq -A {input.all_reads} | grep '^>' | sed 's/^>//' | grep -v -f temp/{wildcards.sample}_hominin_ids.lst > temp/{wildcards.sample}_non_homin.read.lst
+
+            # Extract non-hominin reads efficiently using seqtk subseq
+            seqtk subseq {input.all_reads} temp/{wildcards.sample}_non_homin.read.lst > {output.non_hominin_reads}
+            """
+
 # Final report generation
 rule final_report:
     input:
@@ -263,7 +286,7 @@ rule final_report:
     output:
         "4_final_report/{sample}.tsv"
     params:
-        check_alternate_allele="../scripts/check_alternate_allele_expected_only.py",
+        check_alternate_allele="../scripts/check_alternative_allele.py",
         lineage_sites=config["lineage_sites"],
         types=types_str,  # Pass the preprocessed space-separated string here
         use_snp_panel=config["use_snp_panel"],
@@ -319,14 +342,14 @@ rule final_report:
             # Proportion hominin derived for the current type
             proportion=$(python {params.check_alternate_allele} -b {input.post_map_qc_rmdup} -v {params.lineage_sites} -t $type)
             proportions="$proportions\t$proportion"
-            proportions_headers="$proportions_headers\tproportion_${{type}}_derived"
+            proportions_headers="$proportions_headers\tPercent ${{type}} derived"
         done
 
         for type in $types; do
             # Proportion hominin derived (deaminated fragments) for the current type
             p_deaminated=$(python {params.check_alternate_allele} -b {input.deaminated_bam} -v {params.lineage_sites} -t $type)
             proportions_deaminated="$proportions_deaminated\t$p_deaminated"
-            proportions_headers="$proportions_headers\tproportion_${{type}}_derived_deaminated"
+            proportions_headers="$proportions_headers\tPercent ${{type}} derived deaminated"
         done
 
         # Format C to T percentages at 5' and 3' ends as percentages with two decimal points
@@ -334,7 +357,7 @@ rule final_report:
         ct_3=$(awk -F',' 'NR==2 {{print $2}}' {input.report_file})
         
         # Output the final report
-        echo -e "ID\tSequenced reads\tLength Filtered\tAfter Classification\tMapped reads\tOn-target reads\tQuality Filtered\tUnique reads\tAverage duplication rate\tNumber of SNPs Covered\tproportion_deaminated$proportions_headers\t5' C-to-T substitution frequency [%] (95% CI)\t3' C-to-T substitution frequency [%] (95% CI)" > {output}
+        echo -e "Sample ID\tSequenced reads\tLength filtered\After classification\tMapped sequences\tOn-target sequences\tQuality filtered\tUnique filtered\tAverage duplication rate\tNumber of SNPs covered\tPercent deaminated$proportions_headers\t5' C-to-T substitution frequency [%] (95% CI)\t3' C-to-T substitution frequency [%] (95% CI)" > {output}
         echo -e "$id\t$total_reads\t$length_filtered_reads\t$total_reads_classified\t$mapped_reads\t$on_target_reads\t$total_reads_post_map_qc\t$unique_reads\t$dup_rate\t$snps_recovered\t$proportion_deaminated$proportions$proportions_deaminated\t$ct_5\t$ct_3" >> {output}
         """
 

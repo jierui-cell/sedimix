@@ -29,9 +29,7 @@ def main():
         'pos': int,
         'ref': str,
         'a1': str,
-        'a2': str,
-        'b_3': int, # TODO: need to remove this in the future and let user input snp panel to follow certain requirements 
-        'snp.cat.general': str
+        'a2': str
     }
 
     # Load the targeted sites from the input file

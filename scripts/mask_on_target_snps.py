@@ -2,14 +2,17 @@ import sys
 import pysam
 
 def get_snp_positions(snp_panel_file):
-    snp_positions = set()
+    snp_positions = {}
     with open(snp_panel_file) as f:
         for line in f:
             if line.startswith('chrom'):
                 continue
-            chrom, pos0, pos1 = line.strip().split('\t')[:3]
+            chrom, pos1, *_ = line.strip().split('\t')
             chrom = f'chr{chrom}'  # Add 'chr' prefix to match BAM file naming convention
-            snp_positions.add((chrom, int(pos0)))
+            pos1 = int(pos1)
+            if chrom not in snp_positions:
+                snp_positions[chrom] = set()
+            snp_positions[chrom].add(pos1)
     return snp_positions
 
 def mask_snps_in_bam(input_bam, snp_positions, output_bam):
@@ -17,13 +20,14 @@ def mask_snps_in_bam(input_bam, snp_positions, output_bam):
         for read in bam_in:
             seq = list(read.query_sequence)
             chrom = bam_in.get_reference_name(read.reference_id)
-            for pos in range(read.reference_start, read.reference_end):
-                seq_pos = pos - read.reference_start
-                if (chrom, pos) in snp_positions:
-                    if seq_pos < len(seq):
-                        seq[seq_pos] = 'N'
-                    else:
-                        print(f"Index out of range: {seq_pos} for read {read.query_name} with length {len(seq)}")
+            if chrom in snp_positions:
+                for query_pos, ref_pos in read.get_aligned_pairs(matches_only=True):
+                    ref_pos_1_based = ref_pos + 1
+                    if ref_pos_1_based in snp_positions[chrom]:
+                        if query_pos < len(seq):
+                            seq[query_pos] = 'N'
+                        else:
+                            print(f"Index out of range: {query_pos} for read {read.query_name} with length {len(seq)}")
             read.query_sequence = ''.join(seq)
             bam_out.write(read)
 

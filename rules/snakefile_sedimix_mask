@@ -173,7 +173,7 @@ if config["mask_on_target_snps"]:
         benchmark:
             "benchmarks/mask_on_target_snps/{sample}.txt"
         shell:
-            "python ../scripts/mask_on_target_snps_vernot_replicate.py {input[0]} {input[1]} {output}"
+            "python ../scripts/mask_on_target_snps.py {input[0]} {input[1]} {output}"
 else:
     rule mask_on_target_snps:
         input:
@@ -343,7 +343,7 @@ rule final_report:
     output:
         "4_final_report/{sample}.tsv"
     params:
-        check_alternate_allele="../scripts/check_alternate_allele_expected_only.py",
+        check_alternate_allele="../scripts/check_alternative_allele.py",
         lineage_sites=config["lineage_sites"],
         types=types_str,  # Pass the preprocessed space-separated string here
         use_snp_panel=config["use_snp_panel"], 

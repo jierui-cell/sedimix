@@ -1,0 +1,375 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 32
+Rules claiming more threads will be scaled down.
+Provided resources: mem_mb=200000
+Job stats:
+job                          count
+-------------------------  -------
+all                              1
+classification                   2
+combine_reports                  1
+filter_deaminated_reads          2
+filter_reads_by_length           2
+final_report                     2
+generate_classified_reads        2
+map_sort_index                   2
+mapping_quality_filter           2
+mark_duplicates                  2
+on_target_read_filter            2
+run_mapdamage                    2
+save_non_hominin_reads           2
+total                           24
+
+Select jobs to execute...
+
+[Sat Feb  1 16:19:44 2025]
+rule filter_reads_by_length:
+    input: 0_data/example_reads_B.fq
+    output: temp/example_reads_B_length_filtered.fq
+    jobid: 8
+    benchmark: benchmarks/filter_reads_by_length/example_reads_B.txt
+    reason: Missing output files: temp/example_reads_B_length_filtered.fq
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+
+[Sat Feb  1 16:19:44 2025]
+rule filter_reads_by_length:
+    input: 0_data/example_reads_A.fq
+    output: temp/example_reads_A_length_filtered.fq
+    jobid: 16
+    benchmark: benchmarks/filter_reads_by_length/example_reads_A.txt
+    reason: Missing output files: temp/example_reads_A_length_filtered.fq
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:19:45 2025]
+Finished job 16.
+1 of 24 steps (4%) done
+Select jobs to execute...
+[Sat Feb  1 16:19:45 2025]
+Finished job 8.
+2 of 24 steps (8%) done
+
+[Sat Feb  1 16:19:45 2025]
+rule classification:
+    input: temp/example_reads_A_length_filtered.fq
+    output: 1_classification/example_reads_A.centrifuge, 1_classification/example_reads_A.centrifugeLog, 1_classification/example_reads_A.k2report
+    jobid: 15
+    benchmark: benchmarks/classification/example_reads_A.txt
+    reason: Missing output files: 1_classification/example_reads_A.centrifuge; Input files updated by another job: temp/example_reads_A_length_filtered.fq
+    wildcards: sample=example_reads_A
+    threads: 32
+    resources: tmpdir=/tmp, mem_mb=200000, mem_mib=190735
+
+[Sat Feb  1 16:28:10 2025]
+Finished job 15.
+3 of 24 steps (12%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:28:10 2025]
+rule generate_classified_reads:
+    input: 1_classification/example_reads_A.centrifuge, temp/example_reads_A_length_filtered.fq
+    output: temp/example_reads_A_length_filtered_classified.fq
+    jobid: 14
+    benchmark: benchmarks/generate_classified_reads/example_reads_A.txt
+    reason: Missing output files: temp/example_reads_A_length_filtered_classified.fq; Input files updated by another job: 1_classification/example_reads_A.centrifuge, temp/example_reads_A_length_filtered.fq
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:28:31 2025]
+Finished job 14.
+4 of 24 steps (17%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:28:31 2025]
+rule classification:
+    input: temp/example_reads_B_length_filtered.fq
+    output: 1_classification/example_reads_B.centrifuge, 1_classification/example_reads_B.centrifugeLog, 1_classification/example_reads_B.k2report
+    jobid: 7
+    benchmark: benchmarks/classification/example_reads_B.txt
+    reason: Missing output files: 1_classification/example_reads_B.centrifuge; Input files updated by another job: temp/example_reads_B_length_filtered.fq
+    wildcards: sample=example_reads_B
+    threads: 32
+    resources: tmpdir=/tmp, mem_mb=200000, mem_mib=190735
+
+[Sat Feb  1 16:36:38 2025]
+Finished job 7.
+5 of 24 steps (21%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:38 2025]
+rule generate_classified_reads:
+    input: 1_classification/example_reads_B.centrifuge, temp/example_reads_B_length_filtered.fq
+    output: temp/example_reads_B_length_filtered_classified.fq
+    jobid: 6
+    benchmark: benchmarks/generate_classified_reads/example_reads_B.txt
+    reason: Missing output files: temp/example_reads_B_length_filtered_classified.fq; Input files updated by another job: 1_classification/example_reads_B.centrifuge, temp/example_reads_B_length_filtered.fq
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:40 2025]
+Finished job 6.
+6 of 24 steps (25%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:40 2025]
+rule map_sort_index:
+    input: temp/example_reads_B_length_filtered_classified.fq
+    output: 2_mapping/example_reads_B_length_filtered_classified.bam, 2_mapping/example_reads_B_length_filtered_classified.bam.bai, temp/example_reads_B_length_filtered_classified.sai, temp/example_reads_B_length_filtered_classified.sam
+    jobid: 5
+    benchmark: benchmarks/map_sort_index/example_reads_B.txt
+    reason: Missing output files: 2_mapping/example_reads_B_length_filtered_classified.bam; Input files updated by another job: temp/example_reads_B_length_filtered_classified.fq
+    wildcards: sample=example_reads_B
+    threads: 32
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:50 2025]
+Finished job 5.
+7 of 24 steps (29%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:50 2025]
+rule map_sort_index:
+    input: temp/example_reads_A_length_filtered_classified.fq
+    output: 2_mapping/example_reads_A_length_filtered_classified.bam, 2_mapping/example_reads_A_length_filtered_classified.bam.bai, temp/example_reads_A_length_filtered_classified.sai, temp/example_reads_A_length_filtered_classified.sam
+    jobid: 13
+    benchmark: benchmarks/map_sort_index/example_reads_A.txt
+    reason: Missing output files: 2_mapping/example_reads_A_length_filtered_classified.bam; Input files updated by another job: temp/example_reads_A_length_filtered_classified.fq
+    wildcards: sample=example_reads_A
+    threads: 32
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:55 2025]
+Finished job 13.
+8 of 24 steps (33%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:55 2025]
+rule on_target_read_filter:
+    input: 2_mapping/example_reads_A_length_filtered_classified.bam
+    output: 2_mapping/example_reads_A_on_target.bam
+    jobid: 12
+    reason: Missing output files: 2_mapping/example_reads_A_on_target.bam; Input files updated by another job: 2_mapping/example_reads_A_length_filtered_classified.bam
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+
+[Sat Feb  1 16:36:55 2025]
+rule on_target_read_filter:
+    input: 2_mapping/example_reads_B_length_filtered_classified.bam
+    output: 2_mapping/example_reads_B_on_target.bam
+    jobid: 4
+    reason: Missing output files: 2_mapping/example_reads_B_on_target.bam; Input files updated by another job: 2_mapping/example_reads_B_length_filtered_classified.bam
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:55 2025]
+Finished job 12.
+9 of 24 steps (38%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:55 2025]
+rule mapping_quality_filter:
+    input: 2_mapping/example_reads_A_on_target.bam
+    output: 2_mapping/example_reads_A_LandMQ_filtered.bam
+    jobid: 11
+    benchmark: benchmarks/mapping_quality_filter/example_reads_A.txt
+    reason: Missing output files: 2_mapping/example_reads_A_LandMQ_filtered.bam; Input files updated by another job: 2_mapping/example_reads_A_on_target.bam
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:55 2025]
+Finished job 4.
+10 of 24 steps (42%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:55 2025]
+rule mapping_quality_filter:
+    input: 2_mapping/example_reads_B_on_target.bam
+    output: 2_mapping/example_reads_B_LandMQ_filtered.bam
+    jobid: 3
+    benchmark: benchmarks/mapping_quality_filter/example_reads_B.txt
+    reason: Missing output files: 2_mapping/example_reads_B_LandMQ_filtered.bam; Input files updated by another job: 2_mapping/example_reads_B_on_target.bam
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:56 2025]
+Finished job 11.
+11 of 24 steps (46%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:56 2025]
+rule mark_duplicates:
+    input: 2_mapping/example_reads_A_LandMQ_filtered.bam
+    output: 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_A_final.bam.bai
+    jobid: 10
+    benchmark: benchmarks/mark_duplicates/example_reads_A.txt
+    reason: Missing output files: 3_final_reads/example_reads_A_final.bam; Input files updated by another job: 2_mapping/example_reads_A_LandMQ_filtered.bam
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:56 2025]
+Finished job 3.
+12 of 24 steps (50%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:56 2025]
+rule mark_duplicates:
+    input: 2_mapping/example_reads_B_LandMQ_filtered.bam
+    output: 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_B_final.bam.bai
+    jobid: 2
+    benchmark: benchmarks/mark_duplicates/example_reads_B.txt
+    reason: Missing output files: 3_final_reads/example_reads_B_final.bam; Input files updated by another job: 2_mapping/example_reads_B_LandMQ_filtered.bam
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:57 2025]
+Finished job 10.
+13 of 24 steps (54%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:57 2025]
+rule save_non_hominin_reads:
+    input: 3_final_reads/example_reads_A_final.bam, temp/example_reads_A_length_filtered.fq
+    output: 3_final_reads/example_reads_A_non_hominin.fq
+    jobid: 22
+    benchmark: benchmarks/save_non_hominin_reads/example_reads_A.txt
+    reason: Missing output files: 3_final_reads/example_reads_A_non_hominin.fq; Input files updated by another job: 3_final_reads/example_reads_A_final.bam, temp/example_reads_A_length_filtered.fq; Code has changed since last execution
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+
+[Sat Feb  1 16:36:57 2025]
+rule run_mapdamage:
+    input: 3_final_reads/example_reads_A_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa
+    output: 4_mapdamage_results/example_reads_A, 4_mapdamage_results/example_reads_A/dnacomp.txt, 4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf, 4_mapdamage_results/example_reads_A/Length_plot.pdf, 4_mapdamage_results/example_reads_A/lgdistribution.txt, 4_mapdamage_results/example_reads_A/misincorporation.txt, 4_mapdamage_results/example_reads_A/Runtime_log.txt
+    jobid: 9
+    benchmark: benchmarks/run_mapdamage/example_reads_A.txt
+    reason: Missing output files: 4_mapdamage_results/example_reads_A/misincorporation.txt, 4_mapdamage_results/example_reads_A; Input files updated by another job: 3_final_reads/example_reads_A_final.bam
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:57 2025]
+Finished job 2.
+14 of 24 steps (58%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:36:57 2025]
+rule save_non_hominin_reads:
+    input: 3_final_reads/example_reads_B_final.bam, temp/example_reads_B_length_filtered.fq
+    output: 3_final_reads/example_reads_B_non_hominin.fq
+    jobid: 21
+    benchmark: benchmarks/save_non_hominin_reads/example_reads_B.txt
+    reason: Missing output files: 3_final_reads/example_reads_B_non_hominin.fq; Input files updated by another job: 3_final_reads/example_reads_B_final.bam, temp/example_reads_B_length_filtered.fq; Code has changed since last execution
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+
+[Sat Feb  1 16:36:57 2025]
+rule run_mapdamage:
+    input: 3_final_reads/example_reads_B_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa
+    output: 4_mapdamage_results/example_reads_B, 4_mapdamage_results/example_reads_B/dnacomp.txt, 4_mapdamage_results/example_reads_B/Fragmisincorporation_plot.pdf, 4_mapdamage_results/example_reads_B/Length_plot.pdf, 4_mapdamage_results/example_reads_B/lgdistribution.txt, 4_mapdamage_results/example_reads_B/misincorporation.txt, 4_mapdamage_results/example_reads_B/Runtime_log.txt
+    jobid: 1
+    benchmark: benchmarks/run_mapdamage/example_reads_B.txt
+    reason: Missing output files: 4_mapdamage_results/example_reads_B/misincorporation.txt, 4_mapdamage_results/example_reads_B; Input files updated by another job: 3_final_reads/example_reads_B_final.bam
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:36:57 2025]
+Finished job 22.
+15 of 24 steps (62%) done
+[Sat Feb  1 16:36:57 2025]
+Finished job 21.
+16 of 24 steps (67%) done
+[Sat Feb  1 16:37:20 2025]
+Finished job 1.
+17 of 24 steps (71%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:37:20 2025]
+rule filter_deaminated_reads:
+    input: 3_final_reads/example_reads_B_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa, 4_mapdamage_results/example_reads_B/misincorporation.txt
+    output: 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_B_final_deaminated.bam.bai, 3_final_reads/example_reads_B_final_non_deaminated.bam.bai, temp/example_reads_B_ct_report.csv
+    jobid: 17
+    benchmark: benchmarks/filter_deaminated_reads/example_reads_B.txt
+    reason: Missing output files: temp/example_reads_B_ct_report.csv, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_B_final_deaminated.bam; Input files updated by another job: 4_mapdamage_results/example_reads_B/misincorporation.txt, 3_final_reads/example_reads_B_final.bam
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:37:20 2025]
+Finished job 9.
+18 of 24 steps (75%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:37:20 2025]
+rule filter_deaminated_reads:
+    input: 3_final_reads/example_reads_A_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa, 4_mapdamage_results/example_reads_A/misincorporation.txt
+    output: 3_final_reads/example_reads_A_final_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_deaminated.bam.bai, 3_final_reads/example_reads_A_final_non_deaminated.bam.bai, temp/example_reads_A_ct_report.csv
+    jobid: 18
+    benchmark: benchmarks/filter_deaminated_reads/example_reads_A.txt
+    reason: Missing output files: 3_final_reads/example_reads_A_final_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, temp/example_reads_A_ct_report.csv; Input files updated by another job: 4_mapdamage_results/example_reads_A/misincorporation.txt, 3_final_reads/example_reads_A_final.bam
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:37:38 2025]
+Finished job 18.
+19 of 24 steps (79%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:37:38 2025]
+rule final_report:
+    input: 0_data/example_reads_A.fq, temp/example_reads_A_length_filtered.fq, temp/example_reads_A_length_filtered_classified.fq, 2_mapping/example_reads_A_length_filtered_classified.bam, 2_mapping/example_reads_A_on_target.bam, 2_mapping/example_reads_A_LandMQ_filtered.bam, 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_A_final_deaminated.bam, temp/example_reads_A_ct_report.csv
+    output: 4_final_report/example_reads_A.tsv
+    jobid: 20
+    reason: Missing output files: 4_final_report/example_reads_A.tsv; Input files updated by another job: 3_final_reads/example_reads_A_final.bam, 2_mapping/example_reads_A_on_target.bam, temp/example_reads_A_length_filtered_classified.fq, temp/example_reads_A_ct_report.csv, 3_final_reads/example_reads_A_final_deaminated.bam, 2_mapping/example_reads_A_LandMQ_filtered.bam, temp/example_reads_A_length_filtered.fq, 2_mapping/example_reads_A_length_filtered_classified.bam; Code has changed since last execution
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:37:38 2025]
+Finished job 17.
+20 of 24 steps (83%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:37:38 2025]
+rule final_report:
+    input: 0_data/example_reads_B.fq, temp/example_reads_B_length_filtered.fq, temp/example_reads_B_length_filtered_classified.fq, 2_mapping/example_reads_B_length_filtered_classified.bam, 2_mapping/example_reads_B_on_target.bam, 2_mapping/example_reads_B_LandMQ_filtered.bam, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_B_final_deaminated.bam, temp/example_reads_B_ct_report.csv
+    output: 4_final_report/example_reads_B.tsv
+    jobid: 19
+    reason: Missing output files: 4_final_report/example_reads_B.tsv; Input files updated by another job: 2_mapping/example_reads_B_on_target.bam, 2_mapping/example_reads_B_LandMQ_filtered.bam, 3_final_reads/example_reads_B_final_deaminated.bam, temp/example_reads_B_length_filtered.fq, temp/example_reads_B_ct_report.csv, 2_mapping/example_reads_B_length_filtered_classified.bam, 3_final_reads/example_reads_B_final.bam, temp/example_reads_B_length_filtered_classified.fq; Code has changed since last execution
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:37:43 2025]
+Finished job 20.
+21 of 24 steps (88%) done
+[Sat Feb  1 16:37:43 2025]
+Finished job 19.
+22 of 24 steps (92%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:37:43 2025]
+rule combine_reports:
+    input: 4_final_report/example_reads_B.tsv, 4_final_report/example_reads_A.tsv
+    output: 4_final_report/combined_final_report.tsv
+    jobid: 23
+    reason: Missing output files: 4_final_report/combined_final_report.tsv; Input files updated by another job: 4_final_report/example_reads_A.tsv, 4_final_report/example_reads_B.tsv
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:37:43 2025]
+Finished job 23.
+23 of 24 steps (96%) done
+Select jobs to execute...
+
+[Sat Feb  1 16:37:43 2025]
+localrule all:
+    input: 4_mapdamage_results/example_reads_B, 4_mapdamage_results/example_reads_A, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_A_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, 4_final_report/example_reads_B.tsv, 4_final_report/example_reads_A.tsv, 3_final_reads/example_reads_B_non_hominin.fq, 3_final_reads/example_reads_A_non_hominin.fq, 4_final_report/combined_final_report.tsv
+    jobid: 0
+    reason: Input files updated by another job: 4_final_report/example_reads_B.tsv, 3_final_reads/example_reads_B_non_hominin.fq, 3_final_reads/example_reads_A_final_deaminated.bam, 4_final_report/example_reads_A.tsv, 4_mapdamage_results/example_reads_B, 3_final_reads/example_reads_A_final_non_deaminated.bam, 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 4_final_report/combined_final_report.tsv, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_B_final.bam, 4_mapdamage_results/example_reads_A, 3_final_reads/example_reads_A_non_hominin.fq
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:37:43 2025]
+Finished job 0.
+24 of 24 steps (100%) done
+Complete log: .snakemake/log/2025-02-01T161939.332458.snakemake.log

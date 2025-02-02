@@ -1,0 +1,65 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 32
+Rules claiming more threads will be scaled down.
+Provided resources: mem_mb=200000
+Job stats:
+job                          count
+-------------------------  -------
+all                              1
+classification                   2
+combine_reports                  1
+filter_deaminated_reads          2
+filter_reads_by_length           2
+final_report                     2
+generate_classified_reads        2
+map_sort_index                   2
+mapping_quality_filter           2
+mark_duplicates                  2
+on_target_read_filter            2
+run_mapdamage                    2
+save_non_hominin_reads           2
+total                           24
+
+Select jobs to execute...
+
+[Sat Feb  1 16:14:40 2025]
+rule filter_reads_by_length:
+    input: 0_data/example_reads_B.fq
+    output: temp/example_reads_B_length_filtered.fq
+    jobid: 8
+    benchmark: benchmarks/filter_reads_by_length/example_reads_B.txt
+    reason: Missing output files: temp/example_reads_B_length_filtered.fq
+    wildcards: sample=example_reads_B
+    resources: tmpdir=/tmp
+
+
+[Sat Feb  1 16:14:40 2025]
+rule filter_reads_by_length:
+    input: 0_data/example_reads_A.fq
+    output: temp/example_reads_A_length_filtered.fq
+    jobid: 16
+    benchmark: benchmarks/filter_reads_by_length/example_reads_A.txt
+    reason: Missing output files: temp/example_reads_A_length_filtered.fq
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+[Sat Feb  1 16:14:41 2025]
+Finished job 16.
+1 of 24 steps (4%) done
+Select jobs to execute...
+[Sat Feb  1 16:14:41 2025]
+Finished job 8.
+2 of 24 steps (8%) done
+
+[Sat Feb  1 16:14:41 2025]
+rule classification:
+    input: temp/example_reads_A_length_filtered.fq
+    output: 1_classification/example_reads_A.centrifuge, 1_classification/example_reads_A.centrifugeLog, 1_classification/example_reads_A.k2report
+    jobid: 15
+    benchmark: benchmarks/classification/example_reads_A.txt
+    reason: Missing output files: 1_classification/example_reads_A.centrifuge; Input files updated by another job: temp/example_reads_A_length_filtered.fq
+    wildcards: sample=example_reads_A
+    threads: 32
+    resources: tmpdir=/tmp, mem_mb=200000, mem_mib=190735
+

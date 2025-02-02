@@ -142,7 +142,7 @@ Alternatively, you can build Centrifuge and Kraken2 indexes yourself by followin
 ### Human Reference Genome 
 Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index. 
 
-If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias.  
+If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias during sequence mapping.  
 Use the script `scripts/generate_alternative_ref.py` with three arguments:  
 
 1. The SNP panel/probe file (e.g. containing positions and alleles to modify)  
@@ -182,6 +182,8 @@ bwa index <modified_hg19.fasta>
 4. Outputs a comprehensive taxonomic report and a folder containing classified hominin reads.
 
 ## Usage Instructions
+After you have run `check_dependencies.py` and it shows no error, downloaded the pre-built index, and built the alternative humen reference (optional, if a SNP panel is specified), follow the steps below to run Sedimix. 
+ 
 1. Create a new folder for your current run (same level as `scripts` and `rules`)
 2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. **Input files must be in format that is either .fq or .fq.gz.** 
 3. Update the `config.yaml` file to select parameters (see details below) 

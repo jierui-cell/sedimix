@@ -64,7 +64,6 @@ if (config['classification_software'] == "kraken2"):
             kraken2_results="1_classification/{sample}.kraken2",
             kraken2_report="1_classification/{sample}.k2report"
         params:
-            kraken2_path=config["classification_software_path"],
             kraken2_db=config["classification_index"]
         resources:
             mem_mb=config['memory_mb']  # in MB
@@ -73,7 +72,7 @@ if (config['classification_software'] == "kraken2"):
             "benchmarks/classification/{sample}.txt"
         shell:
             """
-            {params.kraken2_path}/kraken2 --db {params.kraken2_path}/{params.kraken2_db} --output {output.kraken2_results} --report {output.kraken2_report} {input} --threads {threads}
+            kraken2 --db {params.kraken2_db} --output {output.kraken2_results} --report {output.kraken2_report} {input} --threads {threads}
             """
 
     # Generate classified reads after Kraken2
@@ -103,7 +102,6 @@ elif (config['classification_software'] == "centrifuge"):
             centrifuge_report="1_classification/{sample}.centrifugeLog",
             kreport="1_classification/{sample}.k2report"
         params:
-            centrifuge_path=config["classification_software_path"],
             centrifuge_db=config["classification_index"]
         threads: config['threads']
         resources:
@@ -112,8 +110,8 @@ elif (config['classification_software'] == "centrifuge"):
             "benchmarks/classification/{sample}.txt"
         shell:
             """
-            {params.centrifuge_path}/centrifuge -x {params.centrifuge_path}/{params.centrifuge_db} -S {output.centrifuge_results} --report-file {output.centrifuge_report} -U {input} -p {threads}
-            {params.centrifuge_path}/centrifuge-kreport -x {params.centrifuge_path}/{params.centrifuge_db} {output.centrifuge_results} > {output.kreport}
+            centrifuge -x {params.centrifuge_path}/{params.centrifuge_db} -S {output.centrifuge_results} --report-file {output.centrifuge_report} -U {input} -p {threads}
+            centrifuge-kreport -x {params.centrifuge_db} {output.centrifuge_results} > {output.kreport}
             """
 
     # Generate classified reads after Centrifuge

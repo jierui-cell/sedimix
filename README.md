@@ -141,7 +141,7 @@ Download index files for Centrifuge and Kraken2 from the following:
 Alternatively, you can build Centrifuge and Kraken2 indexes yourself by following the instructions provided on their respective GitHub repositories.
 
 #### Human Reference Genome 
-Download the human reference genome hg19.fq.gz and build the BWA index. 
+Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index. 
 
 ## Pipeline Functionality
 1. Takes raw FASTQ file(s) as input.
@@ -161,29 +161,29 @@ Download the human reference genome hg19.fq.gz and build the BWA index.
 An example folder can be found in `example_run/`.
 
 Explanation of `config.yaml` Parameters:
-
+ 
 1. **ref_genome**:
    - Path to the reference genome FASTA file.
    - Example: "/path/to/reference.fa"
 
 2. **threads**:
-   - Number of threads to use for parallel processing.
+   - Number of threads to use for parallel processing. This should align with the n_cores parameter in the snakemake command.
    - Example: 32
 
 3. **min_length**:
    - Minimum read length to retain after filtering.
-   - Example: 35
+   - Default: 35
 
 4. **min_quality**:
-   - Minimum base quality score for reads. Reads below this threshold will be filtered out.
-   - Example: 25
+   - Minimum base quality score after mapping for reads. Reads below this threshold will be filtered out.
+   - Default: 25
 
 5. **use_snp_panel**:
    - Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
-   - Example: False
+   - Default: False
 
 6. **alt_ref_genome** (Optional):
-   - Path to an alternative reference genome with additional or modified alleles.
+   - Path to the pre-built alternative reference genome with additional or modified alleles.
    - Commented out by default.
 
 7. **snp_panel_bed** (Optional):
@@ -193,39 +193,42 @@ Explanation of `config.yaml` Parameters:
 8. **classification_software**:
    - Classification tool to use for taxonomic assignment. 
    - Options: "centrifuge" or "kraken2".
-   - Example: "centrifuge"
+   - Default: "centrifuge"
 
-9. **classification_software_path**:
-   - Path to the directory containing the classification software.
-   - The path should not end with a slash (/).
+9. **classification_index**:
+   - Folder path and name of the classification index to use.
+   - Example: "/path/to/index/nt" (nt is index filename prefix (minus trailing .X.cf). after untaring for Centrifuge; for Kraken2, there is no need for this extra reference, and the path to the untar index folder is suffix)
 
-10. **classification_index**:
-   - Name of the classification index to use.
-   - Example: "nt"
+10. **memory_mb**:
+   - Maximum memory (in megabytes) allocated to the pipeline. This should align with the max_memory parameter in the snakemake command. 
+   - Default: 200000 (around 200 GB)
 
-11. **memory_mb**:
-   - Maximum memory (in megabytes) allocated to the pipeline.
-   - Example: 200000 (equals 200 GB)
-
-12. **taxID**:
+11. **taxID**:
    - Path to a CSV file containing taxonomic IDs of interest for classification.
-   - Example: "/path/to/primates_taxids.csv"
+   - Default: "/path/to/primates_taxids.csv"
 
-13. **calculate_from_mapdamage**:
+12. **calculate_from_mapdamage**:
    - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
-   - Example: True
+   - Default: True
 
-14. **lineage_sites**:
+13. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
-   - Example: "/path/to/lineage_sites.txt"
+   - Default: "/path/to/lineage_sites.txt"
 
-15. **types**:
+14. **types**:
    - Analysis type or category for output classification.
-   - Example: "hominin_informative"
+   - Default: "hominin_informative"
 
+15. **to_clean**:
+   - Boolean (True or False) indicating whether to remove all intermediate files once the final output is generated.
+   - Default: False
+
+16. **keep_non_hominin_reads**:
+   - Boolean (True or False) determining whether to save reads classified as non-hominin into a separate FASTQ file.
+   - Default: True
 
 ## Retrieve Your Results
 - **Classified Reads**: Located in the `3_final_reads` folder
-- **Nonclassified Reads (if specified in congig.yaml)**: Located in the `3_non_classified_reads` folder
+- **Nonclassified Reads (if specified in config.yaml)**: Located in the `3_non_classified_reads` folder
 - **Data Summary Report**: Located in the `4_final_report` folder, `combined_final_report.tsv` 
 - **Deamination Profile**: Located in the `4_mapdamage_results` folder 

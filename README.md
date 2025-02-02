@@ -160,7 +160,7 @@ Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index.
    ```
 An example folder can be found in `example_run/`.
 
-#### Explanation of `config.yaml` Parameters:
+### Explanation of `config.yaml` Parameters:
  
 1. **ref_genome**:
    - Path to the reference genome FASTA file.

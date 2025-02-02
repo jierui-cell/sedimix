@@ -13,7 +13,7 @@ Here we present an open-source snakemake workflow that identifies human sequence
 ## Requirements
 Ensure the following tools are installed and configured before running the pipeline:
 
-#### [Centrifuge (default)](https://ccb.jhu.edu/software/centrifuge/manual.shtml)
+### [Centrifuge (default)](https://ccb.jhu.edu/software/centrifuge/manual.shtml)
 ```bash
 git clone https://github.com/DaehwanKimLab/centrifuge
 make -C centrifuge
@@ -21,7 +21,7 @@ echo 'export PATH=$PATH:$(pwd)/centrifuge' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### [Kraken2 (optional)](https://github.com/DerrickWood/kraken2/wiki/Manual)
+### [Kraken2 (optional)](https://github.com/DerrickWood/kraken2/wiki/Manual)
 ```bash
 git clone https://github.com/DerrickWood/kraken2.git
 ./kraken2/install_kraken2.sh kraken2
@@ -29,7 +29,7 @@ echo 'export PATH=$PATH:$(pwd)/kraken2' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Seqtk 
+### Seqtk 
 ```bash
 git clone https://github.com/lh3/seqtk.git
 make -C seqtk
@@ -37,7 +37,7 @@ echo 'export PATH=$PATH:$(pwd)/seqtk' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### BWA 
+### BWA 
 ```bash
 git clone https://github.com/lh3/bwa.git
 make -C bwa
@@ -45,7 +45,7 @@ echo 'export PATH=$PATH:$(pwd)/bwa' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Samtools
+### Samtools
 ```bash
 wget https://github.com/samtools/samtools/releases/download/1.20/samtools-1.20.tar.bz2
 tar -xvjf samtools-1.20.tar.bz2
@@ -56,7 +56,7 @@ echo 'export PATH=$PATH:$(pwd)/samtools-1.20' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Bedtools 
+### Bedtools 
 ```bash
 wget https://github.com/arq5x/bedtools2/releases/download/v2.29.1/bedtools-2.29.1.tar.gz
 tar -zxvf bedtools-2.29.1.tar.gz
@@ -64,7 +64,7 @@ cd bedtools2
 make
 ```
 
-#### [MapDamage2](https://ginolhac.github.io/mapDamage/)
+### [MapDamage2](https://ginolhac.github.io/mapDamage/)
 The following requirements are for **mapDamage2** to successfully run:
 
 1. Python (version >= 3.5)
@@ -81,7 +81,7 @@ The following requirements are for **mapDamage2** to successfully run:
 
 If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the commands above.
 
-#### Python Packages
+### Python Packages
 
 1. [Snakemake](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) (version 7.32.4)
 2. `pysam` (version >= 0.6): Python package, an interface for reading/writing SAM/BAM files
@@ -95,7 +95,7 @@ If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the 
 
 To ensure all necessary dependencies are installed, you can create a conda environment using the provided `environment.yaml` file.
 
-#### Conda Environment
+### Conda Environment
 
 Create a conda environment with the following command:
 
@@ -113,14 +113,13 @@ conda activate sedimix
 
 To ensure all required tools, Python packages, and R libraries are installed and correctly configured, we provide a script named `check_dependencies.py`.
 
-#### Usage
-
 1. Save the script `check_dependencies.py` in the root directory of your project.
 2. Run the script using Python:
    ```bash
    python check_dependencies.py
+   ```
 
-#### Index Files
+### Index Files
 Download index files for Centrifuge and Kraken2 from the following:
 - [AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
   We recommend NCBI: nucleotide non-redundant sequences (64GB) for Centrifuge.  
@@ -140,7 +139,7 @@ Download index files for Centrifuge and Kraken2 from the following:
 
 Alternatively, you can build Centrifuge and Kraken2 indexes yourself by following the instructions provided on their respective GitHub repositories.
 
-#### Human Reference Genome 
+### Human Reference Genome 
 Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index. 
 
 If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias.  
@@ -176,8 +175,6 @@ python scripts/generate_alternative_ref.py \
 bwa index <modified_hg19.fasta>
 ```
 
-Then, in your config.yaml file, update ref_genome (or alt_ref_genome if using the alternate reference) to point to <modified_hg19.fasta>, the newly created FASTA file.
-
 ## Pipeline Functionality
 1. Takes raw FASTQ file(s) as input.
 2. Classifies Homo sapiens or Primate reads using Centrifuge or Kraken2.
@@ -197,9 +194,9 @@ An example folder can be found in `example_run/`.
 
 ### Explanation of `config.yaml` Parameters:
  
-1. **ref_genome**:
-   - Path to the reference genome FASTA file.
-   - Example: "/path/to/reference.fa"
+1. **memory_mb**:
+   - Maximum memory (in megabytes) allocated to the pipeline. This should align with the max_memory parameter in the snakemake command. 
+   - Example: 200000 (around 200 GB)
 
 2. **threads**:
    - Number of threads to use for parallel processing. This should align with the n_cores parameter in the snakemake command.
@@ -213,52 +210,48 @@ An example folder can be found in `example_run/`.
    - Minimum base quality score after mapping for reads. Reads below this threshold will be filtered out.
    - Default: 25
 
-5. **use_snp_panel**:
-   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
-   - Default: False
-
-6. **alt_ref_genome** (Optional):
-   - Path to the pre-built alternative reference genome with additional or modified alleles.
-   - Commented out by default.
-
-7. **snp_panel_bed** (Optional):
-   - Path to a BED file defining regions of interest based on the SNP panel.
-   - Commented out by default.
-
-8. **classification_software**:
+5. **classification_software**:
    - Classification tool to use for taxonomic assignment. 
    - Options: "centrifuge" or "kraken2".
    - Default: "centrifuge"
 
-9. **classification_index**:
+6. **classification_index**:
    - Folder path and name of the classification index to use.
    - Example: "/path/to/index/nt" (after untaring for Centrifuge, nt is the index filename prefix (minus trailing .X.cf); for Kraken2, there is no need for this extra reference, and the path to the untar index folder is suffix)
 
-10. **memory_mb**:
-   - Maximum memory (in megabytes) allocated to the pipeline. This should align with the max_memory parameter in the snakemake command. 
-   - Example: 200000 (around 200 GB)
-
-11. **taxID**:
+7. **taxID**:
    - Path to a CSV file containing taxonomic IDs of interest for classification.
    - Example: "/path/to/primates_taxids.csv"
 
-12. **calculate_from_mapdamage**:
+8. **use_snp_panel**:
+   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
+   - Default: False
+
+9. **ref_genome**:
+   - Path to the reference genome FASTA file (or to the pre-built alternative reference genome if use_snp_panel is set to True.). 
+   - Example: "/path/to/reference.fa"
+
+10. **snp_panel_bed** (Optional):
+   - Path to a BED file defining regions of interest based on the SNP panel.
+   - Commented out by default.
+
+11. **calculate_from_mapdamage**:
    - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
    - Default: True
 
-13. **lineage_sites**:
+12. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
    - Example: "/path/to/lineage_sites.txt"
 
-14. **types**:
+13. **types**:
    - Analysis type or category for output classification.
    - Example: "hominin_informative"
 
-15. **to_clean**:
+14. **to_clean**:
    - Boolean (True or False) indicating whether to remove all intermediate files once the final output is generated.
    - Default: False
 
-16. **keep_non_hominin_reads**:
+15. **keep_non_hominin_reads**:
    - Boolean (True or False) determining whether to save reads classified as non-hominin into a separate FASTQ file.
    - Default: True
 

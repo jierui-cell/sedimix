@@ -235,7 +235,7 @@ An example folder can be found in `example_run/`.
 
 10. **snp_panel_bed** (Optional):
    - Path to a BED file defining regions of interest based on the SNP panel.
-   - Commented out by default.
+   - Only required if use_snp_panel is set to True. Commented out by default.
 
 11. **calculate_from_mapdamage**:
    - Boolean (True or False) to indicate whether to perform additional analysis using mapDamage results.
@@ -260,5 +260,5 @@ An example folder can be found in `example_run/`.
 ## Retrieve Your Results
 - **Classified Hominin Reads**: Located in the `3_final_reads` folder, ending with `{sample_name}_final.bam`. 
 - **Classified Non-hominin Reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
-- **Data Summary Report**: Located in the `4_final_report` folder, `combined_final_report.tsv`.
+- **Data Summary Report**: Located in the `4_final_report` folder. `combined_final_report.tsv` contains results for all samples.
 - **Deamination Profile**: Located in the `4_mapdamage_results` folder. 

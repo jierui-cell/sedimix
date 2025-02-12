@@ -255,7 +255,7 @@ An example folder can be found in `example_run/`.
 
 15. **keep_non_hominin_reads**:
    - Boolean (True or False) determining whether to save reads classified as non-hominin into a separate FASTQ file.
-   - Default: True
+   - Default: False
 
 ## Retrieve Your Results
 - **Classified Hominin Reads**: Located in the `3_final_reads` folder, ending with `{sample_name}_final.bam`. 

@@ -1,7 +1,7 @@
-2025-02-02 13:19:19,773 mapdamage.main INFO Started with the command: /global/home/users/jieruixu/.local/bin/mapDamage --merge-libraries -i 3_final_reads/example_reads_A_final.bam -r /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa -d 4_mapdamage_results/example_reads_A --no-stats
-2025-02-02 13:19:19,792 mapdamage.reader INFO Found 1 libraries in BAM file
-2025-02-02 13:19:19,795 mapdamage.main INFO Reading from '3_final_reads/example_reads_A_final.bam'
-2025-02-02 13:19:19,795 mapdamage.main INFO Writing results to '4_mapdamage_results/example_reads_A/'
-2025-02-02 13:19:23,765 mapdamage.rscript INFO Saving misincorporation plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf'
-2025-02-02 13:19:24,468 mapdamage.rscript INFO Saving length distribution plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Length_plot.pdf'
-2025-02-02 13:19:24,908 mapdamage.main INFO Successful run
+2025-02-15 14:28:37,724 mapdamage.main INFO Started with the command: /global/home/users/jieruixu/.local/bin/mapDamage --merge-libraries -i 3_final_reads/example_reads_A_final.bam -r /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa -d 4_mapdamage_results/example_reads_A --no-stats
+2025-02-15 14:28:37,749 mapdamage.reader INFO Found 1 libraries in BAM file
+2025-02-15 14:28:37,753 mapdamage.main INFO Reading from '3_final_reads/example_reads_A_final.bam'
+2025-02-15 14:28:37,753 mapdamage.main INFO Writing results to '4_mapdamage_results/example_reads_A/'
+2025-02-15 14:28:42,789 mapdamage.rscript INFO Saving misincorporation plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf'
+2025-02-15 14:28:43,394 mapdamage.rscript INFO Saving length distribution plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Length_plot.pdf'
+2025-02-15 14:28:43,952 mapdamage.main INFO Successful run

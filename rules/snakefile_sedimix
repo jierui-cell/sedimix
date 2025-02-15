@@ -330,8 +330,8 @@ rule final_report:
         # Deaminated reads
         total_reads_deaminated=$(samtools view -c {input.deaminated_bam})
     
-        # Proportion deaminated (among classified homo sapiens)
-        proportion_deaminated=$(echo "scale=3; $total_reads_deaminated / $unique_reads" | bc) 
+        # Percent deaminated (among classified Homo sapiens)
+        percent_deaminated=$(echo "scale=3; ($total_reads_deaminated / $unique_reads) * 100" | bc)
         
         # Initialize variables to store results for each type
         proportions=""
@@ -342,14 +342,14 @@ rule final_report:
             # Proportion hominin derived for the current type
             proportion=$(python {params.check_alternate_allele} -b {input.post_map_qc_rmdup} -v {params.lineage_sites} -t $type)
             proportions="$proportions\t$proportion"
-            proportions_headers="$proportions_headers\tPercent ${{type}} derived"
+            proportions_headers="$proportions_headers\tPercent ${{type}} derived [%]"
         done
 
         for type in $types; do
             # Proportion hominin derived (deaminated fragments) for the current type
             p_deaminated=$(python {params.check_alternate_allele} -b {input.deaminated_bam} -v {params.lineage_sites} -t $type)
             proportions_deaminated="$proportions_deaminated\t$p_deaminated"
-            proportions_headers="$proportions_headers\tPercent ${{type}} derived deaminated"
+            proportions_headers="$proportions_headers\tPercent ${{type}} derived deaminated [%]"
         done
 
         # Format C to T percentages at 5' and 3' ends as percentages with two decimal points
@@ -357,8 +357,8 @@ rule final_report:
         ct_3=$(awk -F',' 'NR==2 {{print $2}}' {input.report_file})
         
         # Output the final report
-        echo -e "Sample ID\tSequenced reads\tLength filtered\After classification\tMapped sequences\tOn-target sequences\tQuality filtered\tUnique filtered\tAverage duplication rate\tNumber of SNPs covered\tPercent deaminated$proportions_headers\t5' C-to-T substitution frequency [%] (95% CI)\t3' C-to-T substitution frequency [%] (95% CI)" > {output}
-        echo -e "$id\t$total_reads\t$length_filtered_reads\t$total_reads_classified\t$mapped_reads\t$on_target_reads\t$total_reads_post_map_qc\t$unique_reads\t$dup_rate\t$snps_recovered\t$proportion_deaminated$proportions$proportions_deaminated\t$ct_5\t$ct_3" >> {output}
+        echo -e "Sample ID\tSequenced reads\tLength filtered\tAfter classification\tMapped sequences\tOn-target sequences\tQuality filtered\tUnique filtered\tAverage duplication rate\tNumber of SNPs covered\tPercent deaminated [%]$proportions_headers\t5' C-to-T substitution frequency [%] (95% CI)\t3' C-to-T substitution frequency [%] (95% CI)" > {output}
+        echo -e "$id\t$total_reads\t$length_filtered_reads\t$total_reads_classified\t$mapped_reads\t$on_target_reads\t$total_reads_post_map_qc\t$unique_reads\t$dup_rate\t$snps_recovered\t$percent_deaminated$proportions$proportions_deaminated\t$ct_5\t$ct_3" >> {output}
         """
 
 # Combine all TSV files into one and delete the individual files

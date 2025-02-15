@@ -23,12 +23,11 @@ mapping_quality_filter           2
 mark_duplicates                  2
 on_target_read_filter            2
 run_mapdamage                    2
-save_non_hominin_reads           2
-total                           24
+total                           22
 
 Select jobs to execute...
 
-[Sun Feb  2 13:01:35 2025]
+[Sat Feb 15 14:05:46 2025]
 rule filter_reads_by_length:
     input: 0_data/example_reads_B.fq
     output: temp/example_reads_B_length_filtered.fq
@@ -39,7 +38,7 @@ rule filter_reads_by_length:
     resources: tmpdir=/tmp
 
 
-[Sun Feb  2 13:01:35 2025]
+[Sat Feb 15 14:05:46 2025]
 rule filter_reads_by_length:
     input: 0_data/example_reads_A.fq
     output: temp/example_reads_A_length_filtered.fq
@@ -49,15 +48,15 @@ rule filter_reads_by_length:
     wildcards: sample=example_reads_A
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:01:35 2025]
+[Sat Feb 15 14:05:47 2025]
 Finished job 8.
-1 of 24 steps (4%) done
+1 of 22 steps (5%) done
 Select jobs to execute...
-[Sun Feb  2 13:01:35 2025]
+[Sat Feb 15 14:05:47 2025]
 Finished job 16.
-2 of 24 steps (8%) done
+2 of 22 steps (9%) done
 
-[Sun Feb  2 13:01:35 2025]
+[Sat Feb 15 14:05:47 2025]
 rule classification:
     input: temp/example_reads_B_length_filtered.fq
     output: 1_classification/example_reads_B.centrifuge, 1_classification/example_reads_B.centrifugeLog, 1_classification/example_reads_B.k2report
@@ -69,8 +68,8 @@ rule classification:
     resources: tmpdir=/tmp, mem_mb=200000, mem_mib=190735
 
 report file 1_classification/example_reads_B.centrifugeLog
-Number of iterations in EM algorithm: 9
-Probability diff. (P - P_prev) in the last iteration: 6.42621e-12
+Number of iterations in EM algorithm: 10
+Probability diff. (P - P_prev) in the last iteration: 9.45938e-12
 Calculating abundance: 00:00:00
 Loading taxonomy ...
 Loading names file ...
@@ -79,29 +78,29 @@ Loading names file ...
 Loading nodes file ...
 /global/scratch/users/jieruixu/sediment_dna/peerj_replication/centrifuge/centrifuge-inspect:24: DeprecationWarning: the imp module is deprecated in favour of importlib and slated for removal in Python 3.12; see the module's documentation for alternative uses
   import imp
-[Sun Feb  2 13:09:58 2025]
+[Sat Feb 15 14:16:21 2025]
 Finished job 7.
-3 of 24 steps (12%) done
+3 of 22 steps (14%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:09:58 2025]
+[Sat Feb 15 14:16:21 2025]
 rule generate_classified_reads:
     input: 1_classification/example_reads_B.centrifuge, temp/example_reads_B_length_filtered.fq
     output: temp/example_reads_B_length_filtered_classified.fq
     jobid: 6
     benchmark: benchmarks/generate_classified_reads/example_reads_B.txt
-    reason: Missing output files: temp/example_reads_B_length_filtered_classified.fq; Input files updated by another job: temp/example_reads_B_length_filtered.fq, 1_classification/example_reads_B.centrifuge
+    reason: Missing output files: temp/example_reads_B_length_filtered_classified.fq; Input files updated by another job: temp/example_reads_B_length_filtered.fq, 1_classification/example_reads_B.centrifuge; Params have changed since last execution
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-Number of total reads: 124992
-Number of reads classified in taxID database: 63910
-[Sun Feb  2 13:10:15 2025]
+Number of total reads: 152355
+Number of reads classified in taxID database: 76349
+[Sat Feb 15 14:16:34 2025]
 Finished job 6.
-4 of 24 steps (17%) done
+4 of 22 steps (18%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:10:15 2025]
+[Sat Feb 15 14:16:34 2025]
 rule classification:
     input: temp/example_reads_A_length_filtered.fq
     output: 1_classification/example_reads_A.centrifuge, 1_classification/example_reads_A.centrifugeLog, 1_classification/example_reads_A.k2report
@@ -113,9 +112,9 @@ rule classification:
     resources: tmpdir=/tmp, mem_mb=200000, mem_mib=190735
 
 report file 1_classification/example_reads_A.centrifugeLog
-Number of iterations in EM algorithm: 9
-Probability diff. (P - P_prev) in the last iteration: 6.42621e-12
-Calculating abundance: 00:00:00
+Number of iterations in EM algorithm: 10
+Probability diff. (P - P_prev) in the last iteration: 9.45938e-12
+Calculating abundance: 00:00:01
 Loading taxonomy ...
 Loading names file ...
 /global/scratch/users/jieruixu/sediment_dna/peerj_replication/centrifuge/centrifuge-inspect:24: DeprecationWarning: the imp module is deprecated in favour of importlib and slated for removal in Python 3.12; see the module's documentation for alternative uses
@@ -123,29 +122,29 @@ Loading names file ...
 Loading nodes file ...
 /global/scratch/users/jieruixu/sediment_dna/peerj_replication/centrifuge/centrifuge-inspect:24: DeprecationWarning: the imp module is deprecated in favour of importlib and slated for removal in Python 3.12; see the module's documentation for alternative uses
   import imp
-[Sun Feb  2 13:18:34 2025]
+[Sat Feb 15 14:27:39 2025]
 Finished job 15.
-5 of 24 steps (21%) done
+5 of 22 steps (23%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:34 2025]
+[Sat Feb 15 14:27:39 2025]
 rule generate_classified_reads:
     input: 1_classification/example_reads_A.centrifuge, temp/example_reads_A_length_filtered.fq
     output: temp/example_reads_A_length_filtered_classified.fq
     jobid: 14
     benchmark: benchmarks/generate_classified_reads/example_reads_A.txt
-    reason: Missing output files: temp/example_reads_A_length_filtered_classified.fq; Input files updated by another job: temp/example_reads_A_length_filtered.fq, 1_classification/example_reads_A.centrifuge
+    reason: Missing output files: temp/example_reads_A_length_filtered_classified.fq; Input files updated by another job: temp/example_reads_A_length_filtered.fq, 1_classification/example_reads_A.centrifuge; Params have changed since last execution
     wildcards: sample=example_reads_A
     resources: tmpdir=/tmp
 
-Number of total reads: 124992
-Number of reads classified in taxID database: 63910
-[Sun Feb  2 13:18:35 2025]
+Number of total reads: 152355
+Number of reads classified in taxID database: 76349
+[Sat Feb 15 14:27:47 2025]
 Finished job 14.
-6 of 24 steps (25%) done
+6 of 22 steps (27%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:35 2025]
+[Sat Feb 15 14:27:47 2025]
 rule map_sort_index:
     input: temp/example_reads_B_length_filtered_classified.fq
     output: 2_mapping/example_reads_B_length_filtered_classified.bam, 2_mapping/example_reads_B_length_filtered_classified.bam.bai, temp/example_reads_B_length_filtered_classified.sai, temp/example_reads_B_length_filtered_classified.sam
@@ -166,26 +165,26 @@ rule map_sort_index:
 [bwa_aln] 176bp reads: max_diff = 9
 [bwa_aln] 207bp reads: max_diff = 10
 [bwa_aln] 239bp reads: max_diff = 11
-[bwa_aln_core] calculate SA coordinate... 15.34 sec
+[bwa_aln_core] calculate SA coordinate... 17.01 sec
 [bwa_aln_core] write to the disk... 0.02 sec
-[bwa_aln_core] 63910 sequences have been processed.
+[bwa_aln_core] 76349 sequences have been processed.
 [main] Version: 0.7.17-r1188
 [main] CMD: bwa aln -t 32 -n 0.01 -o 2 -l 16500 /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa temp/example_reads_B_length_filtered_classified.fq
-[main] Real time: 5.070 sec; CPU: 17.176 sec
-[bwa_aln_core] convert to sequence coordinate... 2.72 sec
-[bwa_aln_core] refine gapped alignments... 0.49 sec
-[bwa_aln_core] print alignments... 0.06 sec
-[bwa_aln_core] 63910 sequences have been processed.
+[main] Real time: 8.373 sec; CPU: 19.058 sec
+[bwa_aln_core] convert to sequence coordinate... 3.59 sec
+[bwa_aln_core] refine gapped alignments... 0.81 sec
+[bwa_aln_core] print alignments... 0.12 sec
+[bwa_aln_core] 76349 sequences have been processed.
 [main] Version: 0.7.17-r1188
 [main] CMD: bwa samse /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa temp/example_reads_B_length_filtered_classified.sai temp/example_reads_B_length_filtered_classified.fq
-[main] Real time: 4.884 sec; CPU: 3.347 sec
+[main] Real time: 10.421 sec; CPU: 4.613 sec
 [bam_sort_core] merging from 0 files and 32 in-memory blocks...
-[Sun Feb  2 13:18:47 2025]
+[Sat Feb 15 14:28:07 2025]
 Finished job 5.
-7 of 24 steps (29%) done
+7 of 22 steps (32%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:47 2025]
+[Sat Feb 15 14:28:07 2025]
 rule map_sort_index:
     input: temp/example_reads_A_length_filtered_classified.fq
     output: 2_mapping/example_reads_A_length_filtered_classified.bam, 2_mapping/example_reads_A_length_filtered_classified.bam.bai, temp/example_reads_A_length_filtered_classified.sai, temp/example_reads_A_length_filtered_classified.sam
@@ -206,26 +205,26 @@ rule map_sort_index:
 [bwa_aln] 176bp reads: max_diff = 9
 [bwa_aln] 207bp reads: max_diff = 10
 [bwa_aln] 239bp reads: max_diff = 11
-[bwa_aln_core] calculate SA coordinate... 11.60 sec
+[bwa_aln_core] calculate SA coordinate... 16.08 sec
 [bwa_aln_core] write to the disk... 0.02 sec
-[bwa_aln_core] 63910 sequences have been processed.
+[bwa_aln_core] 76349 sequences have been processed.
 [main] Version: 0.7.17-r1188
 [main] CMD: bwa aln -t 32 -n 0.01 -o 2 -l 16500 /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa temp/example_reads_A_length_filtered_classified.fq
-[main] Real time: 1.856 sec; CPU: 12.805 sec
-[bwa_aln_core] convert to sequence coordinate... 2.42 sec
+[main] Real time: 2.160 sec; CPU: 17.340 sec
+[bwa_aln_core] convert to sequence coordinate... 2.02 sec
 [bwa_aln_core] refine gapped alignments... 0.25 sec
-[bwa_aln_core] print alignments... 0.06 sec
-[bwa_aln_core] 63910 sequences have been processed.
+[bwa_aln_core] print alignments... 0.08 sec
+[bwa_aln_core] 76349 sequences have been processed.
 [main] Version: 0.7.17-r1188
 [main] CMD: bwa samse /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa temp/example_reads_A_length_filtered_classified.sai temp/example_reads_A_length_filtered_classified.fq
-[main] Real time: 2.861 sec; CPU: 2.801 sec
+[main] Real time: 2.562 sec; CPU: 2.441 sec
 [bam_sort_core] merging from 0 files and 32 in-memory blocks...
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 Finished job 13.
-8 of 24 steps (33%) done
+8 of 22 steps (36%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 rule on_target_read_filter:
     input: 2_mapping/example_reads_A_length_filtered_classified.bam
     output: 2_mapping/example_reads_A_on_target.bam
@@ -235,7 +234,7 @@ rule on_target_read_filter:
     resources: tmpdir=/tmp
 
 
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 rule on_target_read_filter:
     input: 2_mapping/example_reads_B_length_filtered_classified.bam
     output: 2_mapping/example_reads_B_on_target.bam
@@ -244,12 +243,12 @@ rule on_target_read_filter:
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 Finished job 12.
-9 of 24 steps (38%) done
+9 of 22 steps (41%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 rule mapping_quality_filter:
     input: 2_mapping/example_reads_A_on_target.bam
     output: 2_mapping/example_reads_A_LandMQ_filtered.bam
@@ -259,12 +258,12 @@ rule mapping_quality_filter:
     wildcards: sample=example_reads_A
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 Finished job 4.
-10 of 24 steps (42%) done
+10 of 22 steps (45%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:52 2025]
+[Sat Feb 15 14:28:12 2025]
 rule mapping_quality_filter:
     input: 2_mapping/example_reads_B_on_target.bam
     output: 2_mapping/example_reads_B_LandMQ_filtered.bam
@@ -274,27 +273,12 @@ rule mapping_quality_filter:
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:18:53 2025]
-Finished job 11.
-11 of 24 steps (46%) done
-Select jobs to execute...
-
-[Sun Feb  2 13:18:53 2025]
-rule mark_duplicates:
-    input: 2_mapping/example_reads_A_LandMQ_filtered.bam
-    output: 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_A_final.bam.bai
-    jobid: 10
-    benchmark: benchmarks/mark_duplicates/example_reads_A.txt
-    reason: Missing output files: 3_final_reads/example_reads_A_final.bam; Input files updated by another job: 2_mapping/example_reads_A_LandMQ_filtered.bam
-    wildcards: sample=example_reads_A
-    resources: tmpdir=/tmp
-
-[Sun Feb  2 13:18:53 2025]
+[Sat Feb 15 14:28:13 2025]
 Finished job 3.
-12 of 24 steps (50%) done
+11 of 22 steps (50%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:53 2025]
+[Sat Feb 15 14:28:13 2025]
 rule mark_duplicates:
     input: 2_mapping/example_reads_B_LandMQ_filtered.bam
     output: 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_B_final.bam.bai
@@ -304,49 +288,27 @@ rule mark_duplicates:
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:18:54 2025]
-Finished job 10.
-13 of 24 steps (54%) done
+[Sat Feb 15 14:28:13 2025]
+Finished job 11.
+12 of 22 steps (55%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:54 2025]
-rule save_non_hominin_reads:
-    input: 3_final_reads/example_reads_A_final.bam, temp/example_reads_A_length_filtered.fq
-    output: 3_final_reads/example_reads_A_non_hominin.fq
-    jobid: 22
-    benchmark: benchmarks/save_non_hominin_reads/example_reads_A.txt
-    reason: Missing output files: 3_final_reads/example_reads_A_non_hominin.fq; Input files updated by another job: temp/example_reads_A_length_filtered.fq, 3_final_reads/example_reads_A_final.bam
+[Sat Feb 15 14:28:13 2025]
+rule mark_duplicates:
+    input: 2_mapping/example_reads_A_LandMQ_filtered.bam
+    output: 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_A_final.bam.bai
+    jobid: 10
+    benchmark: benchmarks/mark_duplicates/example_reads_A.txt
+    reason: Missing output files: 3_final_reads/example_reads_A_final.bam; Input files updated by another job: 2_mapping/example_reads_A_LandMQ_filtered.bam
     wildcards: sample=example_reads_A
     resources: tmpdir=/tmp
 
-
-[Sun Feb  2 13:18:54 2025]
-rule run_mapdamage:
-    input: 3_final_reads/example_reads_A_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa
-    output: 4_mapdamage_results/example_reads_A, 4_mapdamage_results/example_reads_A/dnacomp.txt, 4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf, 4_mapdamage_results/example_reads_A/Length_plot.pdf, 4_mapdamage_results/example_reads_A/lgdistribution.txt, 4_mapdamage_results/example_reads_A/misincorporation.txt, 4_mapdamage_results/example_reads_A/Runtime_log.txt
-    jobid: 9
-    benchmark: benchmarks/run_mapdamage/example_reads_A.txt
-    reason: Missing output files: 4_mapdamage_results/example_reads_A, 4_mapdamage_results/example_reads_A/misincorporation.txt; Input files updated by another job: 3_final_reads/example_reads_A_final.bam
-    wildcards: sample=example_reads_A
-    resources: tmpdir=/tmp
-
-[Sun Feb  2 13:18:54 2025]
+[Sat Feb 15 14:28:14 2025]
 Finished job 2.
-14 of 24 steps (58%) done
+13 of 22 steps (59%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:18:54 2025]
-rule save_non_hominin_reads:
-    input: 3_final_reads/example_reads_B_final.bam, temp/example_reads_B_length_filtered.fq
-    output: 3_final_reads/example_reads_B_non_hominin.fq
-    jobid: 21
-    benchmark: benchmarks/save_non_hominin_reads/example_reads_B.txt
-    reason: Missing output files: 3_final_reads/example_reads_B_non_hominin.fq; Input files updated by another job: temp/example_reads_B_length_filtered.fq, 3_final_reads/example_reads_B_final.bam
-    wildcards: sample=example_reads_B
-    resources: tmpdir=/tmp
-
-
-[Sun Feb  2 13:18:54 2025]
+[Sat Feb 15 14:28:14 2025]
 rule run_mapdamage:
     input: 3_final_reads/example_reads_B_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa
     output: 4_mapdamage_results/example_reads_B, 4_mapdamage_results/example_reads_B/dnacomp.txt, 4_mapdamage_results/example_reads_B/Fragmisincorporation_plot.pdf, 4_mapdamage_results/example_reads_B/Length_plot.pdf, 4_mapdamage_results/example_reads_B/lgdistribution.txt, 4_mapdamage_results/example_reads_B/misincorporation.txt, 4_mapdamage_results/example_reads_B/Runtime_log.txt
@@ -356,119 +318,128 @@ rule run_mapdamage:
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:18:55 2025]
-Finished job 22.
-15 of 24 steps (62%) done
-[Sun Feb  2 13:18:55 2025]
-Finished job 21.
-16 of 24 steps (67%) done
-13:19:10 mapdamage.config WARNING Folder '4_mapdamage_results/example_reads_B' already exists; content may be overwritten
-13:19:10 mapdamage.config WARNING Folder '4_mapdamage_results/example_reads_A' already exists; content may be overwritten
-13:19:19 mapdamage.main INFO Started with the command: /global/home/users/jieruixu/.local/bin/mapDamage --merge-libraries -i 3_final_reads/example_reads_A_final.bam -r /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa -d 4_mapdamage_results/example_reads_A --no-stats
-13:19:19 mapdamage.main INFO Started with the command: /global/home/users/jieruixu/.local/bin/mapDamage --merge-libraries -i 3_final_reads/example_reads_B_final.bam -r /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa -d 4_mapdamage_results/example_reads_B --no-stats
-13:19:19 mapdamage.reader INFO Found 1 libraries in BAM file
-13:19:19 mapdamage.reader INFO Found 1 libraries in BAM file
-13:19:19 mapdamage.main INFO Reading from '3_final_reads/example_reads_A_final.bam'
-13:19:19 mapdamage.main INFO Writing results to '4_mapdamage_results/example_reads_A/'
-13:19:19 mapdamage.main INFO Reading from '3_final_reads/example_reads_B_final.bam'
-13:19:19 mapdamage.main INFO Writing results to '4_mapdamage_results/example_reads_B/'
-13:19:23 mapdamage.rscript INFO Saving misincorporation plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf'
-13:19:23 mapdamage.rscript INFO Saving misincorporation plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_B/Fragmisincorporation_plot.pdf'
-13:19:24 mapdamage.rscript INFO Saving length distribution plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_B/Length_plot.pdf'
-13:19:24 mapdamage.rscript INFO Saving length distribution plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Length_plot.pdf'
-13:19:24 mapdamage.main INFO Successful run
-13:19:24 mapdamage.main INFO Successful run
-[Sun Feb  2 13:19:25 2025]
-Finished job 9.
-17 of 24 steps (71%) done
+[Sat Feb 15 14:28:14 2025]
+Finished job 10.
+14 of 22 steps (64%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:19:25 2025]
+[Sat Feb 15 14:28:14 2025]
+rule run_mapdamage:
+    input: 3_final_reads/example_reads_A_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa
+    output: 4_mapdamage_results/example_reads_A, 4_mapdamage_results/example_reads_A/dnacomp.txt, 4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf, 4_mapdamage_results/example_reads_A/Length_plot.pdf, 4_mapdamage_results/example_reads_A/lgdistribution.txt, 4_mapdamage_results/example_reads_A/misincorporation.txt, 4_mapdamage_results/example_reads_A/Runtime_log.txt
+    jobid: 9
+    benchmark: benchmarks/run_mapdamage/example_reads_A.txt
+    reason: Missing output files: 4_mapdamage_results/example_reads_A, 4_mapdamage_results/example_reads_A/misincorporation.txt; Input files updated by another job: 3_final_reads/example_reads_A_final.bam
+    wildcards: sample=example_reads_A
+    resources: tmpdir=/tmp
+
+14:28:31 mapdamage.config WARNING Folder '4_mapdamage_results/example_reads_A' already exists; content may be overwritten
+14:28:31 mapdamage.config WARNING Folder '4_mapdamage_results/example_reads_B' already exists; content may be overwritten
+14:28:37 mapdamage.main INFO Started with the command: /global/home/users/jieruixu/.local/bin/mapDamage --merge-libraries -i 3_final_reads/example_reads_A_final.bam -r /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa -d 4_mapdamage_results/example_reads_A --no-stats
+14:28:37 mapdamage.main INFO Started with the command: /global/home/users/jieruixu/.local/bin/mapDamage --merge-libraries -i 3_final_reads/example_reads_B_final.bam -r /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa -d 4_mapdamage_results/example_reads_B --no-stats
+14:28:37 mapdamage.reader INFO Found 1 libraries in BAM file
+14:28:37 mapdamage.reader INFO Found 1 libraries in BAM file
+14:28:37 mapdamage.main INFO Reading from '3_final_reads/example_reads_B_final.bam'
+14:28:37 mapdamage.main INFO Writing results to '4_mapdamage_results/example_reads_B/'
+14:28:37 mapdamage.main INFO Reading from '3_final_reads/example_reads_A_final.bam'
+14:28:37 mapdamage.main INFO Writing results to '4_mapdamage_results/example_reads_A/'
+14:28:42 mapdamage.rscript INFO Saving misincorporation plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Fragmisincorporation_plot.pdf'
+14:28:42 mapdamage.rscript INFO Saving misincorporation plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_B/Fragmisincorporation_plot.pdf'
+14:28:43 mapdamage.rscript INFO Saving length distribution plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_A/Length_plot.pdf'
+14:28:43 mapdamage.rscript INFO Saving length distribution plot to '/global/scratch/users/jieruixu/sediment_dna/sedimix/publish_pipeline/example_run/4_mapdamage_results/example_reads_B/Length_plot.pdf'
+14:28:43 mapdamage.main INFO Successful run
+14:28:43 mapdamage.main INFO Successful run
+[Sat Feb 15 14:28:44 2025]
+Finished job 9.
+15 of 22 steps (68%) done
+Select jobs to execute...
+
+[Sat Feb 15 14:28:44 2025]
 rule filter_deaminated_reads:
     input: 3_final_reads/example_reads_A_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa, 4_mapdamage_results/example_reads_A/misincorporation.txt
     output: 3_final_reads/example_reads_A_final_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_deaminated.bam.bai, 3_final_reads/example_reads_A_final_non_deaminated.bam.bai, temp/example_reads_A_ct_report.csv
     jobid: 18
     benchmark: benchmarks/filter_deaminated_reads/example_reads_A.txt
-    reason: Missing output files: 3_final_reads/example_reads_A_final_non_deaminated.bam, temp/example_reads_A_ct_report.csv, 3_final_reads/example_reads_A_final_deaminated.bam; Input files updated by another job: 3_final_reads/example_reads_A_final.bam, 4_mapdamage_results/example_reads_A/misincorporation.txt
+    reason: Missing output files: 3_final_reads/example_reads_A_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_deaminated.bam, temp/example_reads_A_ct_report.csv; Input files updated by another job: 4_mapdamage_results/example_reads_A/misincorporation.txt, 3_final_reads/example_reads_A_final.bam
     wildcards: sample=example_reads_A
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:19:25 2025]
+[Sat Feb 15 14:28:44 2025]
 Finished job 1.
-18 of 24 steps (75%) done
+16 of 22 steps (73%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:19:25 2025]
+[Sat Feb 15 14:28:44 2025]
 rule filter_deaminated_reads:
     input: 3_final_reads/example_reads_B_final.bam, /global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa, 4_mapdamage_results/example_reads_B/misincorporation.txt
     output: 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_B_final_deaminated.bam.bai, 3_final_reads/example_reads_B_final_non_deaminated.bam.bai, temp/example_reads_B_ct_report.csv
     jobid: 17
     benchmark: benchmarks/filter_deaminated_reads/example_reads_B.txt
-    reason: Missing output files: temp/example_reads_B_ct_report.csv, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam; Input files updated by another job: 4_mapdamage_results/example_reads_B/misincorporation.txt, 3_final_reads/example_reads_B_final.bam
+    reason: Missing output files: 3_final_reads/example_reads_B_final_non_deaminated.bam, temp/example_reads_B_ct_report.csv, 3_final_reads/example_reads_B_final_deaminated.bam; Input files updated by another job: 3_final_reads/example_reads_B_final.bam, 4_mapdamage_results/example_reads_B/misincorporation.txt
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:19:44 2025]
+[Sat Feb 15 14:29:01 2025]
 Finished job 18.
-19 of 24 steps (79%) done
+17 of 22 steps (77%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:19:44 2025]
+[Sat Feb 15 14:29:01 2025]
 rule final_report:
     input: 0_data/example_reads_A.fq, temp/example_reads_A_length_filtered.fq, temp/example_reads_A_length_filtered_classified.fq, 2_mapping/example_reads_A_length_filtered_classified.bam, 2_mapping/example_reads_A_on_target.bam, 2_mapping/example_reads_A_LandMQ_filtered.bam, 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_A_final_deaminated.bam, temp/example_reads_A_ct_report.csv
     output: 4_final_report/example_reads_A.tsv
     jobid: 20
-    reason: Missing output files: 4_final_report/example_reads_A.tsv; Input files updated by another job: temp/example_reads_A_length_filtered.fq, 3_final_reads/example_reads_A_final.bam, temp/example_reads_A_length_filtered_classified.fq, 2_mapping/example_reads_A_length_filtered_classified.bam, 2_mapping/example_reads_A_LandMQ_filtered.bam, 3_final_reads/example_reads_A_final_deaminated.bam, temp/example_reads_A_ct_report.csv, 2_mapping/example_reads_A_on_target.bam; Params have changed since last execution
+    reason: Missing output files: 4_final_report/example_reads_A.tsv; Input files updated by another job: 2_mapping/example_reads_A_length_filtered_classified.bam, temp/example_reads_A_ct_report.csv, 3_final_reads/example_reads_A_final_deaminated.bam, 2_mapping/example_reads_A_on_target.bam, temp/example_reads_A_length_filtered_classified.fq, 2_mapping/example_reads_A_LandMQ_filtered.bam, 3_final_reads/example_reads_A_final.bam, temp/example_reads_A_length_filtered.fq
     wildcards: sample=example_reads_A
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:19:44 2025]
+[Sat Feb 15 14:29:01 2025]
 Finished job 17.
-20 of 24 steps (83%) done
+18 of 22 steps (82%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:19:44 2025]
+[Sat Feb 15 14:29:01 2025]
 rule final_report:
     input: 0_data/example_reads_B.fq, temp/example_reads_B_length_filtered.fq, temp/example_reads_B_length_filtered_classified.fq, 2_mapping/example_reads_B_length_filtered_classified.bam, 2_mapping/example_reads_B_on_target.bam, 2_mapping/example_reads_B_LandMQ_filtered.bam, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_B_final_deaminated.bam, temp/example_reads_B_ct_report.csv
     output: 4_final_report/example_reads_B.tsv
     jobid: 19
-    reason: Missing output files: 4_final_report/example_reads_B.tsv; Input files updated by another job: temp/example_reads_B_length_filtered.fq, 2_mapping/example_reads_B_LandMQ_filtered.bam, 2_mapping/example_reads_B_length_filtered_classified.bam, temp/example_reads_B_length_filtered_classified.fq, 3_final_reads/example_reads_B_final_deaminated.bam, 2_mapping/example_reads_B_on_target.bam, temp/example_reads_B_ct_report.csv, 3_final_reads/example_reads_B_final.bam; Params have changed since last execution
+    reason: Missing output files: 4_final_report/example_reads_B.tsv; Input files updated by another job: 2_mapping/example_reads_B_LandMQ_filtered.bam, 3_final_reads/example_reads_B_final.bam, 2_mapping/example_reads_B_length_filtered_classified.bam, temp/example_reads_B_ct_report.csv, 3_final_reads/example_reads_B_final_deaminated.bam, temp/example_reads_B_length_filtered_classified.fq, temp/example_reads_B_length_filtered.fq, 2_mapping/example_reads_B_on_target.bam
     wildcards: sample=example_reads_B
     resources: tmpdir=/tmp
 
-Processing reads: 0read [00:00, ?read/s]Processing reads: 0read [00:00, ?read/s]Processing reads: 7359read [00:00, 73578.67read/s]Processing reads: 7586read [00:00, 75855.55read/s]Processing reads: 15343read [00:00, 77257.50read/s]Processing reads: 15884read [00:00, 80043.99read/s]Processing reads: 23369read [00:00, 78625.45read/s]Processing reads: 24205read [00:00, 81487.88read/s]Processing reads: 31386read [00:00, 79230.15read/s]Processing reads: 32477read [00:00, 81970.85read/s]Processing reads: 39397read [00:00, 79545.04read/s]Processing reads: 40797read [00:00, 82410.20read/s]Processing reads: 47384read [00:00, 79652.12read/s]Processing reads: 49083read [00:00, 82562.01read/s]Processing reads: 54309read [00:00, 81487.77read/s]
-Processing reads: 54309read [00:00, 78739.57read/s]
-Processing reads: 0read [00:00, ?read/s]Processing reads: 379read [00:00, 100923.19read/s]
-[Sun Feb  2 13:19:49 2025]
-Finished job 19.
-21 of 24 steps (88%) done
-Processing reads: 0read [00:00, ?read/s]Processing reads: 379read [00:00, 65165.25read/s]
-[Sun Feb  2 13:19:50 2025]
+Processing reads: 0read [00:00, ?read/s]Processing reads: 0read [00:00, ?read/s]Processing reads: 7709read [00:00, 77076.84read/s]Processing reads: 7650read [00:00, 76491.50read/s]Processing reads: 16089read [00:00, 81029.25read/s]Processing reads: 16036read [00:00, 80820.77read/s]Processing reads: 24490read [00:00, 82385.09read/s]Processing reads: 24415read [00:00, 82171.80read/s]Processing reads: 32916read [00:00, 83120.33read/s]Processing reads: 32785read [00:00, 82770.59read/s]Processing reads: 41300read [00:00, 83378.49read/s]Processing reads: 41148read [00:00, 83076.93read/s]Processing reads: 49674read [00:00, 83498.65read/s]Processing reads: 49526read [00:00, 83313.82read/s]Processing reads: 58047read [00:00, 83570.40read/s]Processing reads: 57907read [00:00, 83474.88read/s]Processing reads: 64258read [00:00, 82635.07read/s]
+Processing reads: 64258read [00:00, 82482.10read/s]
+Processing reads: 0read [00:00, ?read/s]Processing reads: 441read [00:00, 111797.40read/s]
+[Sat Feb 15 14:29:06 2025]
 Finished job 20.
-22 of 24 steps (92%) done
+19 of 22 steps (86%) done
+Processing reads: 0read [00:00, ?read/s]Processing reads: 441read [00:00, 70536.86read/s]
+[Sat Feb 15 14:29:06 2025]
+Finished job 19.
+20 of 22 steps (91%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:19:50 2025]
+[Sat Feb 15 14:29:06 2025]
 rule combine_reports:
     input: 4_final_report/example_reads_B.tsv, 4_final_report/example_reads_A.tsv
     output: 4_final_report/combined_final_report.tsv
-    jobid: 23
-    reason: Missing output files: 4_final_report/combined_final_report.tsv; Input files updated by another job: 4_final_report/example_reads_B.tsv, 4_final_report/example_reads_A.tsv
+    jobid: 21
+    reason: Missing output files: 4_final_report/combined_final_report.tsv; Input files updated by another job: 4_final_report/example_reads_A.tsv, 4_final_report/example_reads_B.tsv
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:19:50 2025]
-Finished job 23.
-23 of 24 steps (96%) done
+[Sat Feb 15 14:29:06 2025]
+Finished job 21.
+21 of 22 steps (95%) done
 Select jobs to execute...
 
-[Sun Feb  2 13:19:50 2025]
+[Sat Feb 15 14:29:06 2025]
 localrule all:
-    input: 4_mapdamage_results/example_reads_B, 4_mapdamage_results/example_reads_A, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_A_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, 4_final_report/example_reads_B.tsv, 4_final_report/example_reads_A.tsv, 3_final_reads/example_reads_B_non_hominin.fq, 3_final_reads/example_reads_A_non_hominin.fq, 4_final_report/combined_final_report.tsv
+    input: 4_mapdamage_results/example_reads_B, 4_mapdamage_results/example_reads_A, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_A_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, 4_final_report/example_reads_B.tsv, 4_final_report/example_reads_A.tsv, 4_final_report/combined_final_report.tsv
     jobid: 0
-    reason: Input files updated by another job: 3_final_reads/example_reads_A_final.bam, 3_final_reads/example_reads_A_non_hominin.fq, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_B_final_non_deaminated.bam, 3_final_reads/example_reads_A_final_non_deaminated.bam, 4_final_report/example_reads_A.tsv, 4_mapdamage_results/example_reads_A, 4_final_report/example_reads_B.tsv, 4_final_report/combined_final_report.tsv, 3_final_reads/example_reads_A_final_deaminated.bam, 4_mapdamage_results/example_reads_B, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_B_non_hominin.fq
+    reason: Input files updated by another job: 4_mapdamage_results/example_reads_A, 4_final_report/example_reads_A.tsv, 3_final_reads/example_reads_B_final_non_deaminated.bam, 4_mapdamage_results/example_reads_B, 4_final_report/combined_final_report.tsv, 3_final_reads/example_reads_A_final_non_deaminated.bam, 3_final_reads/example_reads_B_final.bam, 3_final_reads/example_reads_A_final_deaminated.bam, 4_final_report/example_reads_B.tsv, 3_final_reads/example_reads_B_final_deaminated.bam, 3_final_reads/example_reads_A_final.bam
     resources: tmpdir=/tmp
 
-[Sun Feb  2 13:19:50 2025]
+[Sat Feb 15 14:29:06 2025]
 Finished job 0.
-24 of 24 steps (100%) done
-Complete log: .snakemake/log/2025-02-02T130133.973690.snakemake.log
+22 of 22 steps (100%) done
+Complete log: .snakemake/log/2025-02-15T140545.740525.snakemake.log

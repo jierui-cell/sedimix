@@ -1,4 +1,9 @@
 Sample	Library	Std	Kind	Length	Occurences
+*	*	+	se	30	879
+*	*	+	se	31	985
+*	*	+	se	32	982
+*	*	+	se	33	1070
+*	*	+	se	34	1070
 *	*	+	se	35	1148
 *	*	+	se	36	1153
 *	*	+	se	37	1118
@@ -40,6 +45,11 @@ Sample	Library	Std	Kind	Length	Occurences
 *	*	+	se	73	1
 *	*	+	se	74	1
 *	*	+	se	75	2426
+*	*	-	se	30	890
+*	*	-	se	31	944
+*	*	-	se	32	959
+*	*	-	se	33	1062
+*	*	-	se	34	1108
 *	*	-	se	35	1065
 *	*	-	se	36	1088
 *	*	-	se	37	1117

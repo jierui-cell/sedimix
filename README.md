@@ -124,17 +124,17 @@ Download index files for Centrifuge and Kraken2 from the following:
 - [AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
   We recommend NCBI: nucleotide non-redundant sequences (64GB) for Centrifuge.  
   ```bash
-  wget https://genome-idx.s3.amazonaws.com/centrifuge/p%2Bh%2Bv.tar.gz
-  tar -xvzf p%2Bh%2Bv.tar.gz -C centrifuge
-  rm p%2Bh%2Bv.tar.gz
+  wget https://genome-idx.s3.amazonaws.com/centrifuge/nt_2018_3_3.tar.gz
+  tar -xvzf nt_2018_3_3.tar.gz -C centrifuge
+  rm nt_2018_3_3.tar.gz
   ```
 
 - [AWS Indexes for Kraken2](https://benlangmead.github.io/aws-indexes/k2)  
   The paper was tested out using nt Database version 11/29/2023 (710GB) for Kraken2. A later version should work as well though not tested. Change the code accordingly for the latest version.
   ```bash
   wget https://genome-idx.s3.amazonaws.com/kraken/k2_nt_20231129.tar.gz
-  tar -xvzf k2_standard_20240605.tar.gz -C kraken2
-  rm k2_standard_20240605.tar.gz
+  tar -xvzf k2_nt_20231129.tar.gz -C kraken2
+  rm k2_nt_20231129.tar.gz
   ```
 
 Alternatively, you can build Centrifuge and Kraken2 indexes yourself by following the instructions provided on their respective GitHub repositories.
@@ -243,11 +243,27 @@ An example folder can be found in `example_run/`.
 
 12. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
-   - Example: "/path/to/lineage_sites.txt"
+   - This file should be a tab-delimited text file with at least the following columns:
+     ```
+     Chromosome   Start   End   Reference   Alternate   Type
+     ```
+   - Example:
+     ```
+     1       949200  949200  C       G       hominin_informative
+     1       1500380 1500380 G       C       hominin_informative
+     1       1500941 1500941 G       A       neanderthal
+     ```
+   - The `Type` column defines the classification of each site, and it can include different types such as `hominin_informative`, `neanderthal`, or `denisova`.
+   - The `types` parameter in `config.yaml` can specify one or multiple types of sites from this file, separated by spaces. For example:
+     ```
+     types: "hominin neanderthal denisova"
+     ```
+   - This ensures that the analysis considers all specified site categories.
 
 13. **types**:
-   - Analysis type or category for output classification.
-   - Example: "hominin_informative"
+   - One or more site types to be analyzed, corresponding to the `Type` column in the `lineage_sites` file.
+   - Multiple types can be specified as a space-separated string.
+   - Example: "hominin_informative", OR "hominin_informative neanderthal denisova"
 
 14. **to_clean**:
    - Boolean (True or False) indicating whether to remove all intermediate files once the final output is generated.

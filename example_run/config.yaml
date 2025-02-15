@@ -1,20 +1,20 @@
 memory_mb: 200000 # max_memory
 threads: 32 # n_cores
 
-min_length: 35
-min_quality: 25
+min_length: 30 # minimum read length  
+min_quality: 25 # minimum mapping quality 
 
 classification_software: "centrifuge" # either kraken2 or centrifuge 
-classification_index: "/global/home/users/jieruixu/jieruixu/sediment_dna/peerj_replication/centrifuge/nt"
-taxID: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/temp/primates_taxids.csv" # primate
+classification_index: "/global/home/users/jieruixu/jieruixu/sediment_dna/peerj_replication/centrifuge/nt" # location to the downloaded index file(s)
+taxID: "./primates_taxids.csv" # a csv file with specie name and NCBI taxids, or just a number such as 9606 for homo sapiens 
 
-use_snp_panel: False 
-ref_genome: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa"
+use_snp_panel: False # whether to input and use a specific SNP panel 
+ref_genome: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/reference_data/human/hg19.fa" # human reference genome; if a specific SNP panel is used, an alternative ref genome is recommended
 # snp_panel_bed: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.bed" 
 
-calculate_from_mapdamage: True
+calculate_from_mapdamage: True # calculate deamination profile from mapDamage outputs 
 lineage_sites: "/global/home/users/jieruixu/jieruixu/sediment_dna/sedimix/final_pipeline/pendant_2023/probes_reich_n3_b8_CONTROL_BV09-BV09.transformed.txt"
-types: "hominin_informative"
+types: "hominin_informative" # can be one or multiple types of sites in the lineage_sites file separated with space, like "hominin neanderthal denisova"
 
-to_clean: False
-keep_non_hominin_reads: True 
+to_clean: False # whether to clean up the folder and only kept the final output and report file 
+keep_non_hominin_reads: False # whether to output the non-hominin reads after classification 

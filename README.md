@@ -243,7 +243,7 @@ An example folder can be found in `example_run/`.
 
 12. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
-   - This file should be a tab-delimited text file with at least the following columns:
+   - This file should be a tab-delimited text file with the following columns with headers:
      ```
      Chromosome   Start   End   Reference   Alternate   Type
      ```
@@ -253,12 +253,7 @@ An example folder can be found in `example_run/`.
      1       1500380 1500380 G       C       hominin_informative
      1       1500941 1500941 G       A       neanderthal
      ```
-   - The `Type` column defines the classification of each site, and it can include different types such as `hominin_informative`, `neanderthal`, or `denisova`.
-   - The `types` parameter in `config.yaml` can specify one or multiple types of sites from this file, separated by spaces. For example:
-     ```
-     types: "hominin neanderthal denisova"
-     ```
-   - This ensures that the analysis considers all specified site categories.
+   - The `Type` column defines the classification of each site. 
 
 13. **types**:
    - One or more site types to be analyzed, corresponding to the `Type` column in the `lineage_sites` file.

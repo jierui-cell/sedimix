@@ -3,15 +3,17 @@
 **Sedimix**: A workflow for the analysis of human nuclear DNA from sediments
 
 ## Overview
-Here we present an open-source snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust, accessible, and adaptable solution to support the growing needs of human evolutionary research. See paper for details. 
+Here we present an open-source snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust and accessible solution to support the growing needs of human evolutionary research. See paper for details. 
 
 **Key Features:**
 - Utilizes Snakemake, a workflow management system for Python
-- Identifies ancient hominin reads in the samples through mapping and taxonomic classification
+- Identifies ancient hominin reads in the samples through taxonomic classification followed by mapping 
 - Generates a report file with summary statistics 
 
 ## Requirements
 Ensure the following tools are installed and configured before running the pipeline:
+
+If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the commands below.
 
 ### [Centrifuge (default)](https://ccb.jhu.edu/software/centrifuge/manual.shtml)
 ```bash
@@ -78,8 +80,6 @@ The following requirements are for **mapDamage2** to successfully run:
 - `Rcpp`
 - `RcppGSL`
 - `ggplot2` (>= 0.9.2)
-
-If you're using `zsh` as your shell, replace `~/.bashrc` with `~/.zshrc` in the commands above.
 
 ### Python Packages
 

@@ -111,7 +111,6 @@ conda activate sedimix
 
 Note that r-gam might show errors for the latest mac users that are on arm64 architecture. If you encounter this issue, you can remove the line for r-gam from the environment.yaml file and install it manually in your R session. 
 
-```bash
 ### Dependency Check Script
 
 To ensure all required tools, Python packages, and R libraries are installed and correctly configured, we provide a script named `check_dependencies.py`.

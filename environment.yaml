@@ -2,13 +2,23 @@ name: sedimix
 channels:
   - conda-forge
   - bioconda
+  - defaults
 dependencies:
-  - python=3.9
-  - snakemake
+  # R and R packages
+  - r-base>=3.1
+  - r-inline
+  - r-gam # this might not work on latest mac arm64. you would need to remove this line and install it manually in r 
+  - r-rcpp
+  - r-rcppgsl
+  - r-ggplot2>=0.9.2
+
+  # Python and required Python packages
+  - python
+  - snakemake=7.32.4
   - pysam>=0.6
-  - cython
+  - cython  # Only necessary if pysam needs to be built
   - numpy>=1.24.4
-  - tqdm>=4.66.1
+  - tqdm=4.66.1
   - pandas>=2.1.2
   - pyfaidx>=0.8.1.1
   - biopython>=1.84

@@ -3,7 +3,7 @@
 *sedimix*: A workflow for the analysis of hominin nuclear DNA sequences from sediments
 
 ## Overview
-Here we present an open-source snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust and accessible solution to support the growing needs of human evolutionary research. See paper for details. 
+Here we present an open-source snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust and accessible solution to support the growing needs of human evolutionary research. See [paper](https://www.biorxiv.org/content/10.1101/2025.02.28.640818v1) for details.
 
 **Key Features:**
 - Utilizes Snakemake, a workflow management system for Python

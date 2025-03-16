@@ -270,4 +270,7 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
 - **Classified hominin reads that do not have deamination**: Located in the `3_final_reads` folder, ending with `{sample_name}_final_non_deaminated.bam`.
 - **Classified Non-hominin Reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
 - **Data Summary Report**: Located in the `4_final_report` folder. `combined_final_report.tsv` contains results for all samples.
-- **Deamination Profile**: Located in the `4_mapdamage_results` folder. 
+- **Deamination Profile**: Located in the `4_mapdamage_results` folder.  
+
+## License
+This project is licensed under the [MIT License](LICENSE).

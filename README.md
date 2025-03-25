@@ -239,17 +239,18 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
 
 12. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
-   - This file should be a tab-delimited text file with the following columns with headers:
+   - This file should be a tab-delimited text file with the following columns but no header:
      ```
      Chromosome   Start   End   Reference   Alternate   Type
      ```
-   - Example:
+   - File example:
      ```
      1       949200  949200  C       G       hominin_informative
      1       1500380 1500380 G       C       hominin_informative
      1       1500941 1500941 G       A       neanderthal
      ```
    - The `Type` column defines the classification of each site. 
+   - The file used in this paper is `hominin_informative_sites.txt`. Original file can be downloaded from https://datadryad.org/dataset/doi:10.5061/dryad.41ns1rnj1, subsetting to hominin_informative only. 
 
 13. **types**:
    - One or more site types to be analyzed, corresponding to the `Type` column in the `lineage_sites` file.

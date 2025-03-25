@@ -239,7 +239,7 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
 
 12. **lineage_sites**:
    - Path to a file containing sites of interest for lineage-specific analysis.
-   - This file should be a tab-delimited text file with the following columns but no header:
+   - This file should be a tab-delimited text file with the following columns **but no header**:
      ```
      Chromosome   Start   End   Reference   Alternate   Type
      ```

@@ -50,7 +50,7 @@ Once you have:
 
 - Pulled the Singularity image  
 - Downloaded any required pre-built indices  
-- (Optionally) built the alternative human reference genome for SNP panels  
+- Built the human reference genome index       
  
  you can run *sedimix* in four simple steps:     
  

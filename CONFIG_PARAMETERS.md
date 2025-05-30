@@ -58,7 +58,7 @@
      1       1500941 1500941 G       A       neanderthal
      ```
    - The `Type` column defines the classification of each site. 
-   - The file used in this paper is [hominin_informative_sites.txt](../hominin_informative_sites.txt). Original file can be downloaded from https://datadryad.org/dataset/doi:10.5061/dryad.41ns1rnj1, subsetting to hominin_informative only. 
+   - The file used in this paper is [hominin_informative_sites.txt](https://github.com/jierui-cell/sedimix/blob/main/hominin_informative_sites.txt). Original file can be downloaded from https://datadryad.org/dataset/doi:10.5061/dryad.41ns1rnj1, subsetting to hominin_informative only. 
 
 13. **types**:
    - One or more site types to be analyzed, corresponding to the `Type` column in the `lineage_sites` file.

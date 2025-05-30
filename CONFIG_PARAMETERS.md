@@ -30,7 +30,7 @@
    - Example: "/path/to/primates_taxids.csv"
 
 8. **use_snp_panel**:
-   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering. If set to True, it is recommended that the user built an alternative reference genome following the instructions [here](#building-an-alternative-reference-genome-optional).
+   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering. If set to True, it is recommended that the user built an **alternative reference genome** following the instructions [here](#building-an-alternative-reference-genome-optional).
    - Default: False
 
 9. **ref_genome**:

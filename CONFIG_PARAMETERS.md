@@ -30,7 +30,7 @@
    - Example: "/path/to/primates_taxids.csv"
 
 8. **use_snp_panel**:
-   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering.
+   - Boolean (True or False) to indicate whether to use a SNP panel for read filtering. If set to True, it is recommended that the user built an alternative reference genome following the instructions [here](#building-an-alternative-reference-genome-optional).
    - Default: False
 
 9. **ref_genome**:
@@ -72,3 +72,39 @@
 15. **keep_non_hominin_reads**:
    - Boolean (True or False) determining whether to save reads classified as non-hominin into a separate FASTQ file.
    - Default: False
+
+
+## Building an alternative reference genome (Optional)
+If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias during sequence mapping.       
+
+Use the script `scripts/generate_alternative_ref.py` with three arguments:  
+
+1. The SNP panel/probe file (e.g. containing positions and alleles to modify)  
+2. Your original reference genome (FASTA format)  
+3. A name for your output modified reference genome file  
+
+**SNP Panel/Probe File Format:**  
+- Tab-delimited text file with **no header**.  
+- Must contain **five columns** in the order: `chrom`, `pos`, `ref`, `a1`, `a2`, for example:  
+   ```
+   1 10000 A G G
+   1 20000 T C C
+   2 30000 C T T
+   ```
+- `chrom`: Chromosome number or letter (e.g., `1`, `2`, ..., `X`, `Y`). The script automatically adds `chr` to this value.  
+- `pos`: 1-based genomic position.  
+- `ref`: The reference allele at this position.  
+- `a1` and `a2`: Observed alternate alleles at this position.  
+
+The script replaces bases in the reference genome at specified SNP positions with a "third allele," ensuring it differs from both the original reference and provided SNP alleles. This helps reduce reference bias when mapping ancient or metagenomic reads.
+
+**Example usage:**
+```bash
+python scripts/generate_alternative_ref.py \
+    <snp_panel_file> \
+    <hg19.fasta> \
+    <modified_hg19.fasta>
+
+# Build a BWA index on the newly created reference
+bwa index <modified_hg19.fasta>
+```

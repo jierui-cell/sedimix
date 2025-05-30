@@ -56,7 +56,7 @@ Once you have:
  
 1. Create and enter a run directory (same level as `scripts` and `rules`) 
 2. Create a folder named `0_data` within the folder you just created, then place your input FASTQ files in it. **Input files must be in format that is either .fq or .fq.gz.** 
-3. Update the `config.yaml` file to set parameters (see details below) 
+3. Update the `config.yaml` file to set parameters (see [details below](#explanation-of-configyaml-parameters)).     
 4. Execute the workflow within the run directory with the following command:
 
    ```bash
@@ -81,9 +81,9 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
 - **Classified hominin reads**: Located in the `3_final_reads` folder, ending with `{sample_name}_final.bam`. 
 - **Classified hominin reads that have deamination**: Located in the `3_final_reads` folder, ending with `{sample_name}_final_deaminated.bam`.
 - **Classified hominin reads that do not have deamination**: Located in the `3_final_reads` folder, ending with `{sample_name}_final_non_deaminated.bam`.
-- **Classified Non-hominin Reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
-- **Data Summary Report**: Located in the `4_final_report` folder. `combined_final_report.tsv` contains results for all samples.
-- **Deamination Profile**: Located in the `4_mapdamage_results` folder.  
+- **Classified non-hominin reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
+- **Data summary report**: Located in the `4_final_report` folder. `combined_final_report.tsv` contains results for all samples.
+- **Deamination profile**: Located in the `4_mapdamage_results` folder.  
 
 
 ## Explanation of `config.yaml` Parameters:

@@ -114,7 +114,7 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
    - Example: "/path/to/index/nt" (after untaring for Centrifuge, nt is the index filename prefix (minus trailing .X.cf); for Kraken2, there is no need for this extra reference, and the path to the untar index folder is suffix)
 
 7. **taxID**:
-   - Path to a CSV file containing taxonomic IDs of interest for classification.
+   - Path to a CSV file containing taxonomic IDs of interest for classification. A curated list can be found in the example_run folder.
    - Example: "/path/to/primates_taxids.csv"
 
 8. **use_snp_panel**:
@@ -146,7 +146,7 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
      1       1500941 1500941 G       A       neanderthal
      ```
    - The `Type` column defines the classification of each site. 
-   - The file used in this paper is `hominin_informative_sites.txt`. Original file can be downloaded from https://datadryad.org/dataset/doi:10.5061/dryad.41ns1rnj1, subsetting to hominin_informative only. 
+   - The file used in this paper is [hominin_informative_sites.txt](./hominin_informative_sites.txt). Original file can be downloaded from https://datadryad.org/dataset/doi:10.5061/dryad.41ns1rnj1, subsetting to hominin_informative only. 
 
 13. **types**:
    - One or more site types to be analyzed, corresponding to the `Type` column in the `lineage_sites` file.
@@ -162,7 +162,8 @@ An example folder can be found in `example_run/`. The start folder is only 0_dat
    - Default: False
 
 ## Building an alternative reference genome (Optional)
-If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias during sequence mapping.  
+If you have a specified SNP panel, you can generate an alternative reference genome to minimize reference bias during sequence mapping.       
+
 Use the script `scripts/generate_alternative_ref.py` with three arguments:  
 
 1. The SNP panel/probe file (e.g. containing positions and alleles to modify)  

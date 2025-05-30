@@ -20,7 +20,7 @@ We provide a fully-baked container image you can pull & run in one step—no ins
 singularity pull library://jieruixu/sedimix/sedimix-v1.0:latest
 ```
 
-If you prefer to install every dependency yourself, see [manual install](./MANUAL_INSTALL.md).
+If you prefer to install every dependency yourself and use conda environment, see [manual install](./MANUAL_INSTALL.md).
 
 ### 2. Index Files
 Download index files for Centrifuge and Kraken2 from the following:

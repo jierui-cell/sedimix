@@ -6,19 +6,17 @@ import yaml
 configfile: "config.yaml"
 
 # Extract and preprocess `types` from the configuration
-types = config["types"].split(",")
-types_str = " ".join(types)
+types = config["types"].split(",")  # This creates a list of types
+types_str = " ".join(types)  # This creates a space-separated string
 
-# Find all FASTQ files (.fq or .fq.gz)
-fq_files = glob.glob("0_data/*.fq") + glob.glob("0_data/*.fq.gz")
+# List all .fq and .fq.gz files in the data folder
+fq_files = glob.glob("0_data/*.fq")
+gz_files = glob.glob("0_data/*.fq.gz")
 
-def get_sample_name(fq_path):
-    base = os.path.basename(fq_path)
-    return re.sub(r"\.fq(\.gz)?$", "", base)
+# If there are .fq.gz files, include them in the list of input files
+input_files = fq_files + [f.replace(".fq.gz", ".fq") for f in gz_files]
 
-SAMPLES = sorted(set(get_sample_name(f) for f in fq_files))
-print(f"Found samples: {SAMPLES}")
-
+# Define the final output files
 rule all:
     input:
         expand([
@@ -27,10 +25,10 @@ rule all:
             "3_final_reads/{sample}_final_deaminated.bam", 
             "3_final_reads/{sample}_final_non_deaminated.bam", 
             "4_final_report/{sample}.tsv"
-        ], sample=SAMPLES) +
-        expand("3_final_reads/{sample}_non_hominin.fq", sample=SAMPLES)
-        if config.get("keep_non_hominin_reads", False) else [] +
-        ["4_final_report/combined_final_report.tsv"]
+        ], sample=[os.path.basename(f).split('.fq')[0] for f in input_files]),
+        expand("3_final_reads/{sample}_non_hominin.fq", 
+        sample=[os.path.basename(f).split('.fq')[0] for f in input_files]) if config.get("keep_non_hominin_reads", False) else [],
+        "4_final_report/combined_final_report.tsv"
 
 # Unzip fastq.gz files if necessary
 if gz_files:

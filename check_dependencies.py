@@ -38,25 +38,52 @@ required_r_libraries = [
     "ggplot2"
 ]
 
-def check_tool_installed(tool):
-    """Check if a tool is installed and in PATH."""
-    return shutil.which(tool) is not None
+# Map pip package names -> import names
+IMPORT_NAME = {
+    "biopython": "Bio",
+    # most others import by the same name:
+    # "snakemake": "snakemake",
+    # "pysam": "pysam",
+    # "numpy": "numpy",
+    # "tqdm": "tqdm",
+    # "pandas": "pandas",
+    # "pyfaidx": "pyfaidx",
+    # "scipy": "scipy",
+    # "cython": "cython"
+}
 
 def check_python_package_installed(package, version=None):
     """Check if a Python package is installed and meets the version requirement."""
+    modname = IMPORT_NAME.get(package, package)
     try:
-        pkg = __import__(package)
-        if version:
-            from packaging import version as pkg_version
-            installed_version = pkg.__version__
-            if pkg_version.parse(installed_version) < pkg_version.parse(version):
-                print(f"[WARNING] {package} is installed (version {installed_version}), but the required version is {version} or higher. It may cause issues.")
-                return False
-        print(f"[OK] {package} is installed.")
-        return True
+        pkg = __import__(modname)
     except ImportError:
-        print(f"[ERROR] Python package {package} is not installed.")
+        print(f"[ERROR] Python package {package} (import '{modname}') is not installed.")
         return False
+
+    # Try to get a version string
+    installed_version = getattr(pkg, "__version__", None)
+    if version and installed_version:
+        try:
+            # Prefer packaging, fallback to distutils if unavailable
+            try:
+                from packaging import version as pkg_version
+            except Exception:
+                from distutils.version import LooseVersion as pkg_version  # type: ignore
+            if pkg_version.parse(installed_version) < pkg_version.parse(version):
+                print(f"[WARNING] {package} is installed (version {installed_version}), "
+                      f"but {version} or higher is required.")
+                return False
+        except Exception:
+            # If version parsing fails, just acknowledge presence
+            pass
+
+    print(f"[OK] {package} is installed" + (f" (version {installed_version})" if installed_version else "") + ".")
+    return True
+
+def check_tool_installed(tool):
+    """Check if a tool is installed and in PATH."""
+    return shutil.which(tool) is not None
 
 def check_r_library_installed(library):
     """Check if an R library is installed."""

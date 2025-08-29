@@ -23,7 +23,7 @@ singularity pull library://jieruixu/sedimix/sedimix-v1.0:latest
 If you prefer to install every dependency yourself and use conda environment, see [manual install](./MANUAL_INSTALL.md).
 
 ### 2. Index Files
-You only need to download one of the following files below to run *sedimix*. We recommend Centrifuge as the default classification software. 
+You only need to download one of the following files below to run *sedimix*. We recommend Centrifuge as the default classification software.            
 Download index files for Centrifuge and Kraken2 from the following:
 - [AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
   We recommend NCBI: nucleotide non-redundant sequences (64GB) for Centrifuge.  

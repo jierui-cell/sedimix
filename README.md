@@ -28,6 +28,7 @@ Download index files for Centrifuge and Kraken2 from the following:
   We recommend NCBI: nucleotide non-redundant sequences (64GB) for Centrifuge.  
   ```bash
   wget https://genome-idx.s3.amazonaws.com/centrifuge/nt_2018_3_3.tar.gz
+  mkdir centrifuge
   tar -xvzf nt_2018_3_3.tar.gz -C centrifuge
   rm nt_2018_3_3.tar.gz
   ```
@@ -36,6 +37,7 @@ Download index files for Centrifuge and Kraken2 from the following:
   The paper was tested out using nt Database version 11/29/2023 (710GB) for Kraken2. A later version should work as well though not tested. Change the code accordingly for the latest version.
   ```bash
   wget https://genome-idx.s3.amazonaws.com/kraken/k2_nt_20231129.tar.gz
+  mkdir kraken2
   tar -xvzf k2_nt_20231129.tar.gz -C kraken2
   rm k2_nt_20231129.tar.gz
   ```

@@ -51,7 +51,7 @@ Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index.
 Once you have:
 
 - Pulled the Singularity image  
-- Downloaded any required pre-built indices  
+- Downloaded any required pre-built indices for Centrifuge or Kraken2 
 - Built the human reference genome index       
  
  you can run *sedimix* in four simple steps:     

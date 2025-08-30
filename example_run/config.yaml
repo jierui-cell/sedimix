@@ -13,7 +13,7 @@ ref_genome: "../reference_data/human/hg19.fa" # human reference genome; if a spe
 # snp_panel_bed: "../probes_reich_n3_b8_CONTROL_BV09-BV09.bed" 
 
 calculate_from_mapdamage: True # calculate deamination profile from mapDamage outputs 
-lineage_sites: "../probes_reich_n3_b8_CONTROL_BV09-BV09.transformed.txt"
+lineage_sites: "../hominin_informative_sites.txt"
 types: "hominin_informative" # can be one or multiple types of sites in the lineage_sites file separated with space, like "hominin neanderthal denisova"
 
 to_clean: False # whether to clean up the folder and only kept the final output and report file 

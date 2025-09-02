@@ -13,12 +13,20 @@ Here we present an open-source snakemake workflow that identifies human sequence
 ## Requirements
 
 ### 1. Using container 
-We provide a fully-baked container image you can pull & run in one step—no installs required:
+We provide a fully-baked container image you can pull & run in one step—no installs required beyond Singularity or Apptainer:
 
+#### ▶️ Option A: Using **Singularity**
 ```bash
-# pull the latest sedimix image
 singularity pull library://jieruixu/sedimix/sedimix-v1.0:latest
 ```
+
+#### ▶️ Option B: Using **Apptainer** (recommended)
+Apptainer is the community-maintained successor to Singularity. To pull the same container image:
+```bash
+apptainer pull sedimix-v1.0_latest.sif library://jieruixu/sedimix/sedimix-v1.0:latest
+```
+
+This should download the container as `sedimix-v1.0_latest.sif` in your current working directory.        
 
 If you prefer to install every dependency yourself and use conda environment, see [manual install](./MANUAL_INSTALL.md).
 

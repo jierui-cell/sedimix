@@ -20,7 +20,7 @@ We provide a fully-baked container image you can pull & run in one step—no ins
 singularity pull library://jieruixu/sedimix/sedimix-v1.0:latest
 ```
 
-#### ▶️ Option B: Using **Apptainer** (recommended)
+#### ▶️ Option B: Using **Apptainer** 
 Apptainer is the community-maintained successor to Singularity. To pull the same container image:
 ```bash
 apptainer pull sedimix-v1.0_latest.sif library://jieruixu/sedimix/sedimix-v1.0:latest

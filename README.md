@@ -55,7 +55,13 @@ Download index files for Centrifuge and Kraken2 from the following:
 Alternatively, you can build Centrifuge and Kraken2 indexes yourself by following the instructions provided on their respective GitHub repositories.
 
 ### 3. Human Reference Genome 
-Download the human reference genome (e.g. hg19.fq.gz) and build the BWA index. 
+Download the human reference genome (e.g. [hg19.fa.gz from UCSC Genome Browser](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/latest/hg19.fa.gz)), unzip it, and build the BWA index.
+
+```bash
+wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/latest/hg19.fa.gz
+gunzip hg19.fa.gz
+bwa index hg19.fa
+```
 
 ## Usage Instructions
 Once you have:

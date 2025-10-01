@@ -64,10 +64,22 @@ Alternatively, you can build Centrifuge and Kraken2 indexes yourself by followin
 Download the human reference genome (e.g. [hg19.fa.gz from UCSC Genome Browser](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/latest/hg19.fa.gz)), unzip it, and build the BWA index.
 
 ```bash
+mkdir human_ref && cd human_ref
 wget https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/latest/hg19.fa.gz
 gunzip hg19.fa.gz
 bwa index hg19.fa
+samtools faidx hg19.fa
 ```
+
+Your folder should look like this:
+```human_ref/
+├── hg19.fa
+├── hg19.fa.amb
+├── hg19.fa.ann
+├── hg19.fa.bwt
+├── hg19.fa.pac
+├── hg19.fa.sa
+├── hg19.fa.fai
 
 ## Usage Instructions
 Once you have:
@@ -75,6 +87,14 @@ Once you have:
 - Pulled the Singularity image  
 - Downloaded any required pre-built indices for Centrifuge or Kraken2 
 - Built the human reference genome index       
+
+Your folder should look like this:
+```sedimix/
+├── README.md
+├── config.yaml
+├── example_run
+├── hg19.fa
+├── hg19.fa.bwt
  
  you can run *sedimix* in four simple steps:     
  

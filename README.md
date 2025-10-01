@@ -2,6 +2,10 @@
 
 *sedimix*: A workflow for the analysis of hominin nuclear DNA sequences from sediments
 
+[![DOI](https://zenodo.org/badge/923335562.svg)](https://doi.org/10.5281/zenodo.17244854)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Snakemake](https://img.shields.io/badge/Snakemake-v7.32.4-blue)](https://snakemake.readthedocs.io/)
+
 ## Overview
 Here we present an open-source snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust and accessible solution to support the growing needs of human evolutionary research. See [paper](https://www.biorxiv.org/content/10.1101/2025.02.28.640818v1) for details.
 

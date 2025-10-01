@@ -80,6 +80,7 @@ Your folder should look like this:
 ├── hg19.fa.pac
 ├── hg19.fa.sa
 ├── hg19.fa.fai
+```
 
 ## Usage Instructions
 Once you have:
@@ -90,11 +91,18 @@ Once you have:
 
 Your folder should look like this:
 ```sedimix/
-├── README.md
-├── config.yaml
-├── example_run
-├── hg19.fa
-├── hg19.fa.bwt
+├── sedimix-v1.0_latest.sif
+├── centrifuge (or kraken2)
+├── human_ref
+├── rules
+├── scripts
+├── hominin_informative_sites.txt
+├── my_run (folder you create to run sedimix)
+│   ├── config.yaml
+│   └── 0_data
+│       ├── sample_1.fq
+│       └── sample_2.fq
+```
  
  you can run *sedimix* in four simple steps:     
  

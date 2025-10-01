@@ -128,7 +128,7 @@ sedimix/
       '
    ```
 - `--cores` and `--resources` should equal to number of `threads` and `memory_mb` specified in `config.yaml`        
-- Append `-n` (dry run) to the second snakemake call to preview execution without running.     
+- Append `-n` (dry run) to the second snakemake call line to preview execution.     
 - For reproducibility, it is recommended that you always define all necessary parameters in `config.yaml`. 
 
 An example run folder together with a default [config.yaml](./example_run_start/config.yaml) file can be found in [`example_run_start/`](./example_run_start/). After running *sedimix*, the final output folder should look like [`example_run_end/`](./example_run_end/).
@@ -143,3 +143,7 @@ An example run folder together with a default [config.yaml](./example_run_start/
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
+
+## Some issues previous users have encountered
+- If you encounter an out-of-memory error — often occurring during the classification step — please increase the `memory_mb` parameter in `config.yaml` and the `--resources mem_mb=` argument in the snakemake command accordingly. We recommend allocating at least 3x of the total memory of the index database you are using. For example, if you’re using the Centrifuge NT database (~64 GB), we suggest requesting at least 200 GB of memory.
+- Increasing the number of threads may raise memory usage by approximately 10–30%, since the index is shared but additional threads require overhead. If you have sufficient CPU cores, feel free to raise the thread count to speed up processing — just make sure your memory allocation scales accordingly. For example, if you set threads to 16, consider increasing memory allocation by around 30%. There is no strict formula, so monitor your system’s memory usage during initial runs to find the optimal balance. 

@@ -131,7 +131,7 @@ sedimix/
 - Append `-n` (dry run) to the second snakemake call to preview execution without running.     
 - For reproducibility, it is recommended that you always define all necessary parameters in `config.yaml`. 
 
-An example run folder together with a default config.yaml file can be found in `example_run_start/`. After running *sedimix*, the final output folder should look like `example_run_end/`.
+An example run folder together with a default [config.yaml](./example_run_start/config.yaml) file can be found in `example_run_start/`. After running *sedimix*, the final output folder should look like `example_run_end/`.
 
 ## Retrieve Your Results
 - **Classified hominin reads**: Located in the `3_final_reads` folder, ending with `{sample_name}_final.bam`. 

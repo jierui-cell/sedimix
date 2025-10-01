@@ -72,14 +72,15 @@ samtools faidx hg19.fa
 ```
 
 Your folder should look like this:
-```human_ref/
-├── hg19.fa
-├── hg19.fa.amb
-├── hg19.fa.ann
-├── hg19.fa.bwt
-├── hg19.fa.pac
-├── hg19.fa.sa
-├── hg19.fa.fai
+```
+├── human_ref
+│   ├── hg19.fa
+│   ├── hg19.fa.fai
+│   ├── hg19.fa.amb
+│   ├── hg19.fa.ann
+│   ├── hg19.fa.bwt
+│   ├── hg19.fa.pac
+│   └── hg19.fa.sa
 ```
 
 ## Usage Instructions
@@ -90,7 +91,8 @@ Once you have:
 - Built the human reference genome index       
 
 Your folder should look like this:
-```sedimix/
+```
+sedimix/
 ├── sedimix-v1.0_latest.sif
 ├── centrifuge (or kraken2)
 ├── human_ref

@@ -132,7 +132,7 @@ sedimix/
       '
    ```
 - `--cores` and `--resources` should equal to number of `threads` and `memory_mb` specified in `config.yaml`        
-- Append `-n` (dry run) to the second snakemake call line to preview execution.     
+- Append `-n` (dry run) to the end of second snakemake call line to preview execution.     
 - For reproducibility, it is recommended that you always define all necessary parameters in `config.yaml`. 
 
 An example run folder together with a default [config.yaml](./example_run_start/config.yaml) file can be found in [`example_run_start/`](./example_run_start/). After running *sedimix*, the final output folder should look like [`example_run_end/`](./example_run_end/).

@@ -12,6 +12,12 @@ Here we present an open-source snakemake workflow that identifies human sequence
 
 ## Requirements
 
+### 0. Clone the repository
+```bash
+git clone https://github.com/jierui-cell/sedimix.git
+cd sedimix
+```
+
 ### 1. Using container 
 We provide a fully-baked container image you can pull & run in one step—no installs required beyond Singularity or Apptainer:
 
@@ -34,7 +40,7 @@ If you prefer to install every dependency yourself and use conda environment, se
 You only need to download one of the following files below to run *sedimix*. We recommend Centrifuge as the default classification software.            
              
 Download index files for Centrifuge and Kraken2 from the following:
-- [AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
+- **RECOMMENDED**[AWS Indexes for Centrifuge](https://benlangmead.github.io/aws-indexes/centrifuge)  
   We recommend NCBI: nucleotide non-redundant sequences (64GB) for Centrifuge.  
   ```bash
   wget https://genome-idx.s3.amazonaws.com/centrifuge/nt_2018_3_3.tar.gz

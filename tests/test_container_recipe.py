@@ -18,7 +18,7 @@ class ContainerRecipeTests(unittest.TestCase):
         self.assertRegex(text, r"KRAKEN2_VERSION=2\.1\.3\b")
         self.assertRegex(
             text,
-            r"From: mambaorg/micromamba:1\.5\.8-jammy@sha256:[0-9a-f]{64}",
+            r"From: mambaorg/micromamba@sha256:[0-9a-f]{64}",
         )
         self.assertIn("/opt/kraken2", text)
         self.assertIn(

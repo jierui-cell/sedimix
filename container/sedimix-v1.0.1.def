@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: mambaorg/micromamba:1.5.8-jammy@sha256:0d2870c1159dfb0c285e1c942c68385cd1110255cc9551838a29e48793e21af1
+From: mambaorg/micromamba@sha256:0d2870c1159dfb0c285e1c942c68385cd1110255cc9551838a29e48793e21af1
 
 %labels
     Author Jierui Xu

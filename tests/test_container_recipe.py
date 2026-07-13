@@ -21,6 +21,7 @@ class ContainerRecipeTests(unittest.TestCase):
             r"From: mambaorg/micromamba@sha256:[0-9a-f]{64}",
         )
         self.assertIn("/opt/kraken2", text)
+        self.assertRegex(text, r"(?m)^\s*zlib1g-dev\b")
         self.assertIn(
             "(cd /tmp/kraken2-src && ./install_kraken2.sh /opt/kraken2)",
             text,

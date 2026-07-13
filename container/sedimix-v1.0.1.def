@@ -25,7 +25,8 @@ From: mambaorg/micromamba@sha256:0d2870c1159dfb0c285e1c942c68385cd1110255cc95518
         gzip \
         perl \
         rsync \
-        tar
+        tar \
+        zlib1g-dev
     rm -rf /var/lib/apt/lists/*
 
     # Install the complete Kraken2 tree in one location. The Perl wrappers

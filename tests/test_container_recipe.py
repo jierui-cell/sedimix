@@ -22,6 +22,7 @@ class ContainerRecipeTests(unittest.TestCase):
         )
         self.assertIn("/opt/kraken2", text)
         self.assertRegex(text, r"(?m)^\s*zlib1g-dev\b")
+        self.assertRegex(text, r"(?m)^\s*centrifuge=1\.0\.4\.2\b")
         self.assertIn(
             "(cd /tmp/kraken2-src && ./install_kraken2.sh /opt/kraken2)",
             text,

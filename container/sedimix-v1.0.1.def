@@ -61,7 +61,7 @@ From: mambaorg/micromamba@sha256:0d2870c1159dfb0c285e1c942c68385cd1110255cc95518
         pyfaidx=0.8.1.1 \
         biopython=1.84 \
         scipy=1.11.3 \
-        centrifuge=1.0.4_beta \
+        centrifuge=1.0.4.2 \
         seqtk=1.4 \
         bwa=0.7.17 \
         samtools=1.20 \

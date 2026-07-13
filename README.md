@@ -2,12 +2,13 @@
 
 *sedimix*: A workflow for the analysis of hominin nuclear DNA sequences from sediments
 
-[![DOI](https://zenodo.org/badge/923335562.svg)](https://doi.org/10.5281/zenodo.17244854)
+[![Software DOI](https://zenodo.org/badge/923335562.svg)](https://doi.org/10.5281/zenodo.17244854)
+[![Article DOI](https://img.shields.io/badge/Article_DOI-10.1093%2Fbioinformatics%2Fbtag004-blue)](https://doi.org/10.1093/bioinformatics/btag004)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Snakemake](https://img.shields.io/badge/Snakemake-v7.32.4-blue)](https://snakemake.readthedocs.io/)
 
 ## Overview
-Here we present an open-source snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust and accessible solution to support the growing needs of human evolutionary research. See [paper](https://www.biorxiv.org/content/10.1101/2025.02.28.640818v1) for details.
+Here we present an open-source Snakemake workflow that identifies human sequences from sequencing data and provides relevant summary statistics. The final tool prioritizes the retention of human DNA while minimizing detection errors, offering a robust and accessible solution to support the growing needs of human evolutionary research. See the peer-reviewed [*Bioinformatics* paper](https://doi.org/10.1093/bioinformatics/btag004) for details.
 
 **Key Features:**
 - Utilizes Snakemake, a workflow management system for Python
@@ -23,20 +24,27 @@ cd sedimix
 ```
 
 ### 1. Using container 
-We provide a fully-baked container image you can pull & run in one step—no installs required beyond Singularity or Apptainer:
+The repaired version 1.0.1 image is currently being validated and is **not yet published**. The existing `sedimix-v1.0:latest` image is affected by [issue #5](https://github.com/jierui-cell/sedimix/issues/5) when Kraken2 is selected; build version 1.0.1 locally or use the manual installation until the repaired image is released.
 
-#### ▶️ Option A: Using **Singularity**
+#### ▶️ After version 1.0.1 is published: using **Singularity**
 ```bash
-singularity pull library://jieruixu/sedimix/sedimix-v1.0:latest
+singularity pull sedimix-v1.0.1.sif library://jieruixu/sedimix/sedimix-v1.0:1.0.1
 ```
 
-#### ▶️ Option B: Using **Apptainer** 
+#### ▶️ After version 1.0.1 is published: using **Apptainer**
 Apptainer is the community-maintained successor to Singularity. To pull the same container image:
 ```bash
-apptainer pull sedimix-v1.0_latest.sif library://jieruixu/sedimix/sedimix-v1.0:latest
+apptainer pull sedimix-v1.0.1.sif library://jieruixu/sedimix/sedimix-v1.0:1.0.1
 ```
 
-This should download the container as `sedimix-v1.0_latest.sif` in your current working directory.        
+Once published, this downloads the container as `sedimix-v1.0.1.sif` in your current working directory. Version 1.0.1 includes a complete Kraken2 2.1.3 installation and an image-level Kraken2 classification smoke test.
+
+The version-controlled build recipe is [`container/sedimix-v1.0.1.def`](./container/sedimix-v1.0.1.def). To rebuild it locally on a Linux system with Apptainer:
+
+```bash
+apptainer build --fakeroot sedimix-v1.0.1.sif container/sedimix-v1.0.1.def
+apptainer test sedimix-v1.0.1.sif
+```
 
 If you prefer to install every dependency yourself and use conda environment, see [manual install](./MANUAL_INSTALL.md).
 
@@ -97,7 +105,7 @@ Once you have:
 Your folder should look like this:
 ```
 sedimix/
-├── sedimix-v1.0_latest.sif
+├── sedimix-v1.0.1.sif
 ├── centrifuge (or kraken2)
 ├── human_ref
 ├── rules
@@ -121,7 +129,7 @@ sedimix/
    ```bash
    singularity exec --cleanenv --no-home \
       --bind "$(pwd)/..":/workdir \
-      ../sedimix-v1.0_latest.sif \
+      ../sedimix-v1.0.1.sif \
       bash -c '\
          snakemake -s /workdir/rules/snakefile_sedimix --unlock && \
          snakemake -s /workdir/rules/snakefile_sedimix \
@@ -144,6 +152,12 @@ An example run folder together with a default [config.yaml](./example_run_start/
 - **Classified non-hominin reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
 - **Data summary report**: Located in the `4_final_report` folder. `combined_final_report.tsv` contains results for all samples.
 - **Deamination profile**: Located in the `4_mapdamage_results` folder.  
+
+## Citation
+
+If you use *sedimix* in your research, please cite the peer-reviewed [article in *Bioinformatics*](https://doi.org/10.1093/bioinformatics/btag004).
+
+The archived software release is available from [Zenodo](https://doi.org/10.5281/zenodo.17244854).
 
 ## License
 This project is licensed under the [MIT License](LICENSE).

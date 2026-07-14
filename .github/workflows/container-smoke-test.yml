@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - "container/**"
-      - "tests/smoke_test_kraken2.sh"
+      - "tests/smoke_test_classifiers.sh"
       - "tests/test_container_recipe.py"
       - "environment.yaml"
       - "README.md"
@@ -14,7 +14,7 @@ on:
       - main
     paths:
       - "container/**"
-      - "tests/smoke_test_kraken2.sh"
+      - "tests/smoke_test_classifiers.sh"
       - "tests/test_container_recipe.py"
       - "environment.yaml"
       - "README.md"

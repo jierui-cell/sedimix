@@ -37,7 +37,7 @@ Apptainer is the community-maintained successor to Singularity. To pull the same
 apptainer pull sedimix-v1.0.1.sif library://jieruixu/sedimix/sedimix-v1.0:1.0.1
 ```
 
-Once published, this downloads the container as `sedimix-v1.0.1.sif` in your current working directory. Version 1.0.1 includes a complete Kraken2 2.1.3 installation and an image-level Kraken2 classification smoke test.
+Once published, this downloads the container as `sedimix-v1.0.1.sif` in your current working directory. Version 1.0.1 keeps the original Ubuntu 22.04 source-build approach while installing the complete Kraken2 2.1.3 distribution together under `/opt/kraken2`.
 
 The version-controlled build recipe is [`container/sedimix-v1.0.1.def`](./container/sedimix-v1.0.1.def). To rebuild it locally on a Linux system with Apptainer:
 
@@ -45,6 +45,8 @@ The version-controlled build recipe is [`container/sedimix-v1.0.1.def`](./contai
 apptainer build --fakeroot sedimix-v1.0.1.sif container/sedimix-v1.0.1.def
 apptainer test sedimix-v1.0.1.sif
 ```
+
+The embedded QA test builds minimal local Kraken2 and Centrifuge databases, runs the corresponding branch of `rules/snakefile_sedimix` for each classifier, and verifies that both paths produce the expected classified FASTQ. These generated fixtures are only a few files and avoid downloading the multi-gigabyte production indexes listed below.
 
 If you prefer to install every dependency yourself and use conda environment, see [manual install](./MANUAL_INSTALL.md).
 

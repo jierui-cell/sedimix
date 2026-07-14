@@ -2,7 +2,7 @@
 
 *sedimix*: A workflow for the analysis of hominin nuclear DNA sequences from sediments
 
-[![Software DOI](https://zenodo.org/badge/923335562.svg)](https://doi.org/10.5281/zenodo.17244854)
+[![Software DOI](https://img.shields.io/badge/Software_DOI-10.5281%2Fzenodo.17244854-blue)](https://doi.org/10.5281/zenodo.17244854)
 [![Article DOI](https://img.shields.io/badge/Article_DOI-10.1093%2Fbioinformatics%2Fbtag004-blue)](https://doi.org/10.1093/bioinformatics/btag004)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Snakemake](https://img.shields.io/badge/Snakemake-v7.32.4-blue)](https://snakemake.readthedocs.io/)
@@ -24,29 +24,20 @@ cd sedimix
 ```
 
 ### 1. Using container 
-The repaired version 1.0.1 image is currently being validated and is **not yet published**. The existing `sedimix-v1.0:latest` image is affected by [issue #5](https://github.com/jierui-cell/sedimix/issues/5) when Kraken2 is selected; build version 1.0.1 locally or use the manual installation until the repaired image is released.
+We provide a fully-baked container image you can pull and run in one step—no installs required beyond Singularity or Apptainer:
 
-#### ▶️ After version 1.0.1 is published: using **Singularity**
+#### ▶️ Option A: Using **Singularity**
 ```bash
-singularity pull sedimix-v1.0.1.sif library://jieruixu/sedimix/sedimix-v1.0:1.0.1
+singularity pull --arch amd64 library://jieruixu/sedmix/sedimix-v1.0.1:latest
 ```
 
-#### ▶️ After version 1.0.1 is published: using **Apptainer**
+#### ▶️ Option B: Using **Apptainer**
 Apptainer is the community-maintained successor to Singularity. To pull the same container image:
 ```bash
-apptainer pull sedimix-v1.0.1.sif library://jieruixu/sedimix/sedimix-v1.0:1.0.1
+apptainer pull --arch amd64 library://jieruixu/sedmix/sedimix-v1.0.1:latest
 ```
 
-Once published, this downloads the container as `sedimix-v1.0.1.sif` in your current working directory. Version 1.0.1 keeps the original Ubuntu 22.04 source-build approach while installing the complete Kraken2 2.1.3 distribution together under `/opt/kraken2`.
-
-The version-controlled build recipe is [`container/sedimix-v1.0.1.def`](./container/sedimix-v1.0.1.def). To rebuild it locally on a Linux system with Apptainer:
-
-```bash
-apptainer build --fakeroot sedimix-v1.0.1.sif container/sedimix-v1.0.1.def
-apptainer test sedimix-v1.0.1.sif
-```
-
-The embedded QA test builds minimal local Kraken2 and Centrifuge databases, runs the corresponding branch of `rules/snakefile_sedimix` for each classifier, and verifies that both paths produce the expected classified FASTQ. These generated fixtures are only a few files and avoid downloading the multi-gigabyte production indexes listed below.
+This downloads the container as `sedimix-v1.0.1_latest.sif` in your current working directory.
 
 If you prefer to install every dependency yourself and use conda environment, see [manual install](./MANUAL_INSTALL.md).
 
@@ -107,7 +98,7 @@ Once you have:
 Your folder should look like this:
 ```
 sedimix/
-├── sedimix-v1.0.1.sif
+├── sedimix-v1.0.1_latest.sif
 ├── centrifuge (or kraken2)
 ├── human_ref
 ├── rules
@@ -131,7 +122,7 @@ sedimix/
    ```bash
    singularity exec --cleanenv --no-home \
       --bind "$(pwd)/..":/workdir \
-      ../sedimix-v1.0.1.sif \
+      ../sedimix-v1.0.1_latest.sif \
       bash -c '\
          snakemake -s /workdir/rules/snakefile_sedimix --unlock && \
          snakemake -s /workdir/rules/snakefile_sedimix \
@@ -154,12 +145,6 @@ An example run folder together with a default [config.yaml](./example_run_start/
 - **Classified non-hominin reads (if specified in config.yaml)**: Located in the `3_final_reads` folder, ending with `{sample_name}_non_hominin.fq`. 
 - **Data summary report**: Located in the `4_final_report` folder. `combined_final_report.tsv` contains results for all samples.
 - **Deamination profile**: Located in the `4_mapdamage_results` folder.  
-
-## Citation
-
-If you use *sedimix* in your research, please cite the peer-reviewed [article in *Bioinformatics*](https://doi.org/10.1093/bioinformatics/btag004).
-
-The archived software release is available from [Zenodo](https://doi.org/10.5281/zenodo.17244854).
 
 ## License
 This project is licensed under the [MIT License](LICENSE).

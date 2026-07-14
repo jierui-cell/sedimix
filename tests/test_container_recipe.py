@@ -22,6 +22,7 @@ class ContainerRecipeTests(unittest.TestCase):
         self.assertIn("/opt/kraken2", text)
         self.assertRegex(text, r"(?m)^\s*zlib1g-dev\b")
         self.assertRegex(text, r"(?m)^\s*libncurses5-dev\b")
+        self.assertRegex(text, r"(?m)^\s*gfortran\b")
         self.assertRegex(text, r"CENTRIFUGE_VERSION=1\.0\.4\b")
         self.assertIn("make -C /tmp/centrifuge-src", text)
         self.assertIn(
@@ -35,6 +36,8 @@ class ContainerRecipeTests(unittest.TestCase):
         )
         self.assertRegex(text, r"export PATH=/opt/kraken2:[^\n]*\$PATH")
         self.assertNotRegex(text, r"(?m)^\s*cp\s+.*kraken2\*")
+        self.assertRegex(text, r"MAPDAMAGE_VERSION=2\.2\.2\b")
+        self.assertNotIn("git clone --depth 1 https://github.com/ginolhac/mapDamage", text)
 
         self.assertRegex(text, r"(?m)^\s*r-base(?:\s|\\|$)")
         for dependency in ("inline", "gam", "Rcpp", "RcppGSL", "ggplot2"):

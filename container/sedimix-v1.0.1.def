@@ -28,6 +28,7 @@ From: ubuntu:22.04
         curl \
         cython3 \
         gawk \
+        gfortran \
         git \
         gzip \
         libbz2-dev \
@@ -101,10 +102,6 @@ From: ubuntu:22.04
     cp /tmp/bedtools/bin/bedtools /usr/local/bin/
     rm -rf /tmp/bedtools /tmp/bedtools.tar.gz
 
-    git clone --depth 1 https://github.com/ginolhac/mapDamage.git /tmp/mapDamage
-    pip3 install --no-cache-dir /tmp/mapDamage
-    rm -rf /tmp/mapDamage
-
     pip3 install --no-cache-dir --upgrade pip setuptools wheel
     pip3 install --no-cache-dir \
         snakemake==7.32.4 \
@@ -117,6 +114,18 @@ From: ubuntu:22.04
         biopython==1.84 \
         scipy==1.11.3 \
         'pulp<2.8.0'
+
+    MAPDAMAGE_VERSION=2.2.2
+    MAPDAMAGE_SHA256=0958ac559c5cdb064156a74df6fb8665610ec98521c892f8923cf2060f1014f8
+    curl --fail --location --retry 3 \
+        --output /tmp/mapdamage.tar.gz \
+        "https://github.com/ginolhac/mapDamage/archive/refs/tags/${MAPDAMAGE_VERSION}.tar.gz"
+    echo "${MAPDAMAGE_SHA256}  /tmp/mapdamage.tar.gz" | sha256sum --check --strict
+    mkdir -p /tmp/mapdamage-src
+    tar --extract --gzip --file /tmp/mapdamage.tar.gz \
+        --strip-components=1 --directory /tmp/mapdamage-src
+    pip3 install --no-cache-dir /tmp/mapdamage-src
+    rm -rf /tmp/mapdamage-src /tmp/mapdamage.tar.gz
 
     Rscript -e "install.packages(c('inline','gam','Rcpp','RcppGSL','ggplot2'), repos='https://cloud.r-project.org')"
 

@@ -72,6 +72,7 @@ class ContainerRecipeTests(unittest.TestCase):
         self.assertIn("classification_software: centrifuge", smoke_test)
         self.assertEqual(smoke_test.count("snakefile_sedimix"), 2)
         self.assertIn("length_filtered_classified.fq", smoke_test)
+        self.assertIn("export XDG_CACHE_HOME=", smoke_test)
 
     def test_ci_builds_and_tests_the_versioned_recipe(self):
         workflow = (

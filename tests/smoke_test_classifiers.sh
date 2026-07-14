@@ -5,7 +5,9 @@ export PATH="/opt/kraken2:/usr/local/bin:${PATH}"
 
 workdir="$(mktemp -d)"
 trap 'rm -rf "${workdir}"' EXIT
+export XDG_CACHE_HOME="${workdir}/.cache"
 mkdir -p \
+  "${XDG_CACHE_HOME}" \
   "${workdir}/scripts" \
   "${workdir}/kraken2_db/taxonomy" \
   "${workdir}/kraken2_run/0_data" \

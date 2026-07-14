@@ -21,6 +21,7 @@ class ContainerRecipeTests(unittest.TestCase):
         self.assertNotIn("micromamba", text)
         self.assertIn("/opt/kraken2", text)
         self.assertRegex(text, r"(?m)^\s*zlib1g-dev\b")
+        self.assertRegex(text, r"(?m)^\s*libncurses5-dev\b")
         self.assertRegex(text, r"CENTRIFUGE_VERSION=1\.0\.4\b")
         self.assertIn("make -C /tmp/centrifuge-src", text)
         self.assertIn(

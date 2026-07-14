@@ -34,6 +34,7 @@ From: ubuntu:22.04
         libcurl4-openssl-dev \
         libgsl-dev \
         liblzma-dev \
+        libncurses5-dev \
         libtool \
         pkg-config \
         perl \

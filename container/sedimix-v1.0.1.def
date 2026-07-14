@@ -60,7 +60,7 @@ From: ubuntu:22.04
     tar --extract --gzip --file /tmp/centrifuge.tar.gz \
         --strip-components=1 --directory /tmp/centrifuge-src
     make -C /tmp/centrifuge-src
-    cp /tmp/centrifuge-src/centrifuge* /usr/local/bin/
+    make -C /tmp/centrifuge-src install prefix=/usr/local
     rm -rf /tmp/centrifuge-src /tmp/centrifuge.tar.gz
 
     # Keep the complete Kraken2 tree together. Its Perl wrappers locate

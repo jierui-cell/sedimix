@@ -24,6 +24,11 @@ class ContainerRecipeTests(unittest.TestCase):
         self.assertRegex(text, r"CENTRIFUGE_VERSION=1\.0\.4\b")
         self.assertIn("make -C /tmp/centrifuge-src", text)
         self.assertIn(
+            "make -C /tmp/centrifuge-src install prefix=/usr/local",
+            text,
+        )
+        self.assertNotIn("cp /tmp/centrifuge-src/centrifuge*", text)
+        self.assertIn(
             "(cd /tmp/kraken2-src && ./install_kraken2.sh /opt/kraken2)",
             text,
         )

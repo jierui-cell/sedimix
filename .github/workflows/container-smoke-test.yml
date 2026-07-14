@@ -1,0 +1,50 @@
+name: Container smoke test
+
+on:
+  pull_request:
+    paths:
+      - "container/**"
+      - "tests/smoke_test_classifiers.sh"
+      - "tests/test_container_recipe.py"
+      - "environment.yaml"
+      - "README.md"
+      - ".github/workflows/container-smoke-test.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "container/**"
+      - "tests/smoke_test_classifiers.sh"
+      - "tests/test_container_recipe.py"
+      - "environment.yaml"
+      - "README.md"
+      - ".github/workflows/container-smoke-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Run static regression tests
+        run: python3 tests/test_container_recipe.py -v
+
+      - name: Install Apptainer
+        uses: eWaterCycle/setup-apptainer@3f706d898c9db585b1d741b4692e66755f3a1b40 # v2
+        with:
+          apptainer-version: 1.3.6
+
+      - name: Build image
+        run: |
+          apptainer build --fakeroot \
+            sedimix-v1.0.1.sif \
+            container/sedimix-v1.0.1.def
+
+      - name: Re-run embedded smoke tests
+        run: apptainer test sedimix-v1.0.1.sif
